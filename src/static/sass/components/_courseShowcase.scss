@@ -1,0 +1,155 @@
+.courseShowcase {
+   background-color: $color-background;
+   grid-column: 2 / 13;
+   color: #fff;
+
+   margin-top: 7rem;
+   &__heading {
+      padding-top: 2rem;
+   }
+/*
+   &__container::-webkit-scrollbar {
+      display: none;
+   }
+*/
+
+&__container::-webkit-scrollbar {
+   width: 10px;
+}
+
+&__container::-webkit-scrollbar-track {
+   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+   box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+   border-radius: 10px;
+}
+
+&__container::-webkit-scrollbar-thumb {
+   border-radius: 10px;
+   -webkit-box-shadow: inset 0 0 6px rgb(78, 78, 78); 
+   box-shadow: inset 0 0 6px rgb(78, 78, 78); 
+}
+   &__container { 
+      //scrollbar-width: none;
+      //overflow:visible;
+      overflow-y: hidden;
+      transition: transform 450ms;
+      overflow: -moz-hidden-unscrollable;
+      overflow-x: scroll;
+      display: flex;
+      width: 95vw;
+      overflow: -moz-scrollbars-horizontal; 
+      grid-template-columns: repeat(20, 1fr);
+      column-gap: 0;
+
+      @include responsive(phone) {
+         width: 98vw;
+      }
+
+      
+      &:hover &--course {
+         opacity: .3;
+
+         &:hover {
+            transform: scale(1.5);
+            opacity: 1;
+         }
+      }
+
+      /*
+      &:hover > *  {
+         transform: translate3d(-6rem, 0, 0); 
+
+         @include responsive(tab_port) {
+            transform: translate3d(-5rem, 0, 0);
+         }
+
+         @include responsive(phone) {
+            transform: translate3d(-3rem, 0, 0);
+         }
+      }*/
+
+      &--course:hover ~ &--course {
+          transform: translate3d(6rem, 0, 0); 
+
+         @include responsive(tab_port) {
+            transform: translate3d(4.5rem, 0, 0);
+         }
+
+         @include responsive(phone) {
+            transform: translate3d(2.8rem, 0, 0);
+         }
+      }
+
+
+      &:hover > &--course__course  {
+         transform: translate3d(-1rem, 0, 0); 
+      }
+
+      &--course__course:hover ~ &--course__course {
+          transform: translate3d(1rem, 0, 0); 
+      }
+
+      &:hover &--course__course {
+         opacity: .3;
+
+         &:hover {
+            transform: scale(1.1);
+            opacity: 1;
+         }
+      }
+
+      &--course { 
+         cursor: pointer;
+         transition: all 450ms; 
+         transform: center left; 
+         padding-top: 3.5rem;
+         padding-bottom: 4rem;
+         height: 21.5rem;
+         min-height: 0;
+
+         @include responsive(tab_port) {
+            height: 18.5rem;
+         }
+
+         @include responsive(phone) {
+            height: 14rem;
+         }
+        
+         &:not(:last-child) {
+            padding-right: .5rem;
+         }
+       
+         &-image {
+            height: 100%;
+         }
+    
+         &-title {
+            color: grey;
+            margin-top: .5rem;
+         } 
+          &:hover &-title{
+               display: none;
+         }
+
+         &__course {
+            min-height: 0;
+            padding-top: 3rem;
+            padding-bottom: 4rem;
+            padding-right: 1rem;
+            height: 52rem;
+            cursor: pointer;
+            transition: all 450ms;
+            transform: center left;
+
+            @include responsive(tab_port) {
+               height: 42rem;
+            }
+            @include responsive(phone) {
+               height: 34rem;
+            }
+         }
+
+      }
+   }
+}
+
