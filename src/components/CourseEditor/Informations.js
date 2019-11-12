@@ -22,13 +22,13 @@ export function Informations() {
                <textarea className="formfield" type="text" name="name" placeholder="Description..." maxLength="500"/>
             </label>
             </div>
-            <div className="row mt-5">
 
+            <div className="row mt-5">
             <div className="file-drop-area mx-auto" id="file-drop-area">
                <span className="fake-btn">Choose thumbnail</span>
                {/* (IF UPLOAD NAMEFILE.PNG HERE) */}
-               <span className="file-msg">Currently using default thumbnail</span>
-               <input className="file-input" id="file-input" type="file"/>
+               {/*<span className="file-msg">Currently using default thumbnail</span>*/}
+               <input className="file-input" id="file-input" type="file" accept="image/*"/>
             </div>
             </div>
 

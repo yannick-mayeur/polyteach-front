@@ -59,6 +59,15 @@ html, *, ::after, ::before {
       margin-right: auto;
     }
 
+    .btntransparant{
+      background-color: Transparent;
+      background-repeat:no-repeat;
+      border: none;
+      cursor:pointer;
+      overflow: hidden;
+      outline:none;
+    }
+
     .formfield{
       display: flex;
       flex-direction: row;
@@ -136,23 +145,13 @@ html, *, ::after, ::before {
       padding-top: 1rem;
       background-color: $color-purple;
       padding-bottom: 1rem;
-      @include responsive(tab_port) {
-         display: none; 
-      }
 
-      &-add {
+      &-icon {
          width: 15px;
          height: 15px;
          fill: #fff;
          margin-right: 1rem;
          
-      }
-
-      &-play {
-         width: 15px;
-         height: 15px;
-         fill: #fff;
-         margin-right: 1rem;
       }
       
       &:hover {
@@ -166,4 +165,69 @@ html, *, ::after, ::before {
          }
       }
    }
+
+   .btnBlack {
+    cursor: pointer;
+    font-size: 1.6rem;
+    color:#fff;
+    outline: none;
+    border: none;
+    font-weight: 700;
+    border-radius: .2vw;
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
+    margin-right: 1rem;
+    padding-top: 1rem;
+    background-color: rgba(51,51,51,.5); 
+    padding-bottom: 1rem;
+  
+    &-icon{
+       width: 15px;
+       height: 15px;
+       fill: #fff;
+       margin-right: 1rem; 
+    }
+
+    &:hover {
+       color: #000;
+       background-color: #e6e6e6;
+       transition: all .2s;
+       box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+
+       & > * {
+          fill: #000;
+       }
+    }
+ }
+  }
+
+  .card {
+    padding: 40px;
+    color: #fff;
+    background:  rgba(51,51,51,.5); 
+    max-width: 350rem;
+    border-radius: 10px;
+    margin: 60px auto;
+  }
+  
+  .shadow2 { 
+    box-shadow:  rgba(48, 48, 48, 0.5); 
+  }
+
+  .cardimg{
+    max-width: 250px;
+    max-height: 120px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .card-head{
+    font-size: 4rem;
+    color: #fff;
+  }
+
+  .card-duration{
+    font-size: 2rem;
+    color: $color-modal-grey;
   }

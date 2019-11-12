@@ -1,41 +1,58 @@
 import React from 'react'
+import Picker from '../Picker/Picker'
+import UploadLogo from '../../static/images/upload.svg';
+import CloseIcon from '../../static/images/close.svg';
 
 export function Videos() {
+
       return (
          <>
          <div className="container">
-            <div className="row mt-5">
-            <div className="text-center mx-auto">
-               <form>
-               <div className="row mt-4">
-            <label>
-               <h1 className="text-center">Name</h1>  
-               <input className="forminput" type="text" name="name" placeholder="Name..." />
-            </label>
-            </div>
-            <div className="row mt-4">
-            <label className="mt-5">
-                <h1 className="text-center">Description</h1>  
-               <textarea className="formfield" type="text" name="name" placeholder="Description..." maxLength="500"/>
-            </label>
-            </div>
-            <div className="row mt-5">
+            <h1>Add new videos to this course</h1>
+                <div className="row mt-5 text-center mx-auto">
+                        <div className="col-md-6">
+                        <Picker/>
+                        </div>
+                        <div className="col-md-6">
+                        <button className="btnBlack" onClick={()=>{document.getElementById("uploadvideo").click();}}>
+                        <input name="video" type="file" id="uploadvideo" accept="video/*" />
+                        <UploadLogo className="btnBlack-icon" />
+                        Upload
+                        </button>  
+                        </div>
+                </div>
 
-            <div className="file-drop-area mx-auto" id="file-drop-area">
-               <span className="fake-btn">Choose thumbnail</span>
-               {/* (IF UPLOAD NAMEFILE.PNG HERE) */}
-               <span className="file-msg">Currently using default thumbnail</span>
-               <input className="file-input" id="file-input" type="file"/>
-            </div>
-            </div>
+                <div class="card shadow2">
+                    <div className="row">
+                        <div className="col-md-3">
+                            <img className="cardimg" src="http://www.bagherra.eu/wp-content/uploads/2016/11/orionthemes-placeholder-image-1.png" />
+                        </div>
+                        <div className="col-md-8">
+                        <h1 className="card-head">Video Title</h1>
+                        <h4 className="card-duration">MM:SS</h4>
+                        </div>
+                        <div className="col-md-1">
+                        <button className="modal__close" onClick={()=>{alert("remove this video")}}><CloseIcon className="modal__button--close" /></button>
+                        </div>
+                    </div>
+                </div>
 
-            <div className="row mt-3">
-               <img className="thumbimg" src="http://www.bagherra.eu/wp-content/uploads/2016/11/orionthemes-placeholder-image-1.png" />
-            </div>
-            </form>
-            </div>
-            </div>
-         </div>
+                <div class="card shadow2">
+                    <div className="row">
+                        <div className="col-md-3">
+                            <img className="cardimg" src="http://www.bagherra.eu/wp-content/uploads/2016/11/orionthemes-placeholder-image-1.png" />
+                        </div>
+                        <div className="col-md-8">
+                        <h1 className="card-head">Video Title</h1>
+                        <h4 className="card-duration">MM:SS</h4>
+                        </div>
+                        <div className="col-md-1">
+                        <button className="modal__close" onClick={()=>{alert("remove this video")}}><CloseIcon className="modal__button--close" /></button>
+                        </div>
+                    </div>
+                </div>
+
+		</div>
          </>
       )
 }
