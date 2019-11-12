@@ -9,8 +9,10 @@ export default function ConnexionForm(props) {
                     <input type="text" name="name" />
                 </label>
 
-                <label>Password</label>
-                <input type="text" name="name" />
+                <label>Password
+                    <input type="text" name="name" />
+                </label>
+
                 <input type="submit" value="Envoyer" />
             </form>
         </>
