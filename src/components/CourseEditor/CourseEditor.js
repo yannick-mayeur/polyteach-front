@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Informations } from './Informations';
 import { Videos } from './Videos';
+import { Students } from './Students';
   
   class CourseEditor extends Component {
 
@@ -22,7 +23,7 @@ import { Videos } from './Videos';
         },
         {
            title: 'Students',
-           component: <Informations/>
+           component: <Students/>
         }
       ]
     
