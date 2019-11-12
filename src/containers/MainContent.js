@@ -20,9 +20,10 @@ class MainContent extends Component {
       <div className="container">
         <div className="courseShowcase">
           <ScrollCourses courses={this.props.courses.ownCourses} name="MY COURSES"></ScrollCourses>
-          <ScrollCourses courses={this.props.courses.ownCourses} name="IG5"></ScrollCourses>
-          <ScrollCourses courses={this.props.courses.ownCourses} name="IG4"></ScrollCourses>
-          <ScrollCourses courses={this.props.courses.ownCourses} name="IG3"></ScrollCourses>
+          <ScrollCourses courses={this.props.courses.ownCourses} name="🔴 Live Streams"></ScrollCourses>
+          <ScrollCourses courses={this.props.courses.ownCourses} name="IG5 Courses"></ScrollCourses>
+          <ScrollCourses courses={this.props.courses.ownCourses} name="IG4 Courses"></ScrollCourses>
+          <ScrollCourses courses={this.props.courses.ownCourses} name="IG3 Courses"></ScrollCourses>
         </div>
       </div>
     );

@@ -2,10 +2,31 @@
    background-color: $color-background;
    grid-column: 2 / 13;
    color: #fff;
-
    margin-top: 7rem;
    &__heading {
       padding-top: 2rem;
+   }
+   &__coursetitle {
+      display: inline-flex;
+      color: $color-purple;
+      margin-right: 1rem;
+   }
+   &__logoreduce {
+      fill: #fff;
+      height: 2rem;
+      width: 2rem;
+      margin-right: 2rem;
+      display: inline-flex;
+      align-self: center;
+   }
+   &__head {
+      display: flex;
+   }
+   &__videoplayer {
+      text-align: center;
+      margin-top: 4rem;
+      margin-left: auto;
+      margin-right: auto;
    }
 /*
    &__container::-webkit-scrollbar {

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import StarIcon from '../../static/images/star.svg';
 import CloseIcon from '../../static/images/close.svg';
 import PlayIcon from '../../static/images/play-button.svg';
