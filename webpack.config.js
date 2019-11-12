@@ -9,7 +9,11 @@ module.exports = {
    entry: "./src/index.js",
    output: {
       filename: "bundle.js",
+      publicPath: '/',
    },
+   devServer: {
+      historyApiFallback: true,
+    },
    module: {
       rules: [
          {
