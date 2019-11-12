@@ -55,10 +55,12 @@ class navigation extends Component {
               type="text"
               placeholder="Title, genres, people" />
           </div>
+          <Link to="/courseEditor" style={{ textDecoration: 'none' }}>
           <button className="header__container-btnAddCourse">
           <AddLogo className="header__container-btnAddCourse-add" />
           Add a new course
         </button>  
+        </Link>
           <button className="header__container-btnLogout">
           <LogoutLogo className="header__container-btnLogout-add" />
           Log Out
