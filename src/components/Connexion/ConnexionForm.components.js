@@ -3,6 +3,7 @@ import React from 'react';
 export default function ConnexionForm(props) {
     return (
         <>
+<<<<<<< HEAD
             <div className="content">
                 <div className="courseShowcase">
                     <div className="login-page">
@@ -21,6 +22,20 @@ export default function ConnexionForm(props) {
                     </div>
                 </div>
             </div>
+=======
+            <form>
+                <label>
+                    Nom :
+                    <input type="text" name="name" />
+                </label>
+
+                <label>Password
+                    <input type="text" name="name" />
+                </label>
+
+                <input type="submit" value="Envoyer" />
+            </form>
+>>>>>>> Create form connexion
         </>
     )
 }
