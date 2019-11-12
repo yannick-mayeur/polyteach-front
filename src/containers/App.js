@@ -5,7 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import Layout from './Layout';
 import Footer from '../components/Footer';
 import Navbar from './Navbar';
-import Bookmarks from './Bookmarks.container';
+import PlayerLayout from './PlayerLayout.container';
 
 class App extends Component {
   render() {
@@ -16,7 +16,7 @@ class App extends Component {
         {/* Main conteneur */}
         <Switch>
           <Route path="/bookmarks">
-            <Bookmarks />
+            <PlayerLayout />
           </Route>
           <Route path="/">
             <Layout />
