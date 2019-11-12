@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
+
 import NavigationItem from '../components/Navbar/NavigationItem'
 import SearchLogo from '../static/images/search-icon.svg';
 import PolyTeachLogo from '../static/images/PolyTeach_Logo_RGB.png';
@@ -40,8 +43,8 @@ class navigation extends Component {
       <nav className={"navigation " + (scrolling ? "black" : "")} >
         <ul className="navigation__container">
           <NavigationItem link="/" exact><img className="navigation__container--logo" src={PolyTeachLogo} alt="" /></NavigationItem>
-          <div className="navigation__container-link pseudo-link">My Courses</div>
-          <div className="navigation__container-link pseudo-link">Bookmarks</div>
+          <Link to="/" style={{ textDecoration: 'none' }}><div className="navigation__container-link pseudo-link">My Courses</div></Link>
+          <Link to="/bookmarks" style={{ textDecoration: 'none' }}><div className="navigation__container-link pseudo-link">Bookmarks</div></Link>
           <div className="navigation__container-link pseudo-link">Dashboard</div>
       
           <div className="navigation__container--left">
@@ -52,10 +55,12 @@ class navigation extends Component {
               type="text"
               placeholder="Title, genres, people" />
           </div>
+          <Link to="/courseEditor" style={{ textDecoration: 'none' }}>
           <button className="header__container-btnAddCourse">
           <AddLogo className="header__container-btnAddCourse-add" />
           Add a new course
         </button>  
+        </Link>
           <button className="header__container-btnLogout">
           <LogoutLogo className="header__container-btnLogout-add" />
           Log Out

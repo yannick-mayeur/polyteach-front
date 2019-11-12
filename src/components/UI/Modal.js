@@ -4,7 +4,7 @@ import Backdrop from './Backdrop'
 export default function Modal(props) {
    const backgroundStyle = {
       backgroundSize: "cover",
-      backgroundImage: `url(${props.course.picture})`,
+      backgroundImage: `url(${props.course.pictureCourse})`,
    }
 
    return (

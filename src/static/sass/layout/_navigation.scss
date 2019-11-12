@@ -121,12 +121,13 @@
      
          &:last-child {
             padding-right: 2.6rem;
+            
          }
 
          &:hover {
             color: rgb(167, 167, 167); 
-         }
-        
+            text-decoration: none;
+         }        
       }
 
       &--left {
