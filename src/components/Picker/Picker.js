@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import GooglePicker from '../../services/GooglePicker/react-google-picker';
+import DriveLogo from '../../static/images/drive.svg';
 
 const CLIENT_ID = '703791694622-373kp5j2mbo5hahiqt419rolvvg2gdes.apps.googleusercontent.com';
 const DEVELOPER_KEY = 'AIzaSyDKYU-DvZkT48qsJ4Ta3ymSIYtOyr2L6Go';
@@ -63,7 +64,8 @@ render() {
                               picker.build().setVisible(true);
                           }}
       >
-        <img src="../../static/images/logo-gdrive.png" height="80" id="drivebtn" />
+          <DriveLogo className="btnBlack-icon"/>
+          Sync from Google Drive
       </GooglePicker>
       <hr/>
       <p>The oauth token is: {this.state.oauth_tok} </p>
