@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import Navbar from './Navbar';
 import Bookmarks from './Bookmarks.container';
 import Connexion from '../components/Connexion/ConnexionForm.components';
+import PlayerLayout from './PlayerLayout.container';
 
 class App extends Component {
   render() {
@@ -19,7 +20,7 @@ class App extends Component {
             <Connexion />
           </Route>
           <Route path="/bookmarks">
-            <Bookmarks />
+            <PlayerLayout />
           </Route>
           <Route path="/">
             <Layout />
