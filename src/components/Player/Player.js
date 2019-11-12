@@ -38,19 +38,18 @@ export function Player(props) {
   
     return (
       <>
-        <div className="container">
+        <div className="content">
           <div className="courseShowcase">
             <div className="courseShowcase__head">
               <DropdownLogo onClick={minimize} className="courseShowcase__logoreduce" id="minimizebtn"/>
               <h1 className="courseShowcase__coursetitle">{props.title}</h1>
               <h1>| videos</h1>
             </div>
-          </div>
-        </div>
+          
 
-        <div className="container">
           <div className="courseShowcase__container" id="videos">
           {courseRow}
+          </div>
           </div>
           </div>
 

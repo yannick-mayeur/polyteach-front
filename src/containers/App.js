@@ -18,6 +18,9 @@ class App extends Component {
           <Route path="/bookmarks">
             <PlayerLayout />
           </Route>
+          <Route path="/player">
+            <PlayerLayout />
+          </Route>
           <Route path="/">
             <Layout />
           </Route>

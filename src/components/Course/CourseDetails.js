@@ -4,12 +4,13 @@ import StarIcon from '../../static/images/star.svg';
 import CloseIcon from '../../static/images/close.svg';
 import PlayIcon from '../../static/images/play-button.svg';
 import StarRatings from 'react-star-ratings';
+import { Link } from 'react-router-dom';
 
 export default function CourseDetails(props) {
   return (
     <>
       <div className="modal__container">
-        <span><button className="modal__close" onClick={props.modalClosed}><CloseIcon className="modal__btn--close" /></button></span>
+        <span><button className="modal__close" onClick={props.modalClosed}><CloseIcon className="modal__button--close" /></button></span>
         <h1 className="modal__title">
           {props.course.name}
         </h1>
@@ -41,12 +42,15 @@ export default function CourseDetails(props) {
         />
 
         <p className="modal__overview">{props.course.description}</p>
-        <button className="modal__btn modal__btn--purple" onClick={()=>{alert("Route vers player")}}>
-          <PlayIcon className="modal__btn--icon" />
+        <Link to="/player" style={{ textDecoration: 'none' }}>
+        <button className="modal__button modal__button--purple">
+          <PlayIcon className="modal__button--icon" />
           Play
         </button>
-        <button className="modal__btn" onClick={()=>{alert("Ajouter aux bookmarks")}}>
-          <StarIcon className="modal__btn--icon" />
+        </Link>
+        
+        <button className="modal__button" onClick={()=>{alert("Ajouter aux bookmarks")}}>
+          <StarIcon className="modal__button--icon" />
           Bookmark
         </button>
       </div>

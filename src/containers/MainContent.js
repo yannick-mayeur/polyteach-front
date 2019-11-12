@@ -17,7 +17,7 @@ class MainContent extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="content">
         <div className="courseShowcase">
           <ScrollCourses courses={this.props.courses.ownCourses} name="MY COURSES"></ScrollCourses>
           <ScrollCourses courses={this.props.courses.ownCourses} name="🔴 Live Streams"></ScrollCourses>
