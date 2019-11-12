@@ -5,7 +5,6 @@ import { Route, Switch } from "react-router-dom";
 import Layout from './Layout';
 import Footer from '../components/Footer';
 import Navbar from './Navbar';
-import Bookmarks from './Bookmarks.container';
 import Connexion from '../components/Connexion/ConnexionForm.components';
 import PlayerLayout from './PlayerLayout.container';
 

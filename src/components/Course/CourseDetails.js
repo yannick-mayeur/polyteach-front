@@ -44,13 +44,13 @@ export default function CourseDetails(props) {
         <p className="modal__overview">{props.course.description}</p>
         <Link to="/player" style={{ textDecoration: 'none' }}>
         <button className="modal__button modal__button--purple">
-          <PlayIcon className="modal__button--icon" />
+          <PlayIcon className="header__container-btnLogout-add" />
           Play
         </button>
         </Link>
         
         <button className="modal__button" onClick={()=>{alert("Ajouter aux bookmarks")}}>
-          <StarIcon className="modal__button--icon" />
+          <StarIcon className="header__container-btnLogout-add" />
           Bookmark
         </button>
       </div>
