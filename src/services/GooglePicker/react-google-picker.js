@@ -151,9 +151,9 @@ export default class GoogleChooser extends React.Component {
 
   render() {
     return (
-      <button onClick={this.onChoose} className="btntransparant">
+      <button onClick={this.onChoose} className="btnBlack">
         {
-          this.props.children ? this.props.children : <button>Open Google Picker</button>
+          this.props.children ? this.props.children : <button className="btnBlack">Open Google Picker</button>
         }
       </button>
     );

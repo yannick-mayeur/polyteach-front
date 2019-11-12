@@ -38,7 +38,7 @@ import { Videos } from './Videos';
                         <li key={i}
                         data-active={ this.state.index === i }
                         onClick={() => this.setState({ index: i })} className="mx-auto pannel">
-                          <h1 className="text-center">{tab.title}</h1>  
+                          <h1 className="tabtitle">{tab.title}</h1>  
                         </li>
                     )
                     }

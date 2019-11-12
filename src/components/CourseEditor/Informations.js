@@ -27,7 +27,7 @@ export function Informations() {
             <div className="file-drop-area mx-auto" id="file-drop-area">
                <span className="fake-btn">Choose thumbnail</span>
                {/* (IF UPLOAD NAMEFILE.PNG HERE) */}
-               {/*<span className="file-msg">Currently using default thumbnail</span>*/}
+               <span className="file-msg">Currently using default thumbnail</span>
                <input className="file-input" id="file-input" type="file" accept="image/*"/>
             </div>
             </div>
