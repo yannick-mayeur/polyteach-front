@@ -1,20 +1,57 @@
 import React from 'react';
 
-export default function ConnexionForm(props) {
-    return (
-        <>
-            <form>
-                <label>
-                    Nom :
-                    <input type="text" name="name" />
-                </label>
+// REDUX
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-                <label>Password
-                    <input type="text" name="name" />
-                </label>
+class ConnexionForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            login: '',
+            mdp: ''
+        };
+    }
 
-                <input type="submit" value="Envoyer" />
-            </form>
-        </>
-    )
+    handleChangeLogin = (event) => {
+        this.setState({...this.state, value: event.target.value });
+    }
+    handleChangeMdp = (event) => {
+        this.setState({...this.state, mdp: event.target.value });
+    }
+
+    handleSubmit = () => {
+        alert('Un essai a été envoyé : ' + this.state.value);
+        event.preventDefault();
+    }
+
+    render() {
+        return (
+            <div className="content">
+                <div className="courseShowcase">
+                    <form onSubmit={this.handleSubmit}>
+                        <label>
+                            Login
+                            <input value={this.state.value} onChange={this.handleChange} />
+                        </label>
+                        <label>
+                            Mot de passe
+                            <input value={this.state.value} onChange={this.handleChange} />
+                        </label>
+                        <input type="submit" value="Envoyer" />
+                    </form>
+                </div>
+            </div>
+        );
+    }
 }
+
+const mapStateToProps = state => {
+    return {};
+};
+
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators({  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConnexionForm);
