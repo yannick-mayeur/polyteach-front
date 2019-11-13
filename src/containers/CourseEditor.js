@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Informations } from './Informations';
-import { Videos } from './Videos';
-import { Students } from './Students';
+import { Informations } from '../components/CourseEditor/Informations';
+import { Videos } from '../components/CourseEditor/Videos';
+import { Students } from '../components/CourseEditor/Students';
 import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { addNewCourse } from '../store/actions';
   
   class CourseEditor extends Component {
 
@@ -10,37 +13,50 @@ import { Link } from 'react-router-dom';
       super(props);
       this.state = {
         index: 0,
-        name: "",
-        picture: "https://icon-library.net/images/placeholder-image-icon/placeholder-image-icon-7.jpg",
-        description: ""
+        course: {
+          name: "",
+          picture: "https://icon-library.net/images/placeholder-image-icon/placeholder-image-icon-7.jpg",
+          description: ""
+        }
       }
     }
 
     saveName = (name) => {
       this.setState({ 
-        name: name
+        course:{
+          description: this.state.course.description,
+          name: name,
+          picture: this.state.course.picture
+        }
        })
-       console.log(this.state)
     }
 
 
     getName = () => {
-       return this.state.name
+       return this.state.course.name
     }
 
     getDescription = () => {
-      return this.state.description
+      return this.state.course.description
    }
 
     saveDescription = (description) => {
       this.setState({ 
-        description: description
+        course:{
+          description: description,
+          name: this.state.course.name,
+          picture: this.state.course.picture
+        }
        })
     }
 
     savePicture = (picture) => {
       this.setState({ 
-        picture: picture
+        course:{
+          description: this.state.course.description,
+          name: this.state.course.name,
+          picture: picture
+        }
        })
     }
 
@@ -93,17 +109,27 @@ import { Link } from 'react-router-dom';
                         </Link>
                         </div>
                         <div className="col-md-6">
-                        <button className="saveBtn" >
-                        SAVE
-                        </button>  
+                        <button onClick={() => this.props.saveNewCourse(this.state.course)} className="saveBtn" >
+                        {this.props.newCourse.fetching ? "SENDING..." : "SAVE"}
+                        </button>
+                        
                         </div>
                   </div>
-                
             </div>
         </div>
         </div>
       );
     }
   }
+
+
+const mapStateToProps = (state) => ({
+  newCourse: state.newCourse
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  saveNewCourse: course => dispatch(addNewCourse(course))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CourseEditor);
   
-export default CourseEditor;

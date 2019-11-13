@@ -28,9 +28,9 @@ export function Students() {
                         </button>  
                         </div>
                 </div>
-                <div class="container"> 
-                    <div class="card-group"> 
-                        <div class="row"> 
+                <div className="container"> 
+                    <div className="card-group"> 
+                        <div className="row"> 
                             <StudentCard/>
                             <StudentCard/>
                             <StudentCard/>

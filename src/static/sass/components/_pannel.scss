@@ -238,7 +238,13 @@ html, *, ::after, ::before {
 
   .card-head{
     font-size: 4rem;
+    font-family: 'Hind' ;
+    font-weight: 700;
     color: #fff;
+    background: transparent;
+    max-height: 4rem;
+    border: none;
+    border-bottom: 0.5px solid $color-tab;
   }
 
   .card-duration{

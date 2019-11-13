@@ -6,7 +6,7 @@ import Layout from './Layout';
 import Footer from '../components/Footer';
 import Navbar from './Navbar';
 import Connexion from '../components/Connexion/ConnexionForm.components';
-import CourseEditor from '../components/CourseEditor/CourseEditor'
+import CourseEditor from '../containers/CourseEditor'
 import PlayerLayout from './PlayerLayout.container';
 
 class App extends Component {
