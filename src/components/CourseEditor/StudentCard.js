@@ -9,7 +9,7 @@ export function StudentCard() {
         </div>
         <div className="row">
             <div className="col-md-12">
-                <img className="userpicture" src="http://www.bagherra.eu/wp-content/uploads/2016/11/orionthemes-placeholder-image-1.png" />
+                <img className="userpicture" src="../../static/images/avatar-placeholder.gif" />
             </div>
         </div>
         <div className="row">

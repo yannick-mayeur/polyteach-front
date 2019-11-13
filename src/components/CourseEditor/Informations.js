@@ -1,8 +1,6 @@
 import React from 'react'
 
-export function Informations() {
-
-
+export function Informations(props) {
 
       return (
          <>
@@ -12,14 +10,14 @@ export function Informations() {
                <form>
                <div className="row mt-4">
             <label>
-               <h1 className="text-center">Name</h1>  
-               <input className="forminput" type="text" name="name" placeholder="Name..." />
+               <h1 className="text-center mb-2">Name</h1>  
+               <input onChange={(event) => {props.saveName(event.target.value)}} className="forminput" type="text" name="name" placeholder="Name..." defaultValue={props.name()} />
             </label>
             </div>
             <div className="row mt-4">
             <label className="mt-5">
-                <h1 className="text-center">Description</h1>  
-               <textarea className="formfield" type="text" name="name" placeholder="Description..." maxLength="500"/>
+                <h1 className="text-center mb-2">Description</h1>  
+               <textarea onChange={(event) => {props.saveDescription(event.target.value)}} className="formfield" type="text" name="name" placeholder="Description..." maxLength="500" defaultValue={props.description()}/>
             </label>
             </div>
 
