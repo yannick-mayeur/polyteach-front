@@ -50,6 +50,21 @@ import { Students } from './Students';
                     </div>
                 </div>
                 </div>
+
+                
+                  <div className="row mt-5 menubuttonsrow col-md-6">
+                        <div className="col-md-6">
+                        <button className="cancelBtn" >
+                        CANCEL
+                        </button>  
+                        </div>
+                        <div className="col-md-6">
+                        <button className="saveBtn" >
+                        SAVE
+                        </button>  
+                        </div>
+                  </div>
+                
             </div>
         </div>
         </div>

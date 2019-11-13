@@ -12,13 +12,13 @@ export function Informations() {
                <form>
                <div className="row mt-4">
             <label>
-               <h1 className="text-center">Name</h1>  
+               <h1 className="text-center mb-2">Name</h1>  
                <input className="forminput" type="text" name="name" placeholder="Name..." />
             </label>
             </div>
             <div className="row mt-4">
             <label className="mt-5">
-                <h1 className="text-center">Description</h1>  
+                <h1 className="text-center mb-2">Description</h1>  
                <textarea className="formfield" type="text" name="name" placeholder="Description..." maxLength="500"/>
             </label>
             </div>
