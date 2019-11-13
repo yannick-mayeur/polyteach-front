@@ -211,8 +211,17 @@
      &-textOutside {
         font-size: 1.2rem;
         padding-bottom: 1rem;
+        &:visited, :link, :hover, :active{
+         color: #FFF;
+       }   
      }
-
+     .linkcontent{
+        color: #FFF;
+        &:visited, :link, :hover, :active{
+         color: #FFF;
+       }
+     }
+     
    &--user {
       height: 3rem;
       width: 3rem;
