@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 import { login } from '../../store/actions/connexion.action'
 
 class ConnexionForm extends Component {
-
     constructor(props) {
         super(props)
 
@@ -50,7 +49,6 @@ class ConnexionForm extends Component {
                                     <button className="umloginbutton mt-5">login using UM2 - CAS</button>
                                 </form>
                             </div>
-
                         </div>
                     </div>
                 </div>
