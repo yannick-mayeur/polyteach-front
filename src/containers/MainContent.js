@@ -19,11 +19,13 @@ class MainContent extends Component {
     return (
       <div className="content">
         <div className="courseShowcase ml-5">
+
           <ScrollCourses courses={this.props.courses.ownCourses} name="MY COURSES"></ScrollCourses>
           <ScrollCourses courses={this.props.courses.ownCourses} name="🔴 Live Streams"></ScrollCourses>
           <ScrollCourses courses={this.props.courses.ownCourses} name="IG5 Courses"></ScrollCourses>
           <ScrollCourses courses={this.props.courses.ownCourses} name="IG4 Courses"></ScrollCourses>
           <ScrollCourses courses={this.props.courses.ownCourses} name="IG3 Courses"></ScrollCourses>
+        
         </div>
       </div>
     );

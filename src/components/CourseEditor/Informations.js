@@ -4,7 +4,6 @@ export function Informations(props) {
 
       return (
          <>
-         {console.log(props)}
          <div className="container">
             <div className="row mt-5">
             <div className="text-center mx-auto">
