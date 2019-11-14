@@ -1,4 +1,4 @@
-import { FETCH_OWN_COURSES } from '../actions/index';
+import { FETCH_OWN_COURSES } from '../actions/ownCourses.action';
 
 export default function (state = {data: []}, action) {
   switch (action.type) {

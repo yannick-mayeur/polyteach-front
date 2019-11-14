@@ -2,7 +2,7 @@ import Api from "./Api";
 
 const coursesService = {
     getAllCourses() {
-        return Api().get(`courses`)
+        return Api().get(`/courses`)
     }
 }
 
