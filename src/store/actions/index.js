@@ -51,20 +51,10 @@ export function updateCoursePicture(picture) {
   }
 }
 
-export const CREATE_LIVE_SUCCESS = 'CREATE_LIVE_SUCCESS';
-export const CREATE_LIVE_FAILURE = 'CREATE_LIVE_FAILURE';
+export const CREATE_LIVE = 'CREATE_LIVE';
 export function createLive(nameCourse, description) {
-  S.live.createLive(nameCourse, description).then(res => {
-    return {
-      type: CREATE_LIVE_SUCCESS,
-      payload: res
-    }
-  }).catch(res => {
-    // print err
-    return {
-      type: CREATE_LIVE_FAILURE,
-      payload: "err"
-    }
-  })
-
+  return {
+    type: CREATE_LIVE,
+    payload: S.live.createLive(nameCourse, description)
+  }
 }
