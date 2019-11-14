@@ -7,5 +7,5 @@ RUN npm install react-scripts@3.0.1 -g --silent
 RUN npm install serve -g --silent
 COPY . .
 RUN npm run build
-EXPOSE 80
-CMD [ 'serve', '-s', 'dist', '-l', '80' ]
+EXPOSE 3000
+CMD serve -s dist -l 3000
