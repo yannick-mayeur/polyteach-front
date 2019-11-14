@@ -1,34 +1,68 @@
-import React, {useState} from 'react';
-import { useInput } from '../utils/form/useInput';
+import React, { Component } from 'react';
 
-export default function ConnexionForm(props) {
-    const { value:email, bind:bindEmail, reset:resetEmail} = useInput('');
-    const { value:password, bind:bindPassword, reset:resetPassword } = useInput('');
+// REDUX
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-    const handleSubmit = (evt) => {
-        evt.preventDefault();
-        alert(`Submitting Name ${email} ${password}`)
+// Action
+import { login } from '../../store/actions/connexion.action'
+
+class ConnexionForm extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            email: '',
+            password: '',
+        }
+
     }
-    return (
-        <>
-            <div className="content">
-                <div className="courseShowcase">
-                    <div className="login-page">
-                        <div className="row mt-3">
-                            <img src="../../static/images/PolyTeach_Logo_RGB.png" className="logohead" />
-                        </div>
-                        <div className="form">
-                            <form className="login-form" onSubmit={handleSubmit}>
-                                <input type="text" placeholder="firstname.lastname@umontpellier.fr" {...bindEmail} />
-                                <input type="password" placeholder="password" {...bindPassword}/>
-                                <button className="loginbutton">login</button>
-                                <p className="message">Not registered? <a href="#">Create an account</a></p>
-                                <button className="umloginbutton mt-5">login using UM2 - CAS</button>
-                            </form>
+
+    handleChangeEmail = (event) => {
+        this.setState({ email: event.target.value });
+    }
+    handleChangePassword = (event) => {
+        this.setState({ password: event.target.value });
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        this.props.login (this.state.email, this.state.password)
+        alert(`Submitting Name ${this.state.email} ${this.state.password}`)
+    }
+
+    render() {
+        return (
+            <>
+                <div className="content">
+                    <div className="courseShowcase">
+                        <div className="login-page">
+                            <div className="row mt-3">
+                                <img src="../../static/images/PolyTeach_Logo_RGB.png" className="logohead" />
+                            </div>
+                            <div className="form">
+                                <form className="login-form" onSubmit={this.handleSubmit}>
+                                    <input type="text" placeholder="firstname.lastname@umontpellier.fr" onChange={this.handleChangeEmail} />
+                                    <input type="password" placeholder="password" onChange={this.handleChangePassword} />
+                                    <button className="loginbutton">login</button>
+                                    <p className="message">Not registered? <a href="#">Create an account</a></p>
+                                    <button className="umloginbutton mt-5">login using UM2 - CAS</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </>
-    )
+            </>
+        )
+    }
 }
+
+const mapStateToProps = state => {
+    return {};
+};
+
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators({ login }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConnexionForm);
