@@ -2,8 +2,8 @@ import S from '../../services';
 
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
-export function login(name, mdp) {
-    return S.connexion.login(name, mdp)
+export function login(email, password) {
+    return S.connexion.login(email, password)
     .then(data => {
         return {
             type: LOGIN_SUCCESS,
