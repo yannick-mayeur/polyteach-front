@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 
 import OwnCoursesReducer from './reducerOwnCourses';
-import ConnexionReducer from './connexion.reducer'
+import NewCourseReducer from './reducerNewCourse';
+import LoginReducer from './connexion.reducer';
 
 const rootReducer = combineReducers({
   ownCourses: OwnCoursesReducer,
-  connexion: ConnexionReducer,
+  newCourse: NewCourseReducer,
+  login: LoginReducer,
 });
 
 export default rootReducer;

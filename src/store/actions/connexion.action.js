@@ -1,19 +1,18 @@
 import S from '../../services';
 
-export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-export const LOGIN_FAILURE = "LOGIN_FAILURE";
+export const LOGIN = 'LOGIN'
 export function login(email, password) {
-    return S.connexion.login(email, password)
-    .then(data => {
-        return {
-            type: LOGIN_SUCCESS,
-            payload: data
-        }
-    })
-    .catch(data => {
-        return {
-            type: LOGIN_FAILURE,
-            payload: data.response.statusText
-        }
-    })
+    return {
+        type: LOGIN,
+        payload: S.connexion.login(email, password)
+    }
+}
+
+
+export const SIGNUP = 'SIGNUP'
+export function signup(email, password) {
+    return {
+        type: SIGNUP,
+        payload: S.connexion.signup(email, password)
+    }
 }
