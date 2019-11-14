@@ -5,17 +5,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 
-<<<<<<< HEAD
 // Action
 import { login } from '../../store/actions/connexion.action'
 
 class ConnexionForm extends Component {
-=======
-// Actions
-import { login } from '../../store/actions/connexion.action';
 
-class ConnexionForm extends React.Component {
->>>>>>> Add connection login to bach
     constructor(props) {
         super(props)
 
@@ -32,15 +26,9 @@ class ConnexionForm extends React.Component {
         this.setState({ password: event.target.value });
     }
 
-<<<<<<< HEAD
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.login (this.state.email, this.state.password)
-=======
-    handleSubmit = () => {
-        event.preventDefault();
-        this.props.login("nomdefautl", "mdpDefault")
->>>>>>> Add connection login to bach
     }
 
     render() {
@@ -62,6 +50,7 @@ class ConnexionForm extends React.Component {
                                     <button className="umloginbutton mt-5">login using UM2 - CAS</button>
                                 </form>
                             </div>
+
                         </div>
                     </div>
                 </div>
