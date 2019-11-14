@@ -6,9 +6,9 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 
 // Action
-import { login } from '../../store/actions/connexion.action'
+import { signup } from '../../store/actions/connexion.action'
 
-class ConnexionForm extends Component {
+class SignUpForm extends Component {
     constructor(props) {
         super(props)
 
@@ -27,7 +27,7 @@ class ConnexionForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.login (this.state.email, this.state.password)
+        this.props.signup (this.state.email, this.state.password)
     }
 
     render() {
@@ -44,9 +44,8 @@ class ConnexionForm extends Component {
                                     <p>{this.props.errMessage}</p>
                                     <input type="text" placeholder="firstname.lastname@umontpellier.fr" onChange={this.handleChangeEmail} />
                                     <input type="password" placeholder="password" onChange={this.handleChangePassword} />
-                                    <button className="loginbutton">login</button>
-                                    <p className="message">Not registered? <Link to="/signup"> Create an account</Link></p>
-                                    <button className="umloginbutton mt-5">login using UM2 - CAS</button>
+                                    <button className="loginbutton">Sign up</button>
+                                    <p className="message">Already registered ? <Link to="/connexion"> Connect to your account</Link></p>
                                 </form>
                             </div>
                         </div>
@@ -58,12 +57,12 @@ class ConnexionForm extends Component {
 }
 
 const mapStateToProps = state => {
-    return { errMessage: state.login.errConnection};
+    return { errMessage: state.login.errSignup};
 };
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({ login }, dispatch)
+    return bindActionCreators({ signup }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConnexionForm);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpForm);
 

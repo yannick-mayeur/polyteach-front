@@ -20,11 +20,11 @@ class MainContent extends Component {
       <div className="content">
         <div className="courseShowcase ml-5">
 
-          <ScrollCourses courses={this.props.courses.ownCourses} name="MY COURSES"></ScrollCourses>
-          <ScrollCourses courses={this.props.courses.ownCourses} name="🔴 Live Streams"></ScrollCourses>
-          <ScrollCourses courses={this.props.courses.ownCourses} name="IG5 Courses"></ScrollCourses>
-          <ScrollCourses courses={this.props.courses.ownCourses} name="IG4 Courses"></ScrollCourses>
-          <ScrollCourses courses={this.props.courses.ownCourses} name="IG3 Courses"></ScrollCourses>
+          <ScrollCourses courses={this.props.courses} name="MY COURSES"></ScrollCourses>
+          <ScrollCourses courses={this.props.courses} name="🔴 Live Streams"></ScrollCourses>
+          <ScrollCourses courses={this.props.courses} name="IG5 Courses"></ScrollCourses>
+          <ScrollCourses courses={this.props.courses} name="IG4 Courses"></ScrollCourses>
+          <ScrollCourses courses={this.props.courses} name="IG3 Courses"></ScrollCourses>
         
         </div>
       </div>
@@ -33,7 +33,7 @@ class MainContent extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { courses: state }
+  return { courses: state.ownCourses }
 }
 
 const mapDispatchToProps = (dispatch) => {

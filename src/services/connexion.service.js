@@ -1,8 +1,12 @@
 import Api from "./Api";
 
 const connexionService = {
-    login(name, mdp) {
-        return Api().post(`/login`, {name: name, mdp: mdp})
+    login(email, password) {
+        return Api().post(`/login`, {email: email, password: password})
+    },
+
+    signup(email, password) {
+        return Api().post(`/signup`, {email: email, password: password})
     }
 }
 
