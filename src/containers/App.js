@@ -30,6 +30,9 @@ class App extends Component {
             <Signup />
           </Route>
           <Route path="/bookmarks">
+          <Route exact path="/live">
+            <Live/>
+          </Route>
             <PlayerLayout />
           </Route>
           <Route path="/courseEditor">
