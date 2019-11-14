@@ -18,7 +18,6 @@ export default class CourseGenre extends Component {
    }
 
    render() {
-      console.log(this.props.posterUrl)
       return (
          <>
             <div onClick={() => this.handleToggleModal()}
