@@ -45,6 +45,9 @@ export default function ConnexionForm(props) {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+// Actions
+import { login } from '../../store/actions/connexion.action';
+
 class ConnexionForm extends React.Component {
     constructor(props) {
         super(props);
@@ -62,8 +65,8 @@ class ConnexionForm extends React.Component {
     }
 
     handleSubmit = () => {
-        alert('Un essai a été envoyé : ' + this.state.value);
         event.preventDefault();
+        this.props.login("nomdefautl", "mdpDefault")
     }
 
     render() {
@@ -92,7 +95,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({  }, dispatch)
+    return bindActionCreators({ login }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConnexionForm);

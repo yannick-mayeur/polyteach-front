@@ -18,6 +18,7 @@ export default class CourseGenre extends Component {
    }
 
    render() {
+      console.log(this.props.course.picture)
       return (
          <>
             <div onClick={() => this.handleToggleModal()}
