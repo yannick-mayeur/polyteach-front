@@ -12,7 +12,7 @@ export default function CourseDetails(props) {
       <div className="modal__container">
         <span><button className="modal__close" onClick={props.modalClosed}><CloseIcon className="modal__button--close" /></button></span>
         <h1 className="modal__title">
-          {props.course.name}
+          {props.course.nameCourse}
         </h1>
         <p className="modal__info">
           <span className="modal__rating">
@@ -41,7 +41,7 @@ export default function CourseDetails(props) {
           name='rating'
         />
 
-        <p className="modal__overview">{props.course.description}</p>
+        <p className="modal__overview">{props.course.descriptionCourse}</p>
         <Link to="/player" style={{ textDecoration: 'none' }}>
         <button className="modal__button modal__button--purple">
           <PlayIcon className="header__container-btnLogout-add" />

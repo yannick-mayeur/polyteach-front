@@ -1,60 +1,26 @@
 import React from 'react';
 
-// REDUX
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-
-// Actions
-import { login } from '../../store/actions/connexion.action';
-
-class ConnexionForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            login: '',
-            mdp: ''
-        };
-    }
-
-    handleChangeLogin = (event) => {
-        this.setState({...this.state, value: event.target.value });
-    }
-    handleChangeMdp = (event) => {
-        this.setState({...this.state, mdp: event.target.value });
-    }
-
-    handleSubmit = () => {
-        event.preventDefault();
-        this.props.login("nomdefautl", "mdpDefault")
-    }
-
-    render() {
-        return (
+export default function ConnexionForm(props) {
+    return (
+        <>
             <div className="content">
                 <div className="courseShowcase">
-                    <form onSubmit={this.handleSubmit}>
-                        <label>
-                            Login
-                            <input value={this.state.value} onChange={this.handleChange} />
-                        </label>
-                        <label>
-                            Mot de passe
-                            <input value={this.state.value} onChange={this.handleChange} />
-                        </label>
-                        <input type="submit" value="Envoyer" />
-                    </form>
+                    <div className="login-page">
+                        <div className="row mt-3">
+                            <img src="../../static/images/PolyTeach_Logo_RGB.png" className="logohead" />
+                        </div>
+                        <div className="form">
+                            <form className="login-form">
+                                <input type="text" placeholder="firstname.lastname@umontpellier.fr" />
+                                <input type="password" placeholder="password" />
+                                <button className="loginbutton">login</button>
+                                <p className="message">Not registered? <a href="#">Create an account</a></p>
+                                <button className="umloginbutton mt-5">login using UM2 - CAS</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-        );
-    }
+        </>
+    )
 }
-
-const mapStateToProps = state => {
-    return {};
-};
-
-const mapDispatchToProps = dispatch => {
-    return bindActionCreators({ login }, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ConnexionForm);

@@ -23,8 +23,8 @@ export default class CourseGenre extends Component {
          <>
             <div onClick={() => this.handleToggleModal()}
                className={"courseShowcase__container--course"}>
-               <img src={this.props.course.picture} className="courseShowcase__container--course-image" />
-               <h3 className="courseShowcase__container--course-title">{this.props.course.name}</h3>
+               <img src={this.props.course.pictureCourse} className="courseShowcase__container--course-image" />
+               <h3 className="courseShowcase__container--course-title">{this.props.course.nameCourse}</h3>
             </div>
             <Modal show={this.state.toggleModal} course={this.props.course} modalClosed={this.closeModal}>
                <CourseDetails course={this.props.course} modalClosed={this.closeModal} />

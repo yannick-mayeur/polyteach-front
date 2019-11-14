@@ -6,6 +6,7 @@ import Layout from './Layout';
 import Footer from '../components/Footer';
 import Navbar from './Navbar';
 import Connexion from '../components/Connexion/ConnexionForm.components';
+import CourseEditor from '../containers/CourseEditor'
 import PlayerLayout from './PlayerLayout.container';
 
 class App extends Component {
@@ -20,6 +21,9 @@ class App extends Component {
           </Route>
           <Route path="/bookmarks">
             <PlayerLayout />
+          </Route>
+          <Route path="/courseEditor">
+            <CourseEditor />
           </Route>
           <Route path="/player">
             <PlayerLayout />

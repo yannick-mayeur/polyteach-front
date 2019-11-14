@@ -39,7 +39,7 @@ export function Player(props) {
     return (
       <>
         <div className="content">
-          <div className="courseShowcase">
+          <div className="courseShowcase  ml-5">
             <div className="courseShowcase__head">
               <DropdownLogo onClick={minimize} className="courseShowcase__logoreduce" id="minimizebtn"/>
               <h1 className="courseShowcase__coursetitle">{props.title}</h1>
