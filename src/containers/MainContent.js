@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { ScrollCourses } from './ScrollCourses.container';
 
 // Store
-import { fetchOwnCourses } from '../store/actions/ownCourses.action';
+import { fetchOwnCourses } from '../store/actions';
 
 
 class MainContent extends Component {
