@@ -1,4 +1,6 @@
-export default function (state = { data: [] }, action) {
+import { FETCH_OWN_COURSES } from '../actions/ownCourses.action';
+
+export default function (state = {data: []}, action) {
   switch (action.type) {
     case "FETCH_OWN_COURSES_FULFILLED":
       const data = action.payload.data;
