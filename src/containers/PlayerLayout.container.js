@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { Player } from '../components/Player/Player';
 
 // Store
-import { fetchOwnCourses } from '../store/actions/ownCourses.action';
+import { fetchOwnCourses } from '../store/actions';
 
 
 class PlayerLayout extends Component {

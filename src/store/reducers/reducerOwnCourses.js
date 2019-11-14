@@ -1,5 +1,5 @@
 
-import { FETCH_OWN_COURSES } from '../actions/ownCourses.action';
+import { FETCH_OWN_COURSES } from '../reducers';
 
 export default function (state = {data: []}, action) {
 
