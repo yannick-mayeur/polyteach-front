@@ -7,6 +7,13 @@ const connexionService = {
 
     signup(email, password) {
         return Api().post(`/signup`, {email: email, password: password})
+    },
+
+    isTokenValid(token) {
+        return Api().get(`/login/isTokenValid`, token);
+    },
+    isAuthenticated() {
+        return localStorage.getItem('connexionToken') != undefined
     }
 }
 

@@ -18,13 +18,12 @@ export default class CourseGenre extends Component {
    }
 
    render() {
-      console.log(this.props.posterUrl)
       return (
          <>
             <div onClick={() => this.handleToggleModal()}
                className={"courseShowcase__container--course"}>
                <img src={this.props.posterUrl} className="courseShowcase__container--course-image" />
-               <h3 className="courseShowcase__container--course-title">{this.props.course.nameCourse}</h3>
+               <h3 className="courseShowcase__container--course-title">{this.props.course.name}</h3>
             </div>
             <Modal show={this.state.toggleModal} course={this.props.course} modalClosed={this.closeModal}>
                <CourseDetails course={this.props.course} modalClosed={this.closeModal} />

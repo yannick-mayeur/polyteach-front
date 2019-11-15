@@ -10,6 +10,8 @@ import CourseEditor from '../containers/CourseEditor'
 import PlayerLayout from './PlayerLayout.container';
 import Signup from '../components/Connexion/Signup.component';
 
+import {PrivateRoute} from '../components/utils/privateRoute.component';
+
 class App extends Component {
   render() {
     return (
@@ -32,9 +34,7 @@ class App extends Component {
           <Route path="/player">
             <PlayerLayout />
           </Route>
-          <Route path="/">
-            <Layout />
-          </Route>
+            <PrivateRoute path='/' component={Layout} />
         </Switch>
         {/* End Main conteneur */}
 
