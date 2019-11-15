@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 
+// ROUTER
+import { withRouter } from "react-router-dom";
+
 // Action
 import { login } from '../../store/actions/connexion.action'
 
@@ -27,7 +30,10 @@ class ConnexionForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.login (this.state.email, this.state.password)
+        this.props.login(this.state.email, this.state.password).then(() => {
+            this.props.history.push("/");
+        })
+
     }
 
     render() {
@@ -41,7 +47,7 @@ class ConnexionForm extends Component {
                             </div>
                             <div className="form">
                                 <form className="login-form" onSubmit={this.handleSubmit}>
-                                    <p>{this.props.errMessage}</p>
+                                    <p className="errorlogin mb-2">{this.props.errMessage}</p>
                                     <input type="text" placeholder="firstname.lastname@umontpellier.fr" onChange={this.handleChangeEmail} />
                                     <input type="password" placeholder="password" onChange={this.handleChangePassword} />
                                     <button className="loginbutton">login</button>
@@ -58,11 +64,11 @@ class ConnexionForm extends Component {
 }
 
 const mapStateToProps = state => {
-    return { errMessage: state.login.errConnection};
+    return { errMessage: state.login.errConnection };
 };
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators({ login }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConnexionForm);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ConnexionForm));

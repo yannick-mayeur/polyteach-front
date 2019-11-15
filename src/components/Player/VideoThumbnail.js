@@ -6,8 +6,8 @@ export default function VideoThumbnail(props) {
          <>
             <div
                className={"courseShowcase__container--course"}>
-               <img src={props.course.pictureCourse} className="courseShowcase__container--course-image" />
-               <h3 className="courseShowcase__container--course-title">{props.course.nameCourse}</h3>
+               <img src={props.course.picture} className="courseShowcase__container--course-image" />
+               <h3 className="courseShowcase__container--course-title">{props.course.name}</h3>
             </div>
          </>
       )

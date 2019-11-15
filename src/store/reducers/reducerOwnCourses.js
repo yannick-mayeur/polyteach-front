@@ -1,8 +1,6 @@
-
-import { FETCH_OWN_COURSES } from '../reducers';
+import { FETCH_OWN_COURSES } from '../actions';
 
 export default function (state = {data: []}, action) {
-
   switch (action.type) {
     case "FETCH_OWN_COURSES_FULFILLED":
       const data = action.payload.data;

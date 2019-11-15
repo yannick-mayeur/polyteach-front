@@ -9,7 +9,6 @@ import { signup } from '../../components/Connexion/Signup.component';
 
 class Signup extends Component {
     handleSignup(email, password) {
-        console.log("signup");
     }
 
     render() {
