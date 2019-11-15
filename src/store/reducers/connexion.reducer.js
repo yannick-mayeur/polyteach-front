@@ -1,5 +1,6 @@
 import { LOGIN_SUCCESS, LOGIN_FAILURE } from '../actions/connexion.action';
 
+
 const initState = {
   fetchingLogin: false,
   fetchingSignup: false,
