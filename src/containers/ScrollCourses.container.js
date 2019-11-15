@@ -4,8 +4,6 @@ import CourseGenre from '../components/Course/CourseGenre';
 import {Spin} from '../components/UI/Spinner';
 
 export function ScrollCourses(props) {
-    console.log("scroll course")
-    console.log(props)
     // Create Course Components from data course
     const courseRow = 
     props.courses.fetching? 

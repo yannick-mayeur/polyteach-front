@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Informations } from '../components/CourseEditor/Informations';
-import { Videos } from '../components/CourseEditor/Videos';
+import  Videos  from '../components/CourseEditor/Videos';
 import { Students } from '../components/CourseEditor/Students';
 import { Link } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { addNewCourse } from '../store/actions';
   
