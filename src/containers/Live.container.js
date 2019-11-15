@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
 // Store
 import { createLive } from '../store/actions';
 
@@ -13,7 +12,7 @@ class Live extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {nameSession: '', descrSession: ''};
+    this.state = {nameSession: '', descrSession: '', tokenSession: undefined};
 
   }
 
@@ -21,10 +20,16 @@ class Live extends Component {
     this.setState({[e.target.name]: e.target.value})
   }
 
-  submit =()=>{
-    this.connectLive();
+  handlerLeaveSessionEvent= (e)=>{
+    this.setState({nameSession: '', descrSession: '', session: undefined})
   }
 
+  submit= ()=>{
+    this.connectLive();
+  }
+  leaveSession= ()=>{
+    this.state.session.disconnect();
+  }
   connectLive = ()=>{
     //We create an instance of OpenVidu
     const OV = new OpenVidu();
@@ -36,10 +41,12 @@ class Live extends Component {
         // console.log("token res  ***" + token);
         let session = OV.initSession();
         const ovToken = res.value.data;
+        this.setState({
+          tokenSession: ovToken,
+        });
         session.connect(ovToken).then(()=>{
-
           // Add our live video to the DOM
-          let publisher = OV.initPublisher('video-container',{
+         let publisher = OV.initPublisher('video-container',{
 
             audioSource: undefined, // The source of audio. If undefined default microphone
             videoSource: undefined, // The source of video. If undefined default webcam
@@ -52,7 +59,9 @@ class Live extends Component {
           })
           //Publish our stream 
           session.publish(publisher);
-
+          this.setState({
+            session: session,
+          });
         })
       });
   }
@@ -66,14 +75,19 @@ class Live extends Component {
           </label>
           <label>
             Description
-            <input name="descrSession" type="text" value={this.state.descrSesssion} onChange={this.handleChange}/>
+            <input name="descrSession" type="text" value={this.state.descrSession} onChange={this.handleChange}/>
           </label>
           <button onClick={this.submit}>  
             Submit
           </button>
-        </div>
-				<div id="video-container" class="col-md-12"></div>
-      </div>
+
+          <button onClick={this.leaveSession}>  
+            Leave
+          </button>
+        <div id="video-container" class="col-md-12">
+              </div>
+       </div>
+    </div>
     );
   }
 }
