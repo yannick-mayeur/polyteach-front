@@ -41,7 +41,7 @@ class ConnexionForm extends Component {
                             </div>
                             <div className="form">
                                 <form className="login-form" onSubmit={this.handleSubmit}>
-                                    <p>{this.props.errMessage}</p>
+                                <p className="errorlogin mb-2">{this.props.errMessage}</p>
                                     <input type="text" placeholder="firstname.lastname@umontpellier.fr" onChange={this.handleChangeEmail} />
                                     <input type="password" placeholder="password" onChange={this.handleChangePassword} />
                                     <button className="loginbutton">login</button>
