@@ -8,6 +8,9 @@ import Navbar from './Navbar';
 import Connexion from '../components/Connexion/ConnexionForm.components';
 import CourseEditor from '../containers/CourseEditor'
 import PlayerLayout from './PlayerLayout.container';
+import Signup from '../components/Connexion/Signup.component';
+
+import {PrivateRoute} from '../components/utils/privateRoute.component';
 
 class App extends Component {
   render() {
@@ -19,6 +22,9 @@ class App extends Component {
         <Route path="/connexion">
             <Connexion />
           </Route>
+          <Route path="/signup">
+            <Signup />
+          </Route>
           <Route path="/bookmarks">
             <PlayerLayout />
           </Route>
@@ -28,9 +34,7 @@ class App extends Component {
           <Route path="/player">
             <PlayerLayout />
           </Route>
-          <Route path="/">
-            <Layout />
-          </Route>
+            <PrivateRoute path='/' component={Layout} />
         </Switch>
         {/* End Main conteneur */}
 

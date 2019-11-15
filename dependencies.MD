@@ -8,5 +8,4 @@ npm install --save react-star-ratings
 npm install react-google-picker
 npm audit fix
 
-npm install react-bootstrap (maybe)
 ```
