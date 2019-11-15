@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { addNewCourse } from '../store/actions';
   
   class CourseEditor extends Component {
-
+  //TODO - Fetch original course from id if exists
     constructor(props) {
       super(props);
       this.state = {
@@ -15,21 +15,41 @@ import { addNewCourse } from '../store/actions';
         course: {
           name: "",
           picture: "https://icon-library.net/images/placeholder-image-icon/placeholder-image-icon-7.jpg",
-          description: ""
+          description: "",
+          videos: []
         }
       }
     }
+
+    saveVideos = (videos) => {
+      this.setState({
+        course: {
+          name: this.state.course.name,
+          picture: this.state.course.picture,
+          description: this.state.course.description,
+          videos: videos
+        } 
+      })
+      console.log("received new state: ")
+      console.log(this.state)
+    }
+
+    getVideos = () => {
+      console.log("returner by get videos: ")
+      console.log(this.state.course.videos)
+      return this.state.course.videos
+   }
 
     saveName = (name) => {
       this.setState({ 
         course:{
           description: this.state.course.description,
           name: name,
-          picture: this.state.course.picture
+          picture: this.state.course.picture,
+          videos: this.state.course.videos
         }
        })
     }
-
 
     getName = () => {
        return this.state.course.name
@@ -44,7 +64,8 @@ import { addNewCourse } from '../store/actions';
         course:{
           description: description,
           name: this.state.course.name,
-          picture: this.state.course.picture
+          picture: this.state.course.picture,
+          videos: this.state.course.videos
         }
        })
     }
@@ -54,7 +75,8 @@ import { addNewCourse } from '../store/actions';
         course:{
           description: this.state.course.description,
           name: this.state.course.name,
-          picture: picture
+          picture: picture,
+          videos: this.state.course.videos
         }
        })
     }
@@ -66,7 +88,7 @@ import { addNewCourse } from '../store/actions';
         },
         {
           title: 'Videos',
-          component: <Videos/>
+          component: <Videos saveVideos={this.saveVideos} getVideos={this.getVideos}/>
         },
         {
            title: 'Students',

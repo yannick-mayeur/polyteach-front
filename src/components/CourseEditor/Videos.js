@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Picker from '../Picker/Picker'
 import UploadLogo from '../../static/images/upload.svg';
+import FolderLogo from '../../static/images/folder.svg';
 import { VideoCard } from './VideoCard';
 import { askForSignedURL, askForSubtitles, uploadVideoToGCP } from '../../services/Uploader/VideoApi';
 
@@ -9,9 +10,10 @@ export default class Videos extends Component {
         constructor(props) {
                 super(props);
                 this.state = {
+                        //TODO - Fetch videos where idCourse=current course
+                        //TODO - Create an identifier for the videos and do not store <VideoCard/> 
+                        //but an array of attributes for each video and then map them to VideoCards
                         videoURL: '',
-                        subtitles: '',
-                        display: "none",
                         videoName: '',
                         videoInput: '',
                         video: '',
@@ -36,7 +38,6 @@ export default class Videos extends Component {
         // Action when we click on the "upload" button
         handleClick = (event) => {
                 event.preventDefault();
-                this.setState({ subtitles: '', display: 'none' });
                 if (this.state.videoInput !== '') {
                         // We send the video to the server
                         this.uploadDocumentRequest({ video: this.state.videoInput });
@@ -50,6 +51,16 @@ export default class Videos extends Component {
 
         };
 
+        setName = (newName, key)  => {
+                const newVideos = this.props.getVideos();
+                console.log(key);
+                console.log(this.props.getVideos());
+                console.log(newVideos);
+
+                newVideos[key].titleVideo = newName;
+                this.props.saveVideos(newVideos);
+        };
+
         uploadDocumentRequest = async ({ video }) => {
                 // We use a FormData to send the video
                 let data = new FormData();
@@ -58,12 +69,16 @@ export default class Videos extends Component {
                 const see = await uploadVideoToGCP(video, signedURL);
                 if (see) {
                         const subtitles = await askForSubtitles(video.name);
+                        //const newVideo = <VideoCard titleVideo={this.props.videoName} urlVideo={this.props.videoURL} />
+                        const newVideos = this.props.getVideos();
+                        newVideos.push(
+                                {titleVideo:video.name, 
+                                videoURL: subtitles.data.videoURL,
+                                vttURL: subtitles.data.vttURL
+                                }
+                                )
                         // Good
                         this.setState({
-                                subtitles: subtitles.data.transcription.map((value, index) => <p onClick={this.changeVideoSec}
-                                        id={subtitles.data.timings[index][0]}
-                                        key={index}>{value}</p>),
-                                display: "block",
                                 videoURL: subtitles.data.videoURL,
                                 message: "Video uploaded with success !",
                                 displaySpinner: "none",
@@ -71,6 +86,7 @@ export default class Videos extends Component {
                                 videoInput: '',
                                 video: ''
                         });
+                        this.props.saveVideos(newVideos)
                 } else {
                         // Bad
                         this.setState({ displaySpinner: "none", message: "Failed to upload the video !" });
@@ -87,41 +103,34 @@ export default class Videos extends Component {
                                                         <Picker />
                                                 </div>
 
-
-
                                                 <div className="col-md-6">
-                                                        <h5 style={{ textAlign: "center", color: "red" }}>{this.state.message}</h5>
-                                                        <div style={{ marginRight: "auto", marginLeft: "auto", display: this.state.displaySpinner }}
-                                                                className="spinner-border text-primary" role="status">
-                                                                <span style={{ textAlign: "center" }} className="sr-only">Loading...</span>
+                                                        <h4 style={{ textAlign: "center"}}>{this.state.message}</h4>
+                                                        <div style={{ marginRight: "auto", textAlign: "center", marginLeft: "auto", display: this.state.displaySpinner }} className="mb-3" role="status">
+                                                                <div className="loader-1 mb-2"><span></span></div>
+                                                                <span style={{ textAlign: "center" }} className="sr-only">Uploading...</span>
                                                         </div>
-
-                                                        <button className="btnBlack" onClick={() => { document.getElementById("inputVideo").click(); }}>
-                                                                <input name="video" type="file" id="inputVideo" value={this.state.video} onChange={this.handleChange} accept="video/*" />
-                                                                <label className="custom-file-label" htmlFor="inputVideo"
-                                                                        aria-describedby="inputVideoLabel">{this.state.videoName}</label>
+                                                        <div className="mx-auto">
+                                                        <button className="btnBlack mt-2" onClick={() => { document.getElementById("inputVideo").click(); }}>
+                                                                <input name="video" hidden={true} type="file" id="inputVideo" value={this.state.video} onChange={this.handleChange} accept="video/*" />
+                                                                <FolderLogo className="btnBlack-icon" />
+                                                                {this.state.videoName ? this.state.videoName : "Pick a video"}
+                                                        </button>
+                                                                <button className="saveBtn ml-2 mt-2" id="inputVideoLabel" onClick={this.handleClick}>
                                                                 <UploadLogo className="btnBlack-icon" />
-                                                                Pick a video
-                        </button>
-                                                        <button className="input-group-text" id="inputVideoLabel" onClick={this.handleClick}>Upload</button>
-                                                </div>
-                                                <div style={{ marginTop: "30px", paddingRight: "20%", paddingLeft: "20%" }} className="input-group mb-3">
-                                                        <div className="custom-file">
-                                                                <input accept="video/mp4,video/x-m4v,video/*" type="file" className="custom-file-input"
-                                                                        id="inputVideo" value={this.state.video} onChange={this.handleChange} />
-                                                                <label className="custom-file-label" htmlFor="inputVideo"
-                                                                        aria-describedby="inputVideoLabel">{this.state.videoName}</label>
-                                                        </div>
-                                                        <div className="input-group-append">
-                                                                <button className="input-group-text" id="inputVideoLabel" onClick={this.handleClick}>Upload</button>
+                                                                Upload
+                                                                </button>
                                                         </div>
                                                 </div>
-
                                         </div>
 
-                                        <VideoCard />
-                                        <VideoCard />
-
+                                        { this.props.getVideos() && this.props.getVideos().length > 0 ?
+                                        this.props.getVideos().map( (video, index) => {
+                                                const videoCard =
+                                                <VideoCard key={index} idVideo={index} titleVideo={video.titleVideo} videoURL={video.videoURL} vttURL={video.vttURL} setName={this.setName}/>
+                                                return videoCard;
+                                        }) : 
+                                        <h1 style={{ textAlign: "center"}}>You have added no videos yet. </h1>
+                                        }
                                 </div>
                         </>
                 )
