@@ -35,8 +35,6 @@ import { addNewCourse } from '../store/actions';
     }
 
     getVideos = () => {
-      console.log("returner by get videos: ")
-      console.log(this.state.course.videos)
       return this.state.course.videos
    }
 
@@ -133,7 +131,6 @@ import { addNewCourse } from '../store/actions';
                         <button onClick={() => this.props.saveNewCourse(this.state.course)} className="saveBtn" >
                         {this.props.newCourse.fetching ? "SENDING..." : "SAVE"}
                         </button>
-                        
                         </div>
                   </div>
             </div>
