@@ -14,34 +14,36 @@ class Live extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {nameSession: '', 
-    descrSession: '',
-    tokenSession: undefined};
+    this.state = {
+      nameSession: '',
+      descrSession: '',
+      tokenSession: undefined
+    };
 
   }
 
-  handleChange = (e)=>{
-    this.setState({[e.target.name]: e.target.value})
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value })
   }
 
-  handlerLeaveSessionEvent= (e)=>{
-    this.setState({nameSession: '', descrSession: '', tokenSession: '',session: undefined})
+  handlerLeaveSessionEvent = (e) => {
+    this.setState({ nameSession: '', descrSession: '', tokenSession: '', session: undefined })
   }
 
-  submit= ()=>{
+  submit = () => {
     this.connectLive();
   }
-  leaveSession= ()=>{
+  leaveSession = () => {
     this.state.session.disconnect();
     this.state.session = undefined;
   }
-  connectLive = ()=>{
+  connectLive = () => {
     //We create an instance of OpenVidu
     const OV = new OpenVidu();
     let session = OV.initSession();
     //We retrieve the post request's token
     console.log(this.props);
-    this.props.createNewLive(this.state.nameSession,this.state.descrSession)
+    this.props.createNewLive(this.state.nameSession, this.state.descrSession)
       .then((res) => {
         // console.log("token res  ***" + token);
         //let session = OV.initSession();
@@ -74,50 +76,50 @@ class Live extends Component {
   render() {
     return (
       <div>
-    {this.state.session === undefined ? (
+        {this.state.session === undefined ? (
+          <div className="content">
+            <div className="courseShowcase">
+              <div className="login-page">
+                <div className="row mt-3">
+                  <h1 className="liveheader logohead">🔴 New Live</h1>
+                </div>
 
-        <div className="courseShowcase">
-          <div className="form">
-          <img src="../../static/images/liveLogo.png" className="logohead" />
-          <label className= "labell">
-            Name
-            <input className= "field" name="nameSession" type="text" value={this.state.nameSession} onChange={this.handleChange}/>
-          </label>
-          <label>
-            Description
-            <input className= "field" name="descrSession" type="textarea" value={this.state.descrSession} onChange={this.handleChange}/>
-          </label>
-          <button className="livebutton" onClick={this.submit}>  
-            Play
-          </button>
+                <div className="form mt-5">
+                  <form className="login-form">
+                    <input type="text" name="nameSession" value={this.state.nameSession} onChange={this.handleChange} placeholder="Name..." />
+                    <input type="textarea" name="descrSession" value={this.state.descrSession} onChange={this.handleChange} placeholder="Description..." />
+                    <button className="livebutton" onClick={this.submit}>Play</button>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
-          </div>
-                
-          ): 
+
+        ) :
 
 
-    // {/* <div id="video-container" class="col-md-12">
-      //        </div>  */}
-         (
+          // {/* <div id="video-container" class="col-md-12">
+          //        </div>  */}
+          (
 
-        
-          <OpvSession
-         id="opv-session"
-         sessionName={this.state.nameSession}
-         user="Live"
-         token= {this.state.tokenSession}
-         leaveSession={this.handlerLeaveSessionEvent}
-         error={this.handlerErrorEvent} /> 
-       
-       
+            <div className="content">
+              <div className="courseShowcase">
+                <OpvSession
+                  id="opv-session"
+                  sessionName={this.state.nameSession}
+                  user="Live"
+                  token={this.state.tokenSession}
+                  leaveSession={this.handlerLeaveSessionEvent}
+                  error={this.handlerErrorEvent} />
+              </div>
+            </div>
+          )}
 
-         )}
-
-</div>
+      </div>
     );
   }
 
-  }
+}
 
 
 
