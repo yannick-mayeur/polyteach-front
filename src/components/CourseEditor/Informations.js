@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {uploadImageToGCP, askForSignedImageURL} from '../../services/Uploader/VideoApi';
+import {uploadImageToGCP, askForSignedImageURL} from '../../services/Uploader/ImageApi';
 import UploadLogo from '../../static/images/upload.svg';
 export default class  Informations extends Component {
 
@@ -10,6 +10,7 @@ export default class  Informations extends Component {
               pictureName: '',
               pictureInput: '',
               message: '',
+              image: '',
               picture: '',
               displaySpinner: "none"
       };
@@ -42,20 +43,17 @@ export default class  Informations extends Component {
       }
    };
 
-   uploadDocumentRequest = async ({ image }) => {
-      // We use a FormData to send the video
-      let data = new FormData();
-      data.append('picture', image);
-      const signedURL = await askForSignedImageURL(image.name);
-      const see = await uploadImageToGCP(image, signedURL);
+   uploadDocumentRequest = async ({ picture }) => {
+      const result = await askForSignedImageURL(picture.name);
+      const see = await uploadImageToGCP(picture, result.data.signedURL);
       if (see) {
               // Good
               this.setState({
-                      videoURL: image.data.pictureURL,
-                      message: "Image uploaded with success !",
-                      displaySpinner: "none",
-                      pictureInput: '',
-                      picture: ''
+                  pictureURL: result.data.pictureURL,
+                  message: "Image uploaded with success !",
+                  displaySpinner: "none",
+                  pictureInput: '',
+                  picture: ''
               });
               //this.props.saveVideos(newVideos)
       } else {
@@ -93,7 +91,7 @@ render(){
                      <span style={{ textAlign: "center" }} className="sr-only">Uploading...</span>
             </div>
             <span className="file-msg">{this.state.pictureName ? this.state.pictureName : "Currently using default thumbnail"}</span>
-            <input className="file-input" id="file-input" type="file" value={this.state.video} onChange={this.handleChange} accept="image/*"/>
+            <input className="file-input" id="file-input" type="file" value={this.state.image} onChange={this.handleChange} accept="image/*"/>
          </div>
          <button className="saveBtn ml-2 mt-2" id="inputVideoLabel" onClick={this.handleClick}>
             <UploadLogo className="btnBlack-icon" />
