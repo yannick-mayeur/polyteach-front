@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Informations } from '../components/CourseEditor/Informations';
+import Informations from '../components/CourseEditor/Informations';
 import  Videos  from '../components/CourseEditor/Videos';
 import { Students } from '../components/CourseEditor/Students';
 import { Link } from 'react-router-dom';
