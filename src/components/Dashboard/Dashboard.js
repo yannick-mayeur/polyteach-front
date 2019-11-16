@@ -1,7 +1,5 @@
 import React from 'react'
-import {Bar} from 'react-chartjs-2'
-import {Line} from 'react-chartjs-2'
-
+import {Bar, Line, Doughnut} from 'react-chartjs-2'
 
 export function Dashboard() {
     const values =  {
@@ -58,10 +56,7 @@ export function Dashboard() {
                 options={{ maintainAspectRatio: false}}
                 />
                 </div>
-
             </div>
-            
-
         </div>
         </div>
     )

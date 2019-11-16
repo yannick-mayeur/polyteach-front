@@ -82,7 +82,7 @@ import { addNewCourse } from '../store/actions';
     data = [
         {
           title: 'Informations',
-          component: <Informations saveName={this.saveName} name={this.getName} saveDescription={this.saveDescription} description={this.getDescription}/>
+          component: <Informations savePicture={this.savePicture} saveName={this.saveName} name={this.getName} saveDescription={this.saveDescription} description={this.getDescription}/>
         },
         {
           title: 'Videos',
