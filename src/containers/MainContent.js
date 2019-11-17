@@ -19,12 +19,11 @@ class MainContent extends Component {
     return (
       <div className="content">
         <div className="courseShowcase ml-5">
-
-          <ScrollCourses courses={this.props.courses} name="MY COURSES"></ScrollCourses>
-          <ScrollCourses courses={this.props.courses} name="🔴 Live Streams"></ScrollCourses>
-          <ScrollCourses courses={this.props.courses} name="IG5 Courses"></ScrollCourses>
-          <ScrollCourses courses={this.props.courses} name="IG4 Courses"></ScrollCourses>
-          <ScrollCourses courses={this.props.courses} name="IG3 Courses"></ScrollCourses>
+          <ScrollCourses courses={{data: this.props.courses.data.filter(course => course.name.toLowerCase().includes(this.props.searchQueryCourse.toLowerCase())), fetching: this.props.courses.fetching}} name="MY COURSES"></ScrollCourses>
+          <ScrollCourses courses={{data: this.props.courses.data.filter(course => course.name.toLowerCase().includes(this.props.searchQueryCourse.toLowerCase())), fetching: this.props.courses.fetching}} name="🔴 Live Streams"></ScrollCourses>
+          <ScrollCourses courses={{data: this.props.courses.data.filter(course => course.name.toLowerCase().includes(this.props.searchQueryCourse.toLowerCase())), fetching: this.props.courses.fetching}} name="IG5 Courses"></ScrollCourses>
+          <ScrollCourses courses={{data: this.props.courses.data.filter(course => course.name.toLowerCase().includes(this.props.searchQueryCourse.toLowerCase())), fetching: this.props.courses.fetching}} name="IG4 Courses"></ScrollCourses>
+          <ScrollCourses courses={{data: this.props.courses.data.filter(course => course.name.toLowerCase().includes(this.props.searchQueryCourse.toLowerCase())), fetching: this.props.courses.fetching}} name="IG3 Courses"></ScrollCourses>
         
         </div>
       </div>
@@ -33,7 +32,10 @@ class MainContent extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { courses: state.ownCourses }
+  return { 
+    courses: state.ownCourses,
+    searchQueryCourse: state.search.searchQueryCourse
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {

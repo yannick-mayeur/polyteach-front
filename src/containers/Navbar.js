@@ -10,8 +10,15 @@ import LogoutLogo from '../static/images/logout.svg';
 import DropdownArrow from '../static/images/drop-down-arrow.svg';
 import DropdownContent from "../components/Navbar/DropdownContent";
 
+import { connect } from 'react-redux';
+import { updateSearchQueryCourse } from '../store/actions';
+
 
 class navigation extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   state = {
     scrolling: false
   }
@@ -34,7 +41,6 @@ class navigation extends Component {
     }
   }
 
-
   render() {
     const { scrolling } = this.state;
     //const { showCourses } = this.props;
@@ -50,10 +56,10 @@ class navigation extends Component {
           <div className="navigation__container--left">
             <SearchLogo className="logo" />
             <input
-              //onChange={showCourses}
+              onChange={(event) => this.props.updateSearchQueryCourse(event.target.value)}
               className="navigation__container--left__input"
               type="text"
-              placeholder="Title, genres, people" />
+              placeholder="Course name" />
           </div>
           <Link to="/courseEditor" style={{ textDecoration: 'none' }}>
           <button className="header__container-btnAddCourse">
@@ -73,4 +79,10 @@ class navigation extends Component {
   }
 }
 
-export default navigation; 
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = (dispatch) => ({
+  updateSearchQueryCourse: newQuery => dispatch(updateSearchQueryCourse(newQuery))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(navigation);
