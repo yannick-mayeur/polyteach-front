@@ -20,9 +20,5 @@ export function StudentCard(props) {
             </div>
         </div>
     </div>
-
-
     )
-
-
 }

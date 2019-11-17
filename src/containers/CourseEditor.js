@@ -5,11 +5,12 @@ import Students from '../components/CourseEditor/Students';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addNewCourse } from '../store/actions';
-import { fetchStudents } from '../store/actions/students.action';
+import { fetchStudents, addStudents, clearStudents } from '../store/actions/students.action';
 
 class CourseEditor extends Component {
 
   componentWillMount = () => {
+    this.props.clearStudents();
     this.props.fetchStudents();
   };
 
@@ -94,15 +95,6 @@ class CourseEditor extends Component {
     return this.state.course.picture
   }
 
-
-  getAllStudents = () => {
-    return this.props.students.data
-  }
-
-  getSelectedStudents = () => {
-    return this.state.course.students
-  }
-
   saveStudents = (students) => {
     this.setState({
       course: {
@@ -115,22 +107,22 @@ class CourseEditor extends Component {
     })
   }
 
-  data = [
-    {
-      title: 'Informations',
-      component: <Informations savePicture={this.savePicture} getPicture={this.getPicture} saveName={this.saveName} name={this.getName} saveDescription={this.saveDescription} description={this.getDescription} />
-    },
-    {
-      title: 'Videos',
-      component: <Videos saveVideos={this.saveVideos} getVideos={this.getVideos} />
-    },
-    {
-      title: 'Students',
-      component: <Students getAllStudents={this.getAllStudents} getSelectedStudents={this.getSelectedStudents} saveStudents={this.saveStudents} />
-    }
-  ]
 
   render() {
+    let data = [
+      {
+        title: 'Informations',
+        component: <Informations savePicture={this.savePicture} getPicture={this.getPicture} saveName={this.saveName} name={this.getName} saveDescription={this.saveDescription} description={this.getDescription} />
+      },
+      {
+        title: 'Videos',
+        component: <Videos saveVideos={this.saveVideos} getVideos={this.getVideos} />
+      },
+      {
+        title: 'Students',
+        component: <Students students={this.props.students} dispatchAddStudents={this.props.addStudents}/>
+      }
+    ]
     return (
       <div className="content">
         <div className="courseShowcase">
@@ -138,29 +130,28 @@ class CourseEditor extends Component {
             <div className="tab">
               <ul className="tab-list">
                 {
-                  this.data.map((tab, i) =>
+                  data.map((tab, i) =>
                     <li key={i}
-                      data-active={this.state.index === i}
-                      onClick={() => this.setState({ index: i })} className="mx-auto pannel">
-                      <h1 className="tabtitle">{tab.title}</h1>
-                    </li>
+                    data-active={this.state.index === i}
+                    onClick={() => this.setState({ index: i })} className="mx-auto pannel">
+                    <h1 className="tabtitle">{tab.title}</h1>
+                  </li>
                   )
                 }
               </ul>
               <div className="tab-content">
                 <div data-content={this.state.index + 1}>
-                  {this.data[this.state.index].component}
+                  {data[this.state.index].component}
                 </div>
               </div>
             </div>
-
 
             <div className="row mt-5 menubuttonsrow col-md-6">
               <div className="col-md-6">
                 <Link to="/">
                   <button className="cancelBtn" >
                     CANCEL
-                        </button>
+                  </button>
                 </Link>
               </div>
               <div className="col-md-6">
@@ -179,7 +170,7 @@ class CourseEditor extends Component {
 
 const mapStateToProps = (state) => ({
   newCourse: state.newCourse,
-  students: state.students
+  students: state.students,
 })
 
 
@@ -188,6 +179,8 @@ const mapDispatchToProps = dispatch => {
     // dispatching multiple actions
     saveNewCourse: course => dispatch(addNewCourse(course)),
     fetchStudents: () => dispatch(fetchStudents()),
+    addStudents: (students, fromClass) => dispatch(addStudents(students, fromClass)),
+    clearStudents: () => dispatch(clearStudents())
   }
 }
 
