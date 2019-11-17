@@ -1,4 +1,3 @@
-
 import S from '../../services'
 
 export const FETCH_OWN_COURSES = 'FETCH_OWN_COURSES';
@@ -15,5 +14,13 @@ export function addNewCourse(data) {
   return {
     type: ADD_NEW_COURSE,
     payload: S.courses.createCourse(data)
+  }
+}
+
+export const UPDATE_SEARCH_QUERY_COURSE = "UPDATE_SEARCH_QUERY_COURSE";
+export function updateSearchQueryCourse(newQuery) {
+  return {
+    type: UPDATE_SEARCH_QUERY_COURSE,
+    payload: newQuery
   }
 }
