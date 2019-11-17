@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 // Store
-import { createLive } from '../store/actions';
+import { createLive, startToRecord, stopRecording } from '../store/actions';
 // OpenVidu
 import OpvSession from 'openvidu-react';
 import { OpenVidu } from 'openvidu-browser';
@@ -19,7 +19,8 @@ class Live extends Component {
       descrSession: '',
       tokenSession: undefined,
       session: undefined,
-      checked: false
+      checked: false,
+      record: ''
     };
 
   }
@@ -30,13 +31,18 @@ class Live extends Component {
 
   handlerLeaveSessionEvent = (e) => {
     
-    this.state.session.disconnect();
-    this.setState({
-      nameSession: '', 
-      descrSession: '', 
-      tokenSession: '',
-      session: undefined,
-      checked: false
+    let recordId= this.state.record;
+    console.log("le record Id du stop => ------------------" + recordId);
+    this.props.stopRecording(recordId).then(()=>{
+      this.state.session.disconnect();
+      this.setState({
+        nameSession: '', 
+        descrSession: '', 
+        tokenSession: '',
+        session: undefined,
+        checked: false,
+        record: ''
+      });
     })
   
   }
@@ -46,12 +52,10 @@ class Live extends Component {
   }
 
   toggleChecked = (event) => {
-    console.log("slide ++" + event.target.checked);
     this.setState({ 
       checked: event.target.checked 
     }); 
   }
-
 
   
  
@@ -63,11 +67,17 @@ class Live extends Component {
   startRecording = (properties, newProperties) => {
 
     let session= this.state.session.sessionId;
+    console.log("session Id "+ session);
     let name= this.state.nameSession;
-
    (properties === "default") ? 
-   (this.props.startNewRecording(session, name, '')) : 
+   (this.props.startNewRecording(session, name, '').then((res) =>{
+     this.setState({
+       record: res.value.data
+     })
+     console.log("recordId du starting => *****" + this.state.record);
+    })) : 
    (this.props.startNewRecording(session, name, newProperties));
+   
   }
 
   connectLive = () => {
@@ -82,7 +92,6 @@ class Live extends Component {
         // console.log("token res  ***" + token);
         //let session = OV.initSession();
         const ovToken = res.value.data;
-        
         this.setState({
           tokenSession: ovToken,
           session: session,
@@ -130,7 +139,7 @@ class Live extends Component {
                  <input type="textarea" name="descrSession"  value={this.state.descrSession} onChange={this.handleChange} placeholder="Description..."/>
                  <div>
                  <FormControlLabel
-                    control={<Switch checked={this.state.checked} onChange={this.toggleChecked} onColor="white" />}
+                    control={<Switch checked={this.state.checked} onChange={this.toggleChecked} />}
                     label="Recording"
 
                   />
@@ -161,8 +170,11 @@ class Live extends Component {
            </div> 
 */        <div className="content">
             <div className="courseShowcase">
-               <div id="video-container" class="col-md-12">
+               <div id="video-container" className="col-md-12">
                </div>
+               <button onClick={this.handlerLeaveSessionEvent}>  
+            Leave
+          </button>
            </div>
          </div>
          )}
@@ -174,12 +186,15 @@ class Live extends Component {
   }
 
 const mapStateToProps = (state) => ({
-  live: state.ovToken
+  live: state.ovToken, 
+  record : state.record
 });
 
 const mapDispatchToProps = (dispatch) => ({
   createNewLive: (nameCourse, description) => dispatch(createLive(nameCourse, description)),
-  startNewRecording: (session, name, properties) => dispatch(startToRecord(session, name, properties))
+  startNewRecording: (session, name, properties) => dispatch(startToRecord(session, name, properties)),
+  stopRecording: (recordId) => dispatch(stopRecording(recordId))
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Live);

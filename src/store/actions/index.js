@@ -57,12 +57,19 @@ export function createLive(nameCourse, description) {
     type: CREATE_LIVE,
     payload: S.live.createLive(nameCourse, description)
   }
-
-  export const START_RECORDING = 'START_RECORDING';
-  export function createLive(session, name, properties) {
+}
+export const START_RECORDING = 'START_RECORDING';
+export function startToRecord(session, name, properties) {
     return {
       type: START_RECORDING,
       payload: S.live.startToRecord(session, name, properties)
     }
   }
-}
+export const STOP_RECORDING = 'STOP_RECORDING';
+export function stopRecording(recordId) {
+    return {
+      type: STOP_RECORDING,
+      payload: S.live.stopRecording(recordId)
+    }
+  }
+

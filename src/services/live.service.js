@@ -8,6 +8,10 @@ const liveService = {
 
     startToRecord(session, name, properties) {
         return Api().post("/api/live/startRecording",{sessionId: session, sessionName: name, properties: properties})
+    },
+
+    stopRecording(recordId) {
+        return Api().post("/api/live/stopRecording",{recordId: recordId})
     }
 }
 
