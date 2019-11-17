@@ -5,8 +5,14 @@ import { Students } from '../components/CourseEditor/Students';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addNewCourse } from '../store/actions';
+import { fetchStudents } from '../store/actions/students.action';
   
   class CourseEditor extends Component {
+
+    componentWillMount = () => {
+      this.props.fetchStudents();
+    };
+  
   //TODO - Fetch original course from id if exists
     constructor(props) {
       super(props);
@@ -16,7 +22,8 @@ import { addNewCourse } from '../store/actions';
           name: "",
           picture: "https://icon-library.net/images/placeholder-image-icon/placeholder-image-icon-7.jpg",
           description: "",
-          videos: []
+          videos: [],
+          students: []
         }
       }
     }
@@ -146,11 +153,17 @@ import { addNewCourse } from '../store/actions';
 
 
 const mapStateToProps = (state) => ({
-  newCourse: state.newCourse
+  newCourse: state.newCourse,
+  students: state.students
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  saveNewCourse: course => dispatch(addNewCourse(course))
-})
+
+const mapDispatchToProps = dispatch => {
+  return {
+    // dispatching multiple actions
+    saveNewCourse: course => dispatch(addNewCourse(course)),
+    fetchStudents: () => dispatch(fetchStudents),
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(CourseEditor);
