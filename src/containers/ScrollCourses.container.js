@@ -8,7 +8,7 @@ export function ScrollCourses(props) {
     props.courses.fetching? 
     <div className="loader-1 mb-2"><span></span></div>
     :
-    props.courses.data.map((course) => {
+    props.courses.map((course) => {
         const courseComponent =
             <CourseGenre key={course.id} posterUrl={course.picture} course={course}/>
         return courseComponent;
