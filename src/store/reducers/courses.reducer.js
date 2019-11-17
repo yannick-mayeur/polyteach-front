@@ -7,7 +7,6 @@ const initState = {
 export default function (state = initState, action) {
   switch (action.type) {
     case "FETCH_ALL_COURSES_BY_CLASS_FULFILLED":
-      console.log(action.payload.data)
       const myCoursesByClass = action.payload.data;
       return { ...state, myCoursesByClass, fetching: false }
 

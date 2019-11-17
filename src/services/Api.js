@@ -3,8 +3,8 @@ import axios from 'axios';
 
 
 const client = axios.create({
-    baseURL: "https://polyteach-back.igpolytech.fr"
-    //baseURL: "http://localhost:3000"
+    //baseURL: "https://polyteach-back.igpolytech.fr"
+    baseURL: "http://localhost:3000"
 });
 
 client.interceptors.request.use((request) => {
