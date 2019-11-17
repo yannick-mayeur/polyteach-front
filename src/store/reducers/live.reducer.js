@@ -16,5 +16,18 @@ export default function (state = initStore, action) {
     default:
       console.log("default");
       return state;
+
+    case "START_RECORDING_FULFILLED":
+      console.log("recording started!!");
+      return { ...state, recordInfos: action.payload.data }
+
+    case "START_RECORDING_REJECTED":
+        console.log("recording started!!");
+       return { ...state,  }
+         
+
+    case "START_RECORDING_PENDING":
+      return state;
+      
   }
 }
