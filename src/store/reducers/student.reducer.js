@@ -1,8 +1,6 @@
 import { FETCH_STUDENTS } from '../actions';
 
 export default function (state = {data: []}, action) {
-    console.log("reducer")
-    console.log(action)
   switch (action.type) {
     case "FETCH_STUDENTS_FULFILLED":
       const data = action.payload.data;
