@@ -12,7 +12,7 @@ const askForSignedURL = (videoName) => {
 };
 
 const uploadVideoToGCP = (video, signedUrl) => {
-    return axios.put(signedUrl, video, {headers: {'Content-Type': 'video/mp4'}})
+    return axios.put(signedUrl, video, {headers: {'Content-Type': 'video/*'}})
         .then(() => {
             return true;
         })
@@ -32,5 +32,4 @@ const askForSubtitles = (videoName) => {
             console.log(error);
         })
 };
-
 export {askForSignedURL, uploadVideoToGCP, askForSubtitles}

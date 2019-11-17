@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Informations } from '../components/CourseEditor/Informations';
+import Informations from '../components/CourseEditor/Informations';
 import  Videos  from '../components/CourseEditor/Videos';
 import { Students } from '../components/CourseEditor/Students';
 import { Link } from 'react-router-dom';
@@ -35,8 +35,6 @@ import { addNewCourse } from '../store/actions';
     }
 
     getVideos = () => {
-      console.log("returner by get videos: ")
-      console.log(this.state.course.videos)
       return this.state.course.videos
    }
 
@@ -84,7 +82,7 @@ import { addNewCourse } from '../store/actions';
     data = [
         {
           title: 'Informations',
-          component: <Informations saveName={this.saveName} name={this.getName} saveDescription={this.saveDescription} description={this.getDescription}/>
+          component: <Informations savePicture={this.savePicture} saveName={this.saveName} name={this.getName} saveDescription={this.saveDescription} description={this.getDescription}/>
         },
         {
           title: 'Videos',
@@ -133,7 +131,6 @@ import { addNewCourse } from '../store/actions';
                         <button onClick={() => this.props.saveNewCourse(this.state.course)} className="saveBtn" >
                         {this.props.newCourse.fetching ? "SENDING..." : "SAVE"}
                         </button>
-                        
                         </div>
                   </div>
             </div>

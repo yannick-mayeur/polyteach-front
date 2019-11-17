@@ -53,12 +53,15 @@ export default class Videos extends Component {
 
         setName = (newName, key)  => {
                 const newVideos = this.props.getVideos();
-                console.log(key);
-                console.log(this.props.getVideos());
-                console.log(newVideos);
-
                 newVideos[key].titleVideo = newName;
                 this.props.saveVideos(newVideos);
+        };
+
+        removeVideo = (key) => {
+                const newVideos = this.props.getVideos();
+                newVideos.splice(key);
+                this.props.saveVideos(newVideos);
+                this.setState(this.state);
         };
 
         uploadDocumentRequest = async ({ video }) => {
@@ -126,7 +129,7 @@ export default class Videos extends Component {
                                         { this.props.getVideos() && this.props.getVideos().length > 0 ?
                                         this.props.getVideos().map( (video, index) => {
                                                 const videoCard =
-                                                <VideoCard key={index} idVideo={index} titleVideo={video.titleVideo} videoURL={video.videoURL} vttURL={video.vttURL} setName={this.setName}/>
+                                                <VideoCard key={index} idVideo={index} titleVideo={video.titleVideo} videoURL={video.videoURL} vttURL={video.vttURL} setName={this.setName} removeVideo={this.removeVideo}/>
                                                 return videoCard;
                                         }) : 
                                         <h1 style={{ textAlign: "center"}}>You have added no videos yet. </h1>

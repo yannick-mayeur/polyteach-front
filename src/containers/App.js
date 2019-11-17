@@ -9,6 +9,7 @@ import Connexion from '../components/Connexion/ConnexionForm.components';
 import CourseEditor from '../containers/CourseEditor'
 import PlayerLayout from './PlayerLayout.container';
 import Signup from '../components/Connexion/Signup.component';
+import {Dashboard} from '../components/Dashboard/Dashboard';
 
 import {PrivateRoute} from '../components/utils/privateRoute.component';
 
@@ -19,6 +20,9 @@ class App extends Component {
         <Navbar />
         {/* Main conteneur */}
         <Switch>
+        <Route path="/dashboard">
+            <Dashboard />
+          </Route>
         <Route path="/connexion">
             <Connexion />
           </Route>

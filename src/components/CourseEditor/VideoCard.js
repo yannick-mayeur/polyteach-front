@@ -15,8 +15,7 @@ export function VideoCard(props) {
             <h4 className="card-duration mt-3">MM:SS</h4>
             </div>
             <div className="col-md-1">
-                {/* onClick={()=>{props.removeVideo(event)}} */}
-            <button className="modal__close"><CloseIcon className="close-btn" /></button>
+            <button className="modal__close"><CloseIcon className="close-btn" onClick={()=>{props.removeVideo(props.idVideo)}}/></button>
             </div>
         </div>
     </div>

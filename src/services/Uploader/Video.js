@@ -48,9 +48,6 @@ export default class Video extends React.Component {
     };
 
     uploadDocumentRequest = async ({video}) => {
-        // We use a FormData to send the video
-        let data = new FormData();
-        data.append('video', video);
         const signedURL = await askForSignedURL(video.name);
         const see = await uploadVideoToGCP(video, signedURL);
         if (see) {

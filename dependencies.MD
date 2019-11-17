@@ -8,4 +8,6 @@ npm install --save react-star-ratings
 npm install react-google-picker
 npm audit fix
 
+
+npm install --save react-chartjs-2 (maybe)
 ```
