@@ -14,7 +14,7 @@ export default function (state = initState, action) {
     case "LOGIN_PENDING":
       return { ...state, fetchingLogin: true, errConnection: null }
     case "LOGIN_FULFILLED":
-      localStorage.setItem('connexionToken', action.payload.data.token);
+      localStorage.setItem('jwt_token', action.payload.data.token);
       return { ...state, user: action.payload.data.user, fetchingLogin: false, errConnection: null }
     case "LOGIN_REJECTED":
       return { ...state, errConnection: action.payload.response.statusText, fetchingLogin: false }

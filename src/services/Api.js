@@ -1,6 +1,21 @@
 import axios from 'axios';
 
-export default () => axios.create({
+
+
+const client = axios.create({
     baseURL: "https://polyteach-back.igpolytech.fr"
     //baseURL: "http://localhost:3000"
 });
+
+client.interceptors.request.use((request) => {
+    const token = localStorage.getItem('jwt_token')
+    console.log(token)
+    console.log(request)
+    if (token) {
+        request.headers['Authorization'] = token;
+        
+    }
+    return request
+});
+
+export default client;
