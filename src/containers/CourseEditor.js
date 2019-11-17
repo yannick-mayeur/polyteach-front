@@ -79,10 +79,14 @@ import { addNewCourse } from '../store/actions';
        })
     }
 
+    getPicture = () => {
+      return this.state.course.picture
+   }
+
     data = [
         {
           title: 'Informations',
-          component: <Informations savePicture={this.savePicture} saveName={this.saveName} name={this.getName} saveDescription={this.saveDescription} description={this.getDescription}/>
+          component: <Informations savePicture={this.savePicture} getPicture={this.getPicture} saveName={this.saveName} name={this.getName} saveDescription={this.saveDescription} description={this.getDescription}/>
         },
         {
           title: 'Videos',

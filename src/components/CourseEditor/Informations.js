@@ -8,7 +8,7 @@ export default class Informations extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         pictureURL: 'http://www.bagherra.eu/wp-content/uploads/2016/11/orionthemes-placeholder-image-1.png',
+         pictureURL: props.getPicture(),
          pictureName: '',
          pictureInput: '',
          message: '',
