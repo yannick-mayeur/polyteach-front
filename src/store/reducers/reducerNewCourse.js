@@ -1,5 +1,5 @@
 import { FETCH_STUDENTS } from '../actions';
-import { ADD_STUDENTS, CLEAR_STUDENTS, REMOVE_STUDENTS } from '../actions/students.action';
+import { ADD_STUDENTS, CLEAR_STUDENTS, REMOVE_STUDENTS, REMOVE_STUDENT } from '../actions/students.action';
 
 const initialState = {
   createdCourse: [],
@@ -46,6 +46,18 @@ export default function (state = initialState, action) {
           isIG5Added: action.payload.fromClass == 2 ? !state.students.isIG5Added : state.students.isIG5Added,
         }
       }
+
+      case REMOVE_STUDENT:
+        const newSelectedStudent = [...new Set(
+          state.students.selectedStudents.filter(student => !action.payload.selectedStudents === student))];
+        return {...state,
+          students: {
+            selectedStudents: newSelectedStudent,
+            isIG3Added: state.students.isIG3Added,
+            isIG4Added: state.students.isIG4Added,
+            isIG5Added: state.students.isIG5Added,
+          }
+        }
 
     case CLEAR_STUDENTS:
       return {...state} // TODO
