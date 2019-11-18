@@ -2,7 +2,7 @@ import React from 'react'
 import UserLogo from '../../static/images/user.svg';
 import { StudentCard } from './StudentCard';
 
-export default function Students({saveStudents, allStudents, newCourseStudents, dispatchAddStudents, dispatchRemoveStudents, dispatchRemoveStudent}) {
+export default function Students({allStudents, newCourseStudents, dispatchAddStudents, dispatchRemoveStudents, dispatchRemoveStudent}) {
   return (
     <>
       <div className="container">
@@ -12,7 +12,6 @@ export default function Students({saveStudents, allStudents, newCourseStudents, 
             <button className={newCourseStudents.isIG3Added? "saveBtn" : "btnBlack"} onClick={() => {
               const IG3 = allStudents.data.filter(student => student.class == "IG3")
               newCourseStudents.isIG3Added? dispatchRemoveStudents(IG3, 0) : dispatchAddStudents(IG3, 0);
-              saveStudents(newCourseStudents.selectedStudents);
             }}>
               <UserLogo className="btnBlack-icon"/>
               IG3
@@ -22,7 +21,6 @@ export default function Students({saveStudents, allStudents, newCourseStudents, 
             <button className={newCourseStudents.isIG4Added? "saveBtn" : "btnBlack"} onClick={() => {
               const IG4 = allStudents.data.filter(student => student.class == "IG4")
               newCourseStudents.isIG4Added? dispatchRemoveStudents(IG4, 1) : dispatchAddStudents(IG4, 1);
-              saveStudents(newCourseStudents.selectedStudents);
             }}>
               <UserLogo className="btnBlack-icon" />
               IG4
@@ -32,7 +30,6 @@ export default function Students({saveStudents, allStudents, newCourseStudents, 
             <button className={newCourseStudents.isIG5Added? "saveBtn" : "btnBlack"} onClick={() => {
               const IG5 = allStudents.data.filter(student => student.class == "IG5")
               newCourseStudents.isIG5Added? dispatchRemoveStudents(IG5, 2) : dispatchAddStudents(IG5, 2);
-              saveStudents(newCourseStudents.selectedStudents);
             }}>
               <UserLogo className="btnBlack-icon" />
               IG5
