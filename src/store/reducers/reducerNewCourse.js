@@ -1,5 +1,5 @@
 import { FETCH_STUDENTS, UPDATE_NAME_COURSE, UPDATE_DESCRIPTION_COURSE } from '../actions';
-import { ADD_STUDENTS, REMOVE_STUDENTS, CLEAR_STUDENTS} from '../actions/students.action';
+import { ADD_STUDENTS, CLEAR_STUDENTS, REMOVE_STUDENTS, REMOVE_STUDENT } from '../actions/students.action';
 
 const initialState = {
   createdCourse: [],
@@ -32,6 +32,7 @@ export default function (state = initialState, action) {
     case "ADD_NEW_COURSE_REJECTED":
       return { ...state, fetching: false, failed: true }
 
+      // STUDENTS
     case ADD_STUDENTS:
       const selectedStudents = [...new Set(state.students.selectedStudents.concat(action.payload.selectedStudents))];
       return {...state,
@@ -55,6 +56,23 @@ export default function (state = initialState, action) {
         }
       }
 
+    case REMOVE_STUDENT:
+      const newSelectedStudent = [...new Set(
+        state.students.selectedStudents.filter(student => !action.payload.selectedStudents === student))];
+      return {...state,
+        students: {
+          selectedStudents: newSelectedStudent,
+          isIG3Added: state.students.isIG3Added,
+          isIG4Added: state.students.isIG4Added,
+          isIG5Added: state.students.isIG5Added,
+        }
+      }
+
+    case CLEAR_STUDENTS:
+      return {...state} // TODO
+
+
+      // INFORMATIONS
     case UPDATE_NAME_COURSE:
       return {...state, name: action.payload}
 
@@ -63,9 +81,11 @@ export default function (state = initialState, action) {
 
     case "UPDATE_PICTURE_COURSE_PENDING":
       return {...state, picture: {...state.picture, fetching: true}}
+
     case "UPDATE_PICTURE_COURSE_FULFILLED":
       console.log("payload", action.payload);
       return {...state, picture: {...state.picture, name: action.payload.pictureName, url: action.payload.pictureURL, fetching: true, failed: action.payload.failed}}
+
     case "UPDATE_PICTURE_COURSE_REJECTED":
       return {...state, picture: {...state.picture, fetching: true}}
 

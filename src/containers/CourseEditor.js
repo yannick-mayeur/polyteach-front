@@ -5,7 +5,8 @@ import Students from '../components/CourseEditor/Students';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addNewCourse, updateCourseName, updateCourseDescription, updateCoursePicture } from '../store/actions';
-import { fetchStudents, addStudents, clearStudents, removeStudents } from '../store/actions/students.action';
+import { fetchStudents, addStudents, clearStudents, removeStudents, removeStudent } from '../store/actions/students.action';
+import { uploadVideo } from '../store/actions/video.action';
 
 class CourseEditor extends Component {
 
@@ -29,6 +30,14 @@ class CourseEditor extends Component {
     }
   }
 
+  // Function for VIDEOS
+  uploadVideo = (video) => {
+    this.props.uploadVideo(video).then(data => {
+      this.state.course.videos.push(data.value);
+      this.setState(this.state);
+    })
+  }
+
   saveVideos = (videos) => {
     this.setState({
       course: {
@@ -39,13 +48,12 @@ class CourseEditor extends Component {
         students: this.state.students
       }
     })
-    console.log("received new state: ")
-    console.log(this.state)
   }
 
   getVideos = () => {
     return this.state.course.videos
   }
+  // END Function for VIDEOS
 
   render() {
     let data = [
@@ -55,11 +63,11 @@ class CourseEditor extends Component {
       },
       {
         title: 'Videos',
-        component: <Videos saveVideos={this.saveVideos} getVideos={this.getVideos} />
+        component: <Videos saveVideos={this.saveVideos} getVideos={this.getVideos} uploadVideo={this.uploadVideo} displaySpinner={this.props.displaySpinner}/>
       },
       {
         title: 'Students',
-        component: <Students allStudents={this.props.students} newCourseStudents={this.props.newCourse.students} dispatchAddStudents={this.props.addStudents} dispatchRemoveStudents={this.props.removeStudents}/>
+        component: <Students saveStudents = {this.saveStudents} allStudents={this.props.students} newCourseStudents={this.props.newCourse.students} dispatchAddStudents={this.props.addStudents} dispatchRemoveStudents={this.props.removeStudents} dispatchRemoveStudent={this.props.removeStudent} />
       }
     ]
     return (
@@ -109,7 +117,8 @@ class CourseEditor extends Component {
 
 const mapStateToProps = (store) => ({
   newCourse: store.newCourse,
-  students: store.students
+  students: store.students,
+  displaySpinner: store.video.displaySpinner
 })
 
 
@@ -117,13 +126,18 @@ const mapDispatchToProps = dispatch => {
   return {
     // dispatching multiple actions
     saveNewCourse: course => dispatch(addNewCourse(course)),
+    // Students
     fetchStudents: () => dispatch(fetchStudents()),
     addStudents: (students, fromClass) => dispatch(addStudents(students, fromClass)),
     removeStudents: (students, fromClass) => dispatch(removeStudents(students, fromClass)),
+    removeStudent: (student, fromClass) => dispatch(removeStudent(student, fromClass)),
     clearStudents: () => dispatch(clearStudents()),
+    // Informations
     updateCourseName: (newName) => dispatch(updateCourseName(newName)),
     updateCourseDescription: (newDescription) => dispatch(updateCourseDescription(newDescription)),
-    updateCoursePicture: (newPicture) => dispatch(updateCoursePicture(newPicture))
+    updateCoursePicture: (newPicture) => dispatch(updateCoursePicture(newPicture)),
+    // Videos
+    uploadVideo: (video) => dispatch(uploadVideo(video)),
   }
 }
 
