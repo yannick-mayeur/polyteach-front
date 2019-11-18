@@ -7,6 +7,7 @@ import Modal from '../UI/Modal';
 import CourseDetails from './CourseDetails';
 
 // Actions
+import { fetchAllInfosOnCourse } from '../../store/actions/courses.action';
 
 class CourseGenre extends Component {
    state = {
@@ -14,7 +15,7 @@ class CourseGenre extends Component {
    }
 
    componentWillMount = () => {
-
+      this.props.fetchAllInfosOnCourse(this.props.course);
    }
 
    handleToggleModal = () => {
@@ -46,7 +47,7 @@ const mapStateToProps = (state) => {
  }
  
  const mapDispatchToProps = (dispatch) => {
-   return bindActionCreators({  }, dispatch)
+   return bindActionCreators({ fetchAllInfosOnCourse }, dispatch)
  }
  
  export default connect(mapStateToProps, mapDispatchToProps)(CourseGenre);

@@ -11,6 +11,10 @@ const coursesService = {
 
     getCoursesByClass() {
         return Api.get('/courses/getAllByClass');
+    },
+
+    fetchAllInfosOnCourse(idCourse) {
+        return Api.get(`/courses/getAllInfos?courseId=${idCourse}`)
     }
 }
 
