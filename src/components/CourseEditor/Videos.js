@@ -79,7 +79,7 @@ export default class Videos extends Component {
                                 <button className="saveBtn ml-2 mt-2" id="inputVideoLabel" onClick={this.handleClick}>
                                     <UploadLogo className="btnBlack-icon" />
                                     Upload
-                                                                </button>
+                                </button>
                             </div>
                         </div>
                     </div>

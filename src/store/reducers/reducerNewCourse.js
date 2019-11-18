@@ -49,7 +49,7 @@ export default function (state = initialState, action) {
 
       case REMOVE_STUDENT:
         const newSelectedStudent = [...new Set(
-          state.students.selectedStudents.filter(student => !action.payload.selectedStudents === student))];
+          state.students.selectedStudents.filter(student => action.payload.selectedStudents.id != student.id))];
         return {...state,
           students: {
             selectedStudents: newSelectedStudent,
