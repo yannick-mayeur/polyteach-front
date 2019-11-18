@@ -4,12 +4,14 @@ import CoursesReducer from './courses.reducer';
 import NewCourseReducer from './reducerNewCourse';
 import LoginReducer from './connexion.reducer';
 import SearchReducer from './search.reducer';
+import StudentReducer from './student.reducer';
 
 const rootReducer = combineReducers({
   courses: CoursesReducer,
   newCourse: NewCourseReducer,
   login: LoginReducer,
   search: SearchReducer,
+  students: StudentReducer,
 });
 
 export default rootReducer;
