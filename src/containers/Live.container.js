@@ -11,7 +11,8 @@ import { FormControlLabel } from '@material-ui/core';
 import { Switch} from '@material-ui/core';
 import Video from '../components/LiveRoom/Video';
 import ToolbarComponent from '../components/LiveRoom/ToolbarComponent'
-
+import OpenViduLayout from '../components/LiveRoom/libraryComponents/openvidu-layout';
+const layout = new OpenViduLayout();
 class Live extends Component {
 
 
@@ -59,6 +60,7 @@ class Live extends Component {
 
   submit = () => {
     this.connectLive();
+   
   }
 
   toggleChecked = (event) => {
@@ -94,6 +96,7 @@ class Live extends Component {
   })
   this.state.publisher.publishVideo(this.isVideoActive());
   this.sendSignalChanged("isVideoActive:" + this.isVideoActive());
+
     }
 
   sendSignalChanged=(data)=>{
@@ -103,8 +106,9 @@ class Live extends Component {
   screenShare=()=> {
     const OV= new OpenVidu();
       const videoSource = navigator.userAgent.indexOf('Firefox') !== -1 ? 'window' : 'screen';
-  
-            const publisher = OV.initPublisher(undefined, {
+          console.log(videoSource);
+       
+            const publisher = OV.initPublisher("video-container", {
                 videoSource: videoSource,
                 publishAudio: this.isAudioActive(),
                 publishVideo: this.isVideoActive(),
@@ -122,13 +126,19 @@ class Live extends Component {
             });
             
             publisher.once('accessAllowed', () =>{
-                this.state.session.unpublish(this.publisher);
+                this.state.session.unpublish(this.state.publisher);
                 this.setState({publisher: publisher});
                 this.state.session.publish(this.state.publisher).then(() =>{
                   this.setState({screenShareActive: true});
                   this.sendSignalChanged("isScreenShareActive:"+ this.isScreenShareActive());
                 });
             });
+
+            publisher.on('streamPlaying', () =>{
+              this.updateLayout();
+              publisher.videos[0].video.parentElement.classList.remove('custom-class');
+              this.state.publisher.publishVideo(true);
+          });
  }
 
 
@@ -189,12 +199,39 @@ stopScreenShare=()=> {
    
   }
 
+  initLayout=()=>{
+  
+
+    const openViduLayoutOptions = {
+      maxRatio: 3 / 2, // The narrowest ratio that will be used (default 2x3)
+      minRatio: 9 / 16, // The widest ratio that will be used (default 16x9)
+      fixedRatio: false, // If this is true then the aspect ratio of the video is maintained and minRatio and maxRatio are ignored (default false)
+      bigClass: 'OV_big', // The class to add to elements that should be sized bigger
+      bigPercentage: 0.8, // The maximum percentage of space the big ones should take up
+      bigFixedRatio: false, // fixedRatio for the big ones
+      bigMaxRatio: 3 / 2, // The narrowest ratio to use for the big elements (default 2x3)
+      bigMinRatio: 9 / 16, // The widest ratio to use for the big elements (default 16x9)
+      bigFirst: true, // Whether to place the big one in the top left (true) or bottom right
+      animate: true // Whether you want to animate the transitions
+  }; 
+      layout.initLayoutContainer(document.getElementById('layout'), openViduLayoutOptions);
+      window.addEventListener('resize', this.updateLayout);
+      window.addEventListener('resize', this.checkSize);
+  
+  }
+
+  updateLayout=()=>{
+
+    setTimeout(() =>{
+        layout.updateLayout();
+    }, 20);
+}
   connectLive = () => {
 
     //We create an instance of OpenVidu
     const OV = new OpenVidu();
     let session = OV.initSession();
-
+    this.initLayout();
     //We retrieve the post request's token
     this.props.createNewLive(this.state.nameSession,this.state.descrSession)
       .then((res) => {
