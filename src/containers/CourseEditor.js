@@ -21,11 +21,7 @@ class CourseEditor extends Component {
     this.state = {
       index: 0,
       course: {
-        name: "",
-        picture: "https://icon-library.net/images/placeholder-image-icon/placeholder-image-icon-7.jpg",
-        description: "",
         videos: [],
-        students: []
       }
     }
   }
@@ -102,7 +98,13 @@ class CourseEditor extends Component {
                 </Link>
               </div>
               <div className="col-md-6">
-                <button onClick={() => this.props.saveNewCourse(this.state.course)} className="saveBtn" >
+                <button onClick={() => this.props.saveNewCourse({
+                  name: this.props.newCourse.name,
+                  picture: this.props.newCourse.picture.url,
+                  description: this.props.newCourse.description,
+                  videos: this.state.course.videos,
+                  students: this.props.newCourse.students.selectedStudents
+                })} className="saveBtn" >
                   {this.props.newCourse.fetching ? "SENDING..." : "SAVE"}
                 </button>
               </div>
