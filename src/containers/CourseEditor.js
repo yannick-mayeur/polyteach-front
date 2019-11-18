@@ -120,7 +120,7 @@ class CourseEditor extends Component {
       },
       {
         title: 'Students',
-        component: <Students students={this.props.students} dispatchAddStudents={this.props.addStudents}/>
+        component: <Students students={this.props.students} newCourseStudents={this.props.newCourse.students} dispatchAddStudents={this.props.addStudents}/>
       }
     ]
     return (
@@ -168,9 +168,9 @@ class CourseEditor extends Component {
 }
 
 
-const mapStateToProps = (state) => ({
-  newCourse: state.newCourse,
-  students: state.students,
+const mapStateToProps = (store) => ({
+  newCourse: store.newCourse,
+  students: store.students
 })
 
 
