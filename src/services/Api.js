@@ -10,7 +10,7 @@ const client = axios.create({
 client.interceptors.request.use((request) => {
     const token = localStorage.getItem('jwt_token')
     if (token) {
-        request.headers['Authorization'] = token;
+        request.headers['Authorization'] = 'Bearer ' + token;
         
     }
     return request
