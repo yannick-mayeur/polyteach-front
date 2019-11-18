@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 // Components
 import Modal from '../UI/Modal';
 import CourseDetails from './CourseDetails';
 
-export default class CourseGenre extends Component {
+// Actions
+
+class CourseGenre extends Component {
    state = {
       toggleModal: false
+   }
+
+   componentWillMount = () => {
+
    }
 
    handleToggleModal = () => {
@@ -32,3 +40,13 @@ export default class CourseGenre extends Component {
       )
    }
 }
+
+const mapStateToProps = (state) => {
+   return {  }
+ }
+ 
+ const mapDispatchToProps = (dispatch) => {
+   return bindActionCreators({  }, dispatch)
+ }
+ 
+ export default connect(mapStateToProps, mapDispatchToProps)(CourseGenre);

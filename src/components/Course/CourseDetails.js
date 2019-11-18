@@ -49,8 +49,8 @@ export default function CourseDetails(props) {
         </button>
         </Link>
         
-        <button className="modal__button" onClick={()=>{alert("Ajouter aux bookmarks")}}>
-          <StarIcon className="header__container-btnLogout-add" />
+        <button className="modal__button" style={{color: props.course.isBookmarked ? 'red' : ''}} onClick={()=>{alert("Ajouter aux bookmarks")}}>
+          <StarIcon className="header__container-btnLogout-add"/>
           Bookmark
         </button>
       </div>
