@@ -12,7 +12,7 @@ export function VideoCard(props) {
             </div>
             <div className="col-md-8">
             <input onChange={(event) => {props.setName(event.target.value, props.idVideo)}} className="card-head" type="text" name="name" defaultValue={props.titleVideo} />
-            <h4 className="card-duration mt-3">{"MM:SS "}</h4>
+            <h4 className="card-duration mt-3">{}</h4>
             </div>
             <div className="col-md-1">
             <button className="modal__close"><CloseIcon className="close-btn" onClick={()=>{props.removeVideo(props.idVideo)}}/></button>

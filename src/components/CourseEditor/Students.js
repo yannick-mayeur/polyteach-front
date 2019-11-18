@@ -47,7 +47,7 @@ export default function Students({saveStudents, allStudents, newCourseStudents, 
                     return <StudentCard key={student.id} dispatchRemoveStudent={dispatchRemoveStudent} student={student} />
                   })
                   :
-                    <h1>You have added no student to this course yet. </h1>
+                   <div className="mx-auto text-center"> <h1>You have added no student to this course yet. </h1> </div>
               }
             </div>
           </div>
