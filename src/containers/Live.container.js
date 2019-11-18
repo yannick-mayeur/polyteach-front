@@ -11,7 +11,9 @@ import { FormControlLabel } from '@material-ui/core';
 import { Switch} from '@material-ui/core';
 import Video from '../components/LiveRoom/Video';
 import ToolbarComponent from '../components/LiveRoom/ToolbarComponent'
+
 class Live extends Component {
+
 
   constructor(props) {
     super(props);
@@ -23,12 +25,14 @@ class Live extends Component {
       session: undefined,
       publisher: undefined,
       checked: false,
-      record: ''
-
+      record: '',
+      audioActive: false,
+      videoActive: false,
+      screenShareActive: false,
     };
-
   }
 
+  
   handleChange = (e) =>{
     this.setState({ [e.target.name]: e.target.value })
   }
@@ -61,21 +65,70 @@ class Live extends Component {
     this.setState({ 
       checked: event.target.checked 
     }); 
-    let l=document.getElementsById("local-video-undefined").setAttribute("controls", true);
   }
 
+  isAudioActive=() =>{
+      return this.state.audioActive;
+        }
+
+  isVideoActive=() =>{
+      return this.state.videoActive;
+        }
+  isScreenShareActive=()=> {
+      return this.state.screenShareActive;
+        }
+
   micStatusChanged=() =>{
-    console.log("mic");
+    this.setState({
+      audioActive: !(this.state.audioActive)
+    })
+    this.state.publisher.publishAudio(this.isAudioActive());
+    this.sendSignalChanged("isAudioActive:" + this.isAudioActive());
+
     }
 
 
-camStatusChanged=() => {
-  console.log("stat");
+  camStatusChanged=() => {
+  this.setState({
+    videoActive: !(this.state.videoActive)
+  })
+  this.state.publisher.publishVideo(this.isVideoActive());
+  this.sendSignalChanged("isVideoActive:" + this.isVideoActive());
     }
 
+  sendSignalChanged=(data)=>{
+      this.state.session.signal( data,'userChanged');
+  }
 
-screenShare=()=> {
-  console.log("ss");
+  screenShare=()=> {
+    const OV= new OpenVidu();
+      const videoSource = navigator.userAgent.indexOf('Firefox') !== -1 ? 'window' : 'screen';
+  
+            const publisher = OV.initPublisher(undefined, {
+                videoSource: videoSource,
+                publishAudio: this.isAudioActive(),
+                publishVideo: this.isVideoActive(),
+                mirror: false
+            },  function(error)  {
+                if (error && error.name === 'SCREEN_EXTENSION_NOT_INSTALLED') {
+                    this.setState({ showExtensionDialog: true });
+                } else if (error && error.name === 'SCREEN_SHARING_NOT_SUPPORTED') {
+                    alert('Your browser does not support screen sharing');
+                } else if (error && error.name === 'SCREEN_EXTENSION_DISABLED') {
+                    alert('You need to enable screen sharing extension');
+                } else if (error && error.name === 'SCREEN_CAPTURE_DENIED') {
+                    alert('You need to choose a window or application to share');
+                }
+            });
+            
+            publisher.once('accessAllowed', () =>{
+                this.state.session.unpublish(this.publisher);
+                this.setState({publisher: publisher});
+                this.state.session.publish(this.state.publisher).then(() =>{
+                  this.setState({screenShareActive: true});
+                  this.sendSignalChanged("isScreenShareActive:"+ this.isScreenShareActive());
+                });
+            });
  }
 
 
@@ -84,9 +137,31 @@ stopScreenShare=()=> {
  }
 
 
-toggleFullscreen=()=> {
-  console.log("fullscreen");
- }
+ toggleFullscreen=()=>{
+  const document = window.document;
+  const fs = document.getElementById('local-video-undefined');
+  if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+      if (fs.requestFullscreen) {
+          fs.requestFullscreen();
+      } else if (fs.msRequestFullscreen) {
+          fs.msRequestFullscreen();
+      } else if (fs.mozRequestFullScreen) {
+          fs.mozRequestFullScreen();
+      } else if (fs.webkitRequestFullscreen) {
+          fs.webkitRequestFullscreen();
+      }
+  } else {
+      if (document.exitFullscreen) {
+          document.exitFullscreen();
+      } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+      }
+  }
+}
 
  toggleChat=()=> {
    console.log("chat");

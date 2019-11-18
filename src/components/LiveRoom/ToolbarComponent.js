@@ -36,6 +36,7 @@ export default class ToolbarComponent extends Component{
 
     camStatusChanged=() => {
             this.props.camStatusChanged();
+            console.log("def ====" + this.props);
         }
 
 
@@ -80,7 +81,7 @@ export default class ToolbarComponent extends Component{
          const localUser = this.props.user;
          return React.createElement(
              AppBar,
-             { className: 'appbar', id: 'header', color:"success"},
+             { className: 'appbar', id: 'header', color:"inherit"},
              React.createElement(
                  Toolbar,
                  { className: 'toolbar' },
