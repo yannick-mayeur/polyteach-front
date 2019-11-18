@@ -9,6 +9,8 @@ import OpvSession from 'openvidu-react';
 import { OpenVidu } from 'openvidu-browser';
 import { FormControlLabel } from '@material-ui/core';
 import { Switch} from '@material-ui/core';
+import Video from '../components/LiveRoom/Video';
+import ToolbarComponent from '../components/LiveRoom/ToolbarComponent'
 class Live extends Component {
 
   constructor(props) {
@@ -19,8 +21,10 @@ class Live extends Component {
       descrSession: '',
       tokenSession: undefined,
       session: undefined,
+      publisher: undefined,
       checked: false,
       record: ''
+
     };
 
   }
@@ -29,21 +33,23 @@ class Live extends Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  handlerLeaveSessionEvent = (e) => {
-    
-    let recordId= this.state.record;
-    console.log("le record Id du stop => ------------------" + recordId);
-    this.props.stopRecording(recordId).then(()=>{
-      this.state.session.disconnect();
-      this.setState({
-        nameSession: '', 
-        descrSession: '', 
-        tokenSession: '',
-        session: undefined,
-        checked: false,
-        record: ''
-      });
-    })
+  leaveSession = () => {
+
+    this.props.checked ? ( this.props.stopRecording(recordId).then(()=>{
+           this.state.session.disconnect();
+    }))
+    : this.state.session.disconnect(); 
+
+    this.setState({
+      nameSession: '', 
+      descrSession: '', 
+      tokenSession: '',
+      session: undefined,
+      publisher: undefined,
+      checked: false,
+      record: ''
+
+    });
   
   }
 
@@ -55,9 +61,37 @@ class Live extends Component {
     this.setState({ 
       checked: event.target.checked 
     }); 
+    let l=document.getElementsById("local-video-undefined").setAttribute("controls", true);
   }
 
-  
+  micStatusChanged=() =>{
+    console.log("mic");
+    }
+
+
+camStatusChanged=() => {
+  console.log("stat");
+    }
+
+
+screenShare=()=> {
+  console.log("ss");
+ }
+
+
+stopScreenShare=()=> {
+  console.log("stpss");
+ }
+
+
+toggleFullscreen=()=> {
+  console.log("fullscreen");
+ }
+
+ toggleChat=()=> {
+   console.log("chat");
+ }
+
  
   /**
    * @param  {string} properties => "default" or "customized"
@@ -104,7 +138,7 @@ class Live extends Component {
             this.startRecording("default");
           }
           // Add our live video to the DOM
-         let publisher = OV.initPublisher('video-container',{
+         let publisher = OV.initPublisher(undefined,{
 
             audioSource: undefined, // The source of audio. If undefined default microphone
             videoSource: undefined, // The source of video. If undefined default webcam
@@ -115,15 +149,20 @@ class Live extends Component {
             insertMode: 'APPEND',	// How the video is inserted in the target element 'video-container'
             mirror: false       	// Whether to mirror your local video or not
           })
+
           //Publish our stream 
           session.publish(publisher);
           this.setState({
             session: session,
+            publisher: publisher
           });
         })
+        
+       
       });
   }
   render() {
+    
     return (
       <div>
     {this.state.session === undefined ? (
@@ -141,7 +180,6 @@ class Live extends Component {
                  <FormControlLabel
                     control={<Switch checked={this.state.checked} onChange={this.toggleChecked} />}
                     label="Recording"
-
                   />
                   </div>
                 <button className="livebutton" onClick={this.submit}> Play </button>
@@ -168,17 +206,36 @@ class Live extends Component {
          error={this.handlerErrorEvent} /> 
            </div>
            </div> 
-*/        <div className="content">
+          
+*/ 
+ 
+       <div className="content">
+         {this.state.publisher!== undefined ? (
             <div className="courseShowcase">
-               <div id="video-container" className="col-md-12">
+               <div id="video-container" >
+                 <Video videoManager= {this.state.publisher} />
                </div>
-               <button onClick={this.handlerLeaveSessionEvent}>  
+               <ToolbarComponent
+                    sessionId= {"jnfjnjnjnjnjnjfn"}
+                    user= {'localUser'}
+                    showNotification= {false}
+                    camStatusChanged= {this.camStatusChanged}
+                    micStatusChanged= {this.micStatusChanged}
+                    screenShare= {this.screenShare}
+                    stopScreenShare= {this.stopScreenShare}
+                    toggleFullscreen= {this.toggleFullscreen}
+                    leaveSession= {this.leaveSession}
+                    toggleChat= {this.toggleChat}
+                    />
+               <button onClick={this.leaveSession}>  
             Leave
           </button>
+
+          
            </div>
+            ) : null};
          </div>
          )}
-
 </div>
     );
   }
