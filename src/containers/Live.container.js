@@ -108,7 +108,7 @@ class Live extends Component {
       const videoSource = navigator.userAgent.indexOf('Firefox') !== -1 ? 'window' : 'screen';
           console.log(videoSource);
        
-            const publisher = OV.initPublisher("video-container", {
+            const publisher = OV.initPublisher(undefined, {
                 videoSource: videoSource,
                 publishAudio: this.isAudioActive(),
                 publishVideo: this.isVideoActive(),
@@ -143,9 +143,40 @@ class Live extends Component {
 
 
 stopScreenShare=()=> {
-  console.log("stpss");
+  this.state.session.unpublish(localUser.getStreamManager());
+  this.connectWebCam();
  }
+ 
+ connectWebCam=() =>{
 
+  const publisher = OV.initPublisher(undefined, {
+      audioSource: undefined,
+      videoSource: undefined,
+      publishAudio: this.isAudioActive(),
+      publishVideo: this.isVideoActive(),
+      resolution: '640x480',
+      frameRate: 30,
+      insertMode: 'APPEND'
+  });
+
+  if (this.state.session.capabilities.publish) {
+      this.state.session.publish(publisher).then(() => {
+          if (this.props.joinSession) {
+              this.props.joinSession();
+          }
+      });
+  }
+ 
+  // this.setConnectionId(this.state.session.connection.connectionId);
+  this.setState({
+    screenShareActive: false,
+    publisher: publisher
+  })
+
+  //this.subscribeToUserChanged();
+ // this.subscribeToStreamDestroyed();
+  this.sendSignalChanged( "isScreenShareActive:"+ this.isScreenShareActive());
+}
 
  toggleFullscreen=()=>{
   const document = window.document;
@@ -324,8 +355,8 @@ stopScreenShare=()=> {
        <div className="content">
          {this.state.publisher!== undefined ? (
             <div className="courseShowcase">
-               <div id="video-container" >
-                 <Video videoManager= {this.state.publisher} />
+               <div className="video-container" >
+                 <Video videoManager= {this.state.publisher}/>
                </div>
                <ToolbarComponent
                     sessionId= {"jnfjnjnjnjnjnjfn"}
@@ -338,12 +369,7 @@ stopScreenShare=()=> {
                     toggleFullscreen= {this.toggleFullscreen}
                     leaveSession= {this.leaveSession}
                     toggleChat= {this.toggleChat}
-                    />
-               <button onClick={this.leaveSession}>  
-            Leave
-          </button>
-
-          
+                    />     
            </div>
             ) : null};
          </div>

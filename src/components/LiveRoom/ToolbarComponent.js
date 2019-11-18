@@ -22,11 +22,6 @@ export default class ToolbarComponent extends Component{
 
     constructor(props) {
         super(props);
-
-        this.state = { 
-        fullscreen: false
-         };
-        this.toggleFullscreen = this.toggleFullscreen.bind(this);
     } 
 
     micStatusChanged=() =>{

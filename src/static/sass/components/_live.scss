@@ -19,18 +19,15 @@ videol {
     }
   }
 
-  
+  .video-container{
+    position: center;
+ 
+  }
   .labell {
     font-weight: 500;
     font-family: 'Fira Sans', sans-serif;
   }
 
-#video-container{
-
-    width: 100%;
-    height: 100%;
-
-}
 
 .appBar {
     position: bottom;
