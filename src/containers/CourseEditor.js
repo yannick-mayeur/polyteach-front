@@ -4,7 +4,7 @@ import Videos from '../components/CourseEditor/Videos';
 import Students from '../components/CourseEditor/Students';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addNewCourse } from '../store/actions';
+import { addNewCourse, updateCourseName, updateCourseDescription, updateCoursePicture } from '../store/actions';
 import { fetchStudents, addStudents, clearStudents, removeStudents } from '../store/actions/students.action';
 
 class CourseEditor extends Component {
@@ -47,72 +47,11 @@ class CourseEditor extends Component {
     return this.state.course.videos
   }
 
-  saveName = (name) => {
-    this.setState({
-      course: {
-        description: this.state.course.description,
-        name: name,
-        picture: this.state.course.picture,
-        videos: this.state.course.videos,
-        students: this.state.students
-      }
-    })
-  }
-
-  getName = () => {
-    return this.state.course.name
-  }
-
-  getDescription = () => {
-    return this.state.course.description
-  }
-
-  saveDescription = (description) => {
-    this.setState({
-      course: {
-        description: description,
-        name: this.state.course.name,
-        picture: this.state.course.picture,
-        videos: this.state.course.videos,
-        students: this.state.students
-      }
-    })
-  }
-
-  savePicture = (picture) => {
-    this.setState({
-      course: {
-        description: this.state.course.description,
-        name: this.state.course.name,
-        picture: picture,
-        videos: this.state.course.videos,
-        students: this.state.students
-      }
-    })
-  }
-
-  getPicture = () => {
-    return this.state.course.picture
-  }
-
-  saveStudents = (students) => {
-    this.setState({
-      course: {
-        description: this.state.course.description,
-        name: this.state.course.name,
-        picture: this.state.picture,
-        videos: this.state.course.videos,
-        students: students
-      }
-    })
-  }
-
-
   render() {
     let data = [
       {
         title: 'Informations',
-        component: <Informations savePicture={this.savePicture} getPicture={this.getPicture} saveName={this.saveName} name={this.getName} saveDescription={this.saveDescription} description={this.getDescription} />
+        component: <Informations savePicture={this.props.updateCoursePicture} picture={this.props.newCourse.picture} saveName={this.props.updateCourseName} name={this.props.newCourse.name} saveDescription={this.props.updateCourseDescription} description={this.props.newCourse.description} />
       },
       {
         title: 'Videos',
@@ -181,7 +120,10 @@ const mapDispatchToProps = dispatch => {
     fetchStudents: () => dispatch(fetchStudents()),
     addStudents: (students, fromClass) => dispatch(addStudents(students, fromClass)),
     removeStudents: (students, fromClass) => dispatch(removeStudents(students, fromClass)),
-    clearStudents: () => dispatch(clearStudents())
+    clearStudents: () => dispatch(clearStudents()),
+    updateCourseName: (newName) => dispatch(updateCourseName(newName)),
+    updateCourseDescription: (newDescription) => dispatch(updateCourseDescription(newDescription)),
+    updateCoursePicture: (newPicture) => dispatch(updateCoursePicture(newPicture))
   }
 }
 

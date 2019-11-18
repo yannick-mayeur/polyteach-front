@@ -1,5 +1,5 @@
-import { FETCH_STUDENTS } from '../actions';
-import { ADD_STUDENTS, CLEAR_STUDENTS, REMOVE_STUDENTS } from '../actions/students.action';
+import { FETCH_STUDENTS, UPDATE_NAME_COURSE, UPDATE_DESCRIPTION_COURSE } from '../actions';
+import { ADD_STUDENTS, REMOVE_STUDENTS, CLEAR_STUDENTS} from '../actions/students.action';
 
 const initialState = {
   createdCourse: [],
@@ -9,7 +9,15 @@ const initialState = {
     isIG4Added: false,
     isIG5Added: false,
   },
-  fetching: false
+  name: "",
+  description: "",
+  picture: {
+    name: "",
+    url: "https://icon-library.net/images/placeholder-image-icon/placeholder-image-icon-7.jpg",
+    fetching: false,
+    failed: false
+  },
+  fetching: false,
 }
 
 export default function (state = initialState, action) {
@@ -22,7 +30,7 @@ export default function (state = initialState, action) {
       return { ...state, createdCourse, fetching: false}
 
     case "ADD_NEW_COURSE_REJECTED":
-      return { ...state, fetching: false }
+      return { ...state, fetching: false, failed: true }
 
     case ADD_STUDENTS:
       const selectedStudents = [...new Set(state.students.selectedStudents.concat(action.payload.selectedStudents))];
@@ -47,8 +55,19 @@ export default function (state = initialState, action) {
         }
       }
 
-    case CLEAR_STUDENTS:
-      return {...state} // TODO
+    case UPDATE_NAME_COURSE:
+      return {...state, name: action.payload}
+
+    case UPDATE_DESCRIPTION_COURSE:
+      return {...state, description: action.payload}
+
+    case "UPDATE_PICTURE_COURSE_PENDING":
+      return {...state, picture: {...state.picture, fetching: true}}
+    case "UPDATE_PICTURE_COURSE_FULFILLED":
+      console.log("payload", action.payload);
+      return {...state, picture: {...state.picture, name: action.payload.pictureName, url: action.payload.pictureURL, fetching: true, failed: action.payload.failed}}
+    case "UPDATE_PICTURE_COURSE_REJECTED":
+      return {...state, picture: {...state.picture, fetching: true}}
 
     default:
       return state;
