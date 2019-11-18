@@ -16,6 +16,15 @@ export function addStudents(students, fromClass) {
   }
 }
 
+export const REMOVE_STUDENTS = 'REMOVE_STUDENTS';
+export function removeStudents(students, fromClass) {
+  return {
+    type: REMOVE_STUDENTS,
+    payload: {selectedStudents: students, fromClass: fromClass}
+  }
+}
+
+
 export const CLEAR_STUDENTS = 'CLEAR_STUDENTS';
 export function clearStudents() {
   return {

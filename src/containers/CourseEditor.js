@@ -5,7 +5,7 @@ import Students from '../components/CourseEditor/Students';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addNewCourse } from '../store/actions';
-import { fetchStudents, addStudents, clearStudents } from '../store/actions/students.action';
+import { fetchStudents, addStudents, clearStudents, removeStudents } from '../store/actions/students.action';
 
 class CourseEditor extends Component {
 
@@ -120,7 +120,7 @@ class CourseEditor extends Component {
       },
       {
         title: 'Students',
-        component: <Students students={this.props.students} newCourseStudents={this.props.newCourse.students} dispatchAddStudents={this.props.addStudents}/>
+        component: <Students allStudents={this.props.students} newCourseStudents={this.props.newCourse.students} dispatchAddStudents={this.props.addStudents} dispatchRemoveStudents={this.props.removeStudents}/>
       }
     ]
     return (
@@ -180,6 +180,7 @@ const mapDispatchToProps = dispatch => {
     saveNewCourse: course => dispatch(addNewCourse(course)),
     fetchStudents: () => dispatch(fetchStudents()),
     addStudents: (students, fromClass) => dispatch(addStudents(students, fromClass)),
+    removeStudents: (students, fromClass) => dispatch(removeStudents(students, fromClass)),
     clearStudents: () => dispatch(clearStudents())
   }
 }

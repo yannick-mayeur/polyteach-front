@@ -1,5 +1,5 @@
 import { FETCH_STUDENTS } from '../actions';
-import { ADD_STUDENTS, CLEAR_STUDENTS } from '../actions/students.action';
+import { ADD_STUDENTS, CLEAR_STUDENTS, REMOVE_STUDENTS } from '../actions/students.action';
 
 const initialState = {
   createdCourse: [],
@@ -26,13 +26,24 @@ export default function (state = initialState, action) {
 
     case ADD_STUDENTS:
       const selectedStudents = [...new Set(state.students.selectedStudents.concat(action.payload.selectedStudents))];
-      console.log(action.payload);
       return {...state,
         students: {
           selectedStudents: selectedStudents,
           isIG3Added: action.payload.fromClass == 0 || state.students.isIG3Added,
           isIG4Added: action.payload.fromClass == 1 || state.students.isIG4Added,
           isIG5Added: action.payload.fromClass == 2 || state.students.isIG5Added,
+        }
+      }
+
+    case REMOVE_STUDENTS:
+      const newSelectedStudents = [...new Set(
+        state.students.selectedStudents.filter(student => !action.payload.selectedStudents.includes(student)))];
+      return {...state,
+        students: {
+          selectedStudents: newSelectedStudents,
+          isIG3Added: action.payload.fromClass == 0 ? !state.students.isIG3Added : state.students.isIG3Added,
+          isIG4Added: action.payload.fromClass == 1 ? !state.students.isIG4Added : state.students.isIG4Added,
+          isIG5Added: action.payload.fromClass == 2 ? !state.students.isIG5Added : state.students.isIG5Added,
         }
       }
 
