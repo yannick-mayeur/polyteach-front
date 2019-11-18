@@ -7,24 +7,25 @@ import { connect } from 'react-redux';
 import { ScrollCourses } from './ScrollCourses.container';
 
 // Store
-import { fetchOwnCourses } from '../store/actions';
+import { fetchAllMyCoursesByClass } from '../store/actions/courses.action';
 
 
 class MainContent extends Component {
   componentWillMount = () => {
-    this.props.fetchOwnCourses();
+    this.props.fetchAllMyCoursesByClass();
   };
+
+  createScrollCourses = (classCourses) => {
+    return classCourses.map(classCourse => {
+      return <ScrollCourses courses={classCourse.courses} name={classCourse.name}></ScrollCourses>
+    })
+  }
 
   render() {
     return (
       <div className="content">
         <div className="courseShowcase ml-5">
-          <ScrollCourses courses={{data: this.props.courses.data.filter(course => course.name.toLowerCase().includes(this.props.searchQueryCourse.toLowerCase())), fetching: this.props.courses.fetching}} name="MY COURSES"></ScrollCourses>
-          <ScrollCourses courses={{data: this.props.courses.data.filter(course => course.name.toLowerCase().includes(this.props.searchQueryCourse.toLowerCase())), fetching: this.props.courses.fetching}} name="🔴 Live Streams"></ScrollCourses>
-          <ScrollCourses courses={{data: this.props.courses.data.filter(course => course.name.toLowerCase().includes(this.props.searchQueryCourse.toLowerCase())), fetching: this.props.courses.fetching}} name="IG5 Courses"></ScrollCourses>
-          <ScrollCourses courses={{data: this.props.courses.data.filter(course => course.name.toLowerCase().includes(this.props.searchQueryCourse.toLowerCase())), fetching: this.props.courses.fetching}} name="IG4 Courses"></ScrollCourses>
-          <ScrollCourses courses={{data: this.props.courses.data.filter(course => course.name.toLowerCase().includes(this.props.searchQueryCourse.toLowerCase())), fetching: this.props.courses.fetching}} name="IG3 Courses"></ScrollCourses>
-        
+          {this.createScrollCourses(this.props.coursesByClass)}
         </div>
       </div>
     );
@@ -32,14 +33,11 @@ class MainContent extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { 
-    courses: state.ownCourses,
-    searchQueryCourse: state.search.searchQueryCourse
-  }
+  return { coursesByClass: state.courses.myCoursesByClass }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ fetchOwnCourses }, dispatch)
+  return bindActionCreators({ fetchAllMyCoursesByClass }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContent);
