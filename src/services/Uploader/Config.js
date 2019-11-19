@@ -1,3 +1,3 @@
-const URL_API = "http://polyteach-video.igpolytech.fr:80";
+const URL_API = "https://polyteach-video.igpolytech.fr";
 
 export {URL_API};
