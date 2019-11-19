@@ -73,3 +73,11 @@ export function stopRecording(recordId) {
     }
   }
 
+export const GET_TOKEN_SESSION = 'GET_TOKEN_SESSION';
+export function get_tokenSession(sessionId) {
+    return {
+      type: GET_TOKEN_SESSION,
+      payload: S.live.get_tokenSession(sessionId)
+    }
+  }
+

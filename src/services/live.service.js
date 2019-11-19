@@ -12,6 +12,10 @@ const liveService = {
 
     stopRecording(recordId) {
         return Api().post("/api/live/stopRecording",{recordId: recordId})
+    },
+
+    get_tokenSession(sessionId) {
+        return Api().get("/api/live/get-token/" + sessionId);
     }
 }
 

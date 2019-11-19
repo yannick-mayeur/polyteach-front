@@ -45,6 +45,18 @@ export default function (state = initStore, action) {
       return state;
       /** ---------------- **/    
 
+            /** GET SESSION ACTION **/
+    case "GET_TOKEN_SESSION_FULFILLED":
+      console.log("session retrieved!!", action.payload);
+      return { ...state, tokenSession: action.payload.data }
+
+    case "GET_TOKEN_SESSION_REJECTED":
+        console.log("session rejected!!");
+       return { ...state,  }
+
+    case "GET_TOKEN_SESSION_PENDING":
+      return state;
+      /** ---------------- **/    
       default:
         console.log("default");
         return state;

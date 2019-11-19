@@ -34,9 +34,7 @@ class App extends Component {
           <Route exact path="/live">
             <Live/>
           </Route>
-          <Route path="/livestudent/:courseId">
-            <LiveStudent />
-          </Route>
+          <Route path="/livestudent/:sessionId" component={LiveStudent} />
           <Route exact path="/bookmarks">
             <PlayerLayout />
           </Route>

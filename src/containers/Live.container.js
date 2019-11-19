@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 // Store
-import { createLive, startToRecord, stopRecording } from '../store/actions';
+import { createLive, startToRecord, stopRecording, getSession } from '../store/actions';
 // OpenVidu
 import OpvSession from 'openvidu-react';
 import { OpenVidu } from 'openvidu-browser';
@@ -238,6 +238,7 @@ class Live extends Component {
    
   }
 
+
   connectLive = () => {
 
     let session = OV.initSession();
@@ -246,13 +247,21 @@ class Live extends Component {
       .then((res) => {
 
         const ovToken = res.value.data;
-        
+        console.log("ovToken"+ ovToken);
         this.setState({
           tokenSession: ovToken,
           session: session,
         });
 
+        console.log("sessionId you want ***** "+ session);
+        session.on('streamCreated', (event) => {
 
+          console.log("STREAM CREATED 000000");
+     // Subscribe to the Stream to receive it
+     // HTML video will be appended to element with 'video-container' id
+     const subscriber = session.subscribe(event.stream, 'video-container');
+     
+      });
         session.connect(ovToken).then(()=>{
 
           if (this.state.checked){
@@ -347,7 +356,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   createNewLive: (nameCourse, description) => dispatch(createLive(nameCourse, description)),
   startNewRecording: (session, name, properties) => dispatch(startToRecord(session, name, properties)),
-  stopRecording: (recordId) => dispatch(stopRecording(recordId))
+  stopRecording: (recordId) => dispatch(stopRecording(recordId)),
 
 });
 
