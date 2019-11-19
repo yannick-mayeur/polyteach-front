@@ -5,6 +5,10 @@ const coursesService = {
         return Api.get(`courses`);
     },
 
+    getCourse(courseID) {
+        return Api.get(`courses/`+courseID);
+    },
+
     createCourse (data) {
         return Api.post(`/courses`, data);
     },

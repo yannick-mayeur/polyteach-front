@@ -7,3 +7,12 @@ export function fetchAllMyCourses() {
       payload: S.courses.getAllCourses()
     }
 }
+
+
+export const FETCH_COURSE = 'FETCH_COURSE';
+export function fetchCourse(courseID) {
+    return {
+      type: FETCH_COURSE,
+      payload: S.courses.getCourse(courseID)
+    }
+}

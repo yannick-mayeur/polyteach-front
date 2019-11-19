@@ -46,23 +46,20 @@ export function Player(props) {
   };
 
   // Create Course Components from data course
-  const courseRow = props.courses.data.map((course) => {
+  const courseRow = props.course.videos.map((course) => {
       const courseComponent =
           <VideoThumbnail
-              key={course.id}
-              posterUrl={course.picture}
               course={course} />
       return courseComponent;
     });
 
-  
     return (
       <>
         <div className="content">
           <div className="courseShowcase  ml-5">
             <div className="courseShowcase__head mt-5">
               <DropdownLogo onClick={minimize} className="courseShowcase__logoreduce" id="minimizebtn"/>
-              <h1 className="courseShowcase__coursetitle">{props.title}</h1>
+              <h1 className="courseShowcase__coursetitle">{props.course.name}</h1>
               <h1>| videos</h1>
             </div>
           
