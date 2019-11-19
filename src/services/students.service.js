@@ -2,7 +2,7 @@ import Api from "./Api";
 
 const studentsService = {
     getAllStudents() {
-        return Api().get(`students`)
+        return Api.get(`students`)
     }
 }
 
