@@ -12,6 +12,8 @@ import Signup from '../components/Connexion/Signup.component';
 import {Dashboard} from '../components/Dashboard/Dashboard';
 
 import {PrivateRoute} from '../components/utils/privateRoute.component';
+import Live from './Live.container';
+import LiveStudent from "./LiveStudent.container";
 
 class App extends Component {
   render() {
@@ -29,10 +31,13 @@ class App extends Component {
           <Route path="/signup">
             <Signup />
           </Route>
-          <Route path="/bookmarks">
           <Route exact path="/live">
             <Live/>
           </Route>
+          <Route path="/livestudent/:courseId">
+            <LiveStudent />
+          </Route>
+          <Route exact path="/bookmarks">
             <PlayerLayout />
           </Route>
           <Route path="/courseEditor">
