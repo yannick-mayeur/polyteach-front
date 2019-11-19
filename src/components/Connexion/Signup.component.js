@@ -18,6 +18,7 @@ class SignUpForm extends Component {
         this.state = {
             email: '',
             password: '',
+            class:'IG3',
         }
     }
 
@@ -28,9 +29,13 @@ class SignUpForm extends Component {
         this.setState({ password: event.target.value });
     }
 
+    handleChangeClass = (event) => {
+        this.setState({ class: event.target.value });
+    }
+
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.signup(this.state.email, this.state.password).then(() => {
+        this.props.signup(this.state.email, this.state.password, this.state.class).then(() => {
             this.props.history.push("/connexion");
         })
     }
@@ -49,6 +54,12 @@ class SignUpForm extends Component {
                                     <p className="errorlogin mb-2">{this.props.errMessage}</p>
                                     <input type="text" placeholder="firstname.lastname@umontpellier.fr" onChange={this.handleChangeEmail} />
                                     <input type="password" placeholder="password" onChange={this.handleChangePassword} />
+                                    <label className="mr-4">Your class:</label>
+                                    <select name="pets" id="pet-select" className="mb-4" onChange={this.handleChangeClass}>
+                                        <option value="IG3" selected>IG3</option>
+                                        <option value="IG4">IG4</option>
+                                        <option value="IG5">IG5</option>
+                                    </select>
                                     <button className="loginbutton">Sign up</button>
                                     <p className="message">Already registered ? <Link to="/connexion"> Connect to your account</Link></p>
                                 </form>

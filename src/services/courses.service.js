@@ -8,10 +8,6 @@ const coursesService = {
     createCourse (data) {
         return Api.post(`/courses`, data);
     },
-
-    getCoursesByClass() {
-        return Api.get('/courses/getAllByClass');
-    }
 }
 
 export default coursesService;
