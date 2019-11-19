@@ -42,7 +42,7 @@ export default function CourseDetails(props) {
         />
 
         <p className="modal__overview">{props.course.description}</p>
-        <Link to="/player" style={{ textDecoration: 'none' }}>
+        <Link to={"/player/" + props.course.id} style={{ textDecoration: 'none' }}>
         <button className="modal__button modal__button--purple">
           <PlayIcon className="header__container-btnLogout-add" />
           Play

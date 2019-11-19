@@ -7,7 +7,7 @@ import Footer from '../components/Footer';
 import Navbar from './Navbar';
 import Connexion from '../components/Connexion/ConnexionForm.components';
 import CourseEditor from '../containers/CourseEditor'
-import PlayerLayout from './PlayerLayout.container';
+import Player from './Player.container';
 import Signup from '../components/Connexion/Signup.component';
 import {Dashboard} from '../components/Dashboard/Dashboard';
 
@@ -29,14 +29,10 @@ class App extends Component {
           <Route path="/signup">
             <Signup />
           </Route>
-          <Route path="/bookmarks">
-            <PlayerLayout />
-          </Route>
           <Route path="/courseEditor">
             <CourseEditor />
           </Route>
-          <Route path="/player">
-            <PlayerLayout />
+          <Route path="/player/:courseID" component={Player}>
           </Route>
             <PrivateRoute path='/' component={Layout} />
         </Switch>
