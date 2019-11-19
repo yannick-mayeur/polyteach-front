@@ -11,7 +11,7 @@ export function VideoCard(props) {
             </video> 
             </div>
             <div className="col-md-8">
-            <input onChange={(event) => {props.setName(event.target.value, props.idVideo)}} className="card-head" type="text" name="name" defaultValue={props.titleVideo} />
+            <input onBlur={(event) => {props.setName(event.target.value, props.idVideo)}} className="card-head" type="text" name="name" defaultValue={props.titleVideo} />
             <h4 className="card-duration mt-3">{}</h4>
             </div>
             <div className="col-md-1">
