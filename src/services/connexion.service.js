@@ -5,8 +5,8 @@ const connexionService = {
         return Api.post(`/login`, {email: email, password: password})
     },
 
-    signup(email, password) {
-        return Api.post(`/signup`, {email: email, password: password})
+    signup(email, password, classID) {
+        return Api.post(`/signup`, {email: email, password: password, class: classID})
     },
 
     isTokenValid(token) {

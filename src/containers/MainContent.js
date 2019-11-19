@@ -7,12 +7,12 @@ import { connect } from 'react-redux';
 import { ScrollCourses } from './ScrollCourses.container';
 
 // Store
-import { fetchAllMyCoursesByClass } from '../store/actions/courses.action';
+import { fetchAllMyCourses } from '../store/actions/courses.action';
 
 
 class MainContent extends Component {
   componentWillMount = () => {
-    this.props.fetchAllMyCoursesByClass();
+    this.props.fetchAllMyCourses();
   };
 
   createScrollCourses = (classCourses) => {
@@ -25,7 +25,10 @@ class MainContent extends Component {
     return (
       <div className="content">
         <div className="courseShowcase ml-5">
-          {this.createScrollCourses(this.props.coursesByClass)}
+        {this.props.courses && this.props.courses.length > 0 ?
+          //this.createScrollCourses(this.props.courses)
+          <ScrollCourses courses={this.props.courses.filter(course => course.name.toLowerCase().includes(this.props.search.toLowerCase()))} name="My Courses"></ScrollCourses>
+          : <h1 style={{ textAlign: "center" }} className="mt-5">You have no courses yet :(</h1>}
         </div>
       </div>
     );
@@ -33,11 +36,12 @@ class MainContent extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { coursesByClass: state.courses.myCoursesByClass }
+  return { courses: state.courses.myCourses,
+            search: state.search.searchQueryCourse }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ fetchAllMyCoursesByClass }, dispatch)
+  return bindActionCreators({ fetchAllMyCourses }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContent);
