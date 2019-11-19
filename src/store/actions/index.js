@@ -1,4 +1,5 @@
 import S from '../../services'
+import { uploadImageWithSignedURL } from '../../services/Uploader/ImageApi';
 
 export const FETCH_OWN_COURSES = 'FETCH_OWN_COURSES';
 export function fetchOwnCourses() {
@@ -22,5 +23,30 @@ export function updateSearchQueryCourse(newQuery) {
   return {
     type: UPDATE_SEARCH_QUERY_COURSE,
     payload: newQuery
+  }
+}
+
+export const UPDATE_NAME_COURSE = "UPDATE_NAME_COURSE";
+export function updateCourseName(name) {
+  return {
+    type: UPDATE_NAME_COURSE,
+    payload: name
+  }
+}
+
+export const UPDATE_DESCRIPTION_COURSE = "UPDATE_DESCRIPTION_COURSE";
+export function updateCourseDescription(description) {
+  return {
+    type: UPDATE_DESCRIPTION_COURSE,
+    payload: description
+  }
+}
+
+export const UPDATE_PICTURE_COURSE = "UPDATE_PICTURE_COURSE";
+export function updateCoursePicture(picture) {
+  console.log(picture);
+  return {
+    type: UPDATE_PICTURE_COURSE,
+    payload: uploadImageWithSignedURL(picture)
   }
 }
