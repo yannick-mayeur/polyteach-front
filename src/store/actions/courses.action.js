@@ -16,3 +16,10 @@ export function fetchCourse(courseID) {
       payload: S.courses.getCourse(courseID)
     }
 }
+
+
+export function fetchCourseWithVideo(courseID) {
+    return dispatch => {
+        dispatch(fetchCourse(courseID))
+    }
+}
