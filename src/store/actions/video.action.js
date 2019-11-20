@@ -37,3 +37,11 @@ export function selectVideo(video) {
     payload: S.video.getSubtitles(video)
   }
 }
+
+export const RATE_VIDEO = 'RATE_VIDEO';
+export function rateVideo(videoID, rating) {
+  return {
+    type: RATE_VIDEO,
+    payload: S.video.rateVideo(videoID, rating)
+  }
+}

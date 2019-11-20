@@ -11,7 +11,6 @@ const dropdownContent = () => (
         <p className="dropdownContent-textOutside">My Dashboard</p>
         <Link to="/" style={{textDecoration: 'none'}} className="linkcontent"><p className="dropdownContent-textOutside">Home</p></Link>
         <Link to="/courseEditor" style={{textDecoration:'none'}} className="linkcontent"><p className="dropdownContent-textOutside">Create a course</p></Link>
-        <p className="dropdownContent-textOutside">Bookmarks</p>
         <p className="dropdownContent-textOutside">Sign out of PolyTeach</p>
         </div>
       </div>

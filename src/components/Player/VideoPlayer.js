@@ -49,9 +49,10 @@ export function VideoPlayer(props) {
 
         <div className="courseShowcase_videoplayer ">
           <div className="row justify-content-md-center">
+              {/* Display: "Your rating: {props.video.userRating  props.video.userRating : "Not rated." }" */}
           <StarRatings
                 rating={3}
-                changeRating={(newRating, name) => { alert("rating changed:" + newRating) }}
+                changeRating={(newRating) => {props.rateVideo(props.video.id, newRating)}}
                 starRatedColor='rgb(47,72,223)'
                 starHoverColor='rgb(50,75,240)'
                 starDimension='25px'
