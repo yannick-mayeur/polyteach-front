@@ -34,11 +34,11 @@ export default function (state = initStore, action) {
 
       /** RECORDING END ACTION **/
     case "STOP_RECORDING_FULFILLED":
-      console.log("recording started!!");
+      console.log("recording stopped!!");
       return { ...state, recordStatus: action.payload.data }
 
     case "STOP_RECORDING_REJECTED":
-        console.log("recording not started!!");
+        console.log("recording not stopped!!");
        return { ...state,  }
 
     case "STOP_RECORDING_PENDING":

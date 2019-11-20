@@ -20,11 +20,8 @@ export class LiveStudent extends React.Component{
     }
 
     joinSession=(sessionId)=>{
-
-       
         this.props.getTokenById(sessionId).then(token => {
 
-        console.log("tkoen r"+token.value.data);
         const OV= new OpenVidu();
         let session=OV.initSession();
         let subscriber = null;
@@ -37,12 +34,9 @@ export class LiveStudent extends React.Component{
             this.setState({
                 subscriber: subscriber,
             });
- 
         });
 
-        session.connect(token.value.data).then(()=>{
-                console.log("HELLOPPPPOP");
-        });
+        session.connect(token.value.data);
 
         this.setState({
             subscriber: subscriber,
@@ -52,7 +46,6 @@ export class LiveStudent extends React.Component{
     }
 
     render() {
-        console.log(this.props)
         const sessionId = this.props.match.params.sessionId;
         // })
         return(
@@ -85,6 +78,7 @@ export class LiveStudent extends React.Component{
             )
     }
 }
+
 const mapStateToProps = (state) => ({
 
 });

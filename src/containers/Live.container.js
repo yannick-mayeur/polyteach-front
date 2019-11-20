@@ -225,18 +225,15 @@ class Live extends Component {
    
   }
 
-  saveSession=()=>{
-    let now= Date.now();
+  saveSession = () =>{
 
     let params={
-      sessionId: this.state.session.sessionId,
-      nameSession: this.state.nameSession,
-      nameTeacher:"??",
-      description: this.state.descrSession,
-      timeStart: now, 
-      idCourse: "??"
-    }
-    this.props.saveNewLive(params);
+      id: this.state.session.sessionId,
+      name: this.state.nameSession,
+      descr: this.state.descrSession, 
+      idcourse: 3//this.props.Course.idCourse,
+    }    
+    this.props.saveNewLive(params.id,params.name,params.descr,params.idcourse);
   }
 
 
@@ -252,8 +249,6 @@ class Live extends Component {
           session: session,
         });
         session.on('streamCreated', (event) => {
-          num= num+1;
-          console.log("NUUUUUUUUUUUUU"+ num);
         // Subscribe to the Stream to receive it
         // HTML video will be appended to element with 'video-container' id
         const subscriber = session.subscribe(event.stream, 'video-container');
@@ -292,15 +287,13 @@ class Live extends Component {
     });
   }
 
-  copy=()=>{
+  copy = () => {
     let copyText = document.getElementById("liveURL"); 
-    console.log("copyt"+copyText);
     copyText.select();
     document.execCommand("copy");
-
-
-
   }
+
+
   render() {
     
     return (
@@ -340,9 +333,9 @@ class Live extends Component {
                </div>   
                </div>   
                ) : null};
-               <div class="col-md-12">
+               <div>
     
-            <div class="panel-heading">
+            <div>
              
               <IconButton color="default">
                 <Share color= 'primary' ></Share>
@@ -351,7 +344,7 @@ class Live extends Component {
               <label >Share Stream</label>
              </div>
 
-             <div class="panel-body">
+             <div>
            
                <label>⚪️ Live URL</label>
                <div className='input-group'>
@@ -403,7 +396,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   createNewLive: (nameCourse, description) => dispatch(createLive(nameCourse, description)),
-  saveNewLive: (sessionId,  nameSession, nameTeacher, description, timeStart, idCourse) => dispatch(startToRecord(sessionId,  nameSession, nameTeacher, description, timeStart, idCourse)),
+  saveNewLive: (sessionId,  nameSession, description, idCourse) => dispatch(saveLive(sessionId,  nameSession, description, idCourse)),
   startNewRecording: (session, name, properties) => dispatch(startToRecord(session, name, properties)),
   stopRecording: (recordId) => dispatch(stopRecording(recordId)),
 });
