@@ -76,7 +76,10 @@ class CourseEditor extends Component {
                   description: this.props.newCourse.description,
                   videos: this.props.newCourse.videos.selectedVideos,
                   students: this.props.newCourse.students.selectedStudents
-                })} className="saveBtn" >
+                }).then(() => {
+                    window.location.replace("/");
+                })
+        } className="saveBtn" >
                   {this.props.newCourse.fetching ? "SENDING..." : "SAVE"}
                 </button>
               </div>

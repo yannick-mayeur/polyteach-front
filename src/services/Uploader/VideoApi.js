@@ -59,7 +59,7 @@ const askForSubtitles = (videoName) => {
  * @returns {Promise<AxiosResponse<any>>}
  */
 const askForVTT = (vttURL) => {
-    return axios.post(`${URL_API}/video/vtt`, {vttURL: vttURL})
+    return axios.get(`${URL_API}/video/vtt/${vttURL}`)
         .then((result) => {
             return result
         })
