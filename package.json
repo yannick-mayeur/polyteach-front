@@ -11,7 +11,7 @@
     "node": "10.1.0",
     "npm": "6.4.1"
   },
-  "author": "Andres Alcocer",
+  "author": "PolyTeach Team",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.1",
