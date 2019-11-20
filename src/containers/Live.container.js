@@ -16,8 +16,6 @@ import Share from '@material-ui/icons/Share';
 import Code from '@material-ui/icons/Code';
 const OV= new OpenVidu();
 const polyteachURL = "https://polyteach.igpolytech.fr";
-const localhostURL = "http://localhost:8080";
-const num = 0;
 class Live extends Component {
 
   constructor(props) {
@@ -73,7 +71,7 @@ class Live extends Component {
     }); 
 
   }
-  /********* media manager functions ************/
+
   isAudioActive = () => {
     return this.state.audioActive;
   }
@@ -203,12 +201,7 @@ class Live extends Component {
       }
   }
 
-   /********* recording manager functions ************/
-  /**
-   * @param  {string} mode => "default" or "customized"
-   * @param  {} newProperties => optional{"session", "name", "outputMode", "hasAudio", "hasVideo", 
-   * "resolution", "recordingLayout", "customLayout"}
-   */
+
   startRecording = (mode, newProperties) => {
 
     let session= this.state.session.sessionId;
@@ -273,10 +266,8 @@ class Live extends Component {
           insertMode: 'APPEND',	// How the video is inserted in the target element 'video-container'
           mirror: false       	// Whether to mirror your local video or not
         };
-         // Add our live video to the DOM
-         let publisher = OV.initPublisher(undefined, defaultProperties);
 
-          //Publish our stream 
+         let publisher = OV.initPublisher(undefined, defaultProperties);
           session.publish(publisher);
 
           this.setState({
@@ -348,7 +339,7 @@ class Live extends Component {
            
                <label>⚪️ Live URL</label>
                <div className='input-group'>
-               <input type="text" value={localhostURL+"/livestudent/"+this.state.session.sessionId}  id="liveURL"  readOnly="readonly"/>
+               <input type="text" value={polyteachURL+"/livestudent/"+this.state.session.sessionId}  id="liveURL"  readOnly="readonly"/>
           
                <Tooltip title="Copy">
                <IconButton color="default" onClick={()=>(this.copy())}>

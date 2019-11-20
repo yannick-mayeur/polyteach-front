@@ -8,14 +8,12 @@ import { get_tokenSession } from '../store/actions';
 import { OpenVidu } from 'openvidu-browser';
 import Video from '../components/LiveRoom/Video';
 
-var num=0;
 export class LiveStudent extends React.Component{
    
     constructor(props) {
         super(props);
         this.state={
             subscriber: undefined,
-            display: "none"
         };
     }
 
@@ -27,10 +25,7 @@ export class LiveStudent extends React.Component{
         let subscriber = null;
         session.on('streamCreated', (event) => {
 
-			// Subscribe to the Stream to receive it
-			// HTML video will be appended to element with 'video-container' id
             subscriber = session.subscribe(event.stream, 'video-container');
-            
             this.setState({
                 subscriber: subscriber,
             });
@@ -40,12 +35,12 @@ export class LiveStudent extends React.Component{
 
         this.setState({
             subscriber: subscriber,
-            display:"block"
         });
       }) 
     }
 
     render() {
+
         const sessionId = this.props.match.params.sessionId;
         // })
         return(
@@ -78,7 +73,6 @@ export class LiveStudent extends React.Component{
             )
     }
 }
-
 const mapStateToProps = (state) => ({
 
 });

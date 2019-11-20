@@ -34,7 +34,6 @@ export default class ToolbarComponent extends Component{
 
     camStatusChanged = () => {
             this.props.camStatusChanged();
-            console.log("def ====" + this.props);
         }
 
     sourceChanged = () => {
@@ -59,10 +58,7 @@ export default class ToolbarComponent extends Component{
 
     render() {
          const mySessionId = this.props.sessionId;
-         console.log("audio Active :  " + this.props.audioActive);
-         console.log("video Active :  " + this.props.videoActive);
-         console.log("screenshare Active :  " + this.props.screenShareActive);
-         
+
          return React.createElement(
              AppBar,
              { className: 'appbar', id: 'header', color:"inherit"},
