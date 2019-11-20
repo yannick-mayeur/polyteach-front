@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 // Store
 import { createLive, startToRecord, stopRecording, saveLive } from '../store/actions';
 // OpenVidu
-import OpvSession from 'openvidu-react';
 import { OpenVidu } from 'openvidu-browser';
 import { FormControlLabel, IconButton } from '@material-ui/core';
 import { Switch} from '@material-ui/core';
