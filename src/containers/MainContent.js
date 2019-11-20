@@ -7,24 +7,28 @@ import { connect } from 'react-redux';
 import { ScrollCourses } from './ScrollCourses.container';
 
 // Store
-import { fetchOwnCourses } from '../store/actions';
+import { fetchAllMyCourses, removeCourse } from '../store/actions/courses.action';
 
 
 class MainContent extends Component {
   componentWillMount = () => {
-    this.props.fetchOwnCourses();
+    this.props.fetchAllMyCourses();
   };
+
+  createScrollCourses = (classCourses) => {
+    return classCourses.map(classCourse => {
+      return <ScrollCourses courses={classCourse.courses} name={classCourse.name}></ScrollCourses>
+    })
+  }
 
   render() {
     return (
       <div className="content">
         <div className="courseShowcase ml-5">
-          <ScrollCourses courses={{data: this.props.courses.data.filter(course => course.name.toLowerCase().includes(this.props.searchQueryCourse.toLowerCase())), fetching: this.props.courses.fetching}} name="MY COURSES"></ScrollCourses>
-          <ScrollCourses courses={{data: this.props.courses.data.filter(course => course.name.toLowerCase().includes(this.props.searchQueryCourse.toLowerCase())), fetching: this.props.courses.fetching}} name="🔴 Live Streams"></ScrollCourses>
-          <ScrollCourses courses={{data: this.props.courses.data.filter(course => course.name.toLowerCase().includes(this.props.searchQueryCourse.toLowerCase())), fetching: this.props.courses.fetching}} name="IG5 Courses"></ScrollCourses>
-          <ScrollCourses courses={{data: this.props.courses.data.filter(course => course.name.toLowerCase().includes(this.props.searchQueryCourse.toLowerCase())), fetching: this.props.courses.fetching}} name="IG4 Courses"></ScrollCourses>
-          <ScrollCourses courses={{data: this.props.courses.data.filter(course => course.name.toLowerCase().includes(this.props.searchQueryCourse.toLowerCase())), fetching: this.props.courses.fetching}} name="IG3 Courses"></ScrollCourses>
-        
+        {this.props.courses && this.props.courses.length > 0 ?
+          //this.createScrollCourses(this.props.courses)
+          <ScrollCourses removeCourse={this.props.removeCourse} courses={this.props.courses.filter(course => course.name.toLowerCase().includes(this.props.search.toLowerCase()))} name="My Courses"></ScrollCourses>
+          : <h1 style={{ textAlign: "center" }} className="mt-5">You have no courses yet :(</h1>}
         </div>
       </div>
     );
@@ -32,14 +36,16 @@ class MainContent extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { 
-    courses: state.ownCourses,
-    searchQueryCourse: state.search.searchQueryCourse
-  }
+  return { courses: state.courses.myCourses,
+            search: state.search.searchQueryCourse }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ fetchOwnCourses }, dispatch)
+    return {
+        fetchAllMyCourses: () => dispatch(fetchAllMyCourses()),
+        removeCourse: (courseID) => dispatch(removeCourse(courseID)),
+    }
+  //return bindActionCreators({ fetchAllMyCourses, removeCourse }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContent);

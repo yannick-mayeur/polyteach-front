@@ -10,9 +10,9 @@ export function login(email, password) {
 
 
 export const SIGNUP = 'SIGNUP'
-export function signup(email, password) {
+export function signup(email, password, classID) {
     return {
         type: SIGNUP,
-        payload: S.connexion.signup(email, password)
+        payload: S.connexion.signup(email, password, classID)
     }
 }

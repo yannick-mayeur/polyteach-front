@@ -22,4 +22,18 @@ const uploadImageToGCP = (video, signedUrl) => {
         })
 };
 
-export {uploadImageToGCP, askForSignedImageURL}
+const uploadImageWithSignedURL = async (picture) => {
+  const result = await askForSignedImageURL(picture.name);
+  const see = await uploadImageToGCP(picture, result.data.signedURL);
+  if (see) {
+    return {
+      pictureName: picture.name,
+      pictureURL: result.data.pictureURL,
+      failed: false
+    };
+  } else {
+    return {failed: true}
+  }
+}
+
+export {uploadImageWithSignedURL}
