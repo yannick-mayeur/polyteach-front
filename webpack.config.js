@@ -3,6 +3,8 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
+const path = require('path');
+const includePath = path.resolve(__dirname, '..');
 
 module.exports = {
 
@@ -20,7 +22,7 @@ module.exports = {
             test: /\.js$/,
             exclude: /node_modules/,
             use: {
-               loader: "babel-loader"
+               loader: 'babel-loader'
             }
          },
          {
@@ -32,7 +34,30 @@ module.exports = {
 
          },
          {
-            test: /\.scss$/,
+            test: /\.(jpg|JPG|jpeg|png|gif|mp3|ttf|woff2|woff|eot)$/,
+            include: includePath,
+            use: 'url-loader'
+          },
+         {
+            test: /\.css|less$/,
+            include: includePath,
+            use: [
+              {
+                loader: 'style-loader',
+              },
+              {
+               loader: 'raw-loader',
+             },
+              {
+                loader: 'css-loader',
+                options: {
+                  sourceMap: true,
+                },
+              },
+            ],
+          },
+         {
+            test: /\.scss$/i,
             use: [
                {
                   loader: MiniCssExtractPlugin.loader,

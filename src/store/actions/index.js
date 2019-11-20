@@ -50,3 +50,42 @@ export function updateCoursePicture(picture) {
     payload: uploadImageWithSignedURL(picture)
   }
 }
+
+export const CREATE_LIVE = 'CREATE_LIVE';
+export function createLive(nameCourse, description) {
+  return {
+    type: CREATE_LIVE,
+    payload: S.live.createLive(nameCourse, description)
+  }
+}
+export const START_RECORDING = 'START_RECORDING';
+export function startToRecord(session, name, properties) {
+    return {
+      type: START_RECORDING,
+      payload: S.live.startToRecord(session, name, properties)
+    }
+  }
+export const STOP_RECORDING = 'STOP_RECORDING';
+export function stopRecording(recordId) {
+    return {
+      type: STOP_RECORDING,
+      payload: S.live.stopRecording(recordId)
+    }
+  }
+
+export const GET_TOKEN_SESSION = 'GET_TOKEN_SESSION';
+export function get_tokenSession(sessionId) {
+    return {
+      type: GET_TOKEN_SESSION,
+      payload: S.live.get_tokenSession(sessionId)
+    }
+  }
+
+  export const SAVE_LIVE = 'SAVE_LIVE';
+  export function saveLive(sessionId,  nameSession, description, idCourse) {
+    return {
+      type: SAVE_LIVE,
+      payload: S.live.saveLive(sessionId,  nameSession, description, idCourse)
+    }
+  }
+
