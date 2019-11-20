@@ -18,7 +18,8 @@ export default function (state = initState, action) {
 
 
     case "REMOVE_COURSE": {
-        return {...state}
+        const courseDeleted = action.payload.data;
+        return {...state, myCourses: state.myCourses.filter(course => course.id !== courseDeleted.id)}
       }
   
 
