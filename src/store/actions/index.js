@@ -81,3 +81,11 @@ export function get_tokenSession(sessionId) {
     }
   }
 
+  export const SAVE_LIVE = 'SAVE_LIVE';
+  export function saveLive(sessionId,  nameSession, nameTeacher, description, idCourse) {
+    return {
+      type: SAVE_LIVE,
+      payload: S.live.createLive(sessionId,  nameSession, nameTeacher, description, idCourse)
+    }
+  }
+

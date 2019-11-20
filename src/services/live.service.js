@@ -16,6 +16,10 @@ const liveService = {
 
     get_tokenSession(sessionId) {
         return Api().get("/api/live/get-token/" + sessionId);
+    },
+
+    saveLive(sessionid,  namesession, nameteacher, descriptionlive,timestartlive, idcourselive) {
+        return Api().post("/api/live/save",{sessionid,  namesession, nameteacher, descriptionlive,timestartlive, idcourselive})
     }
 }
 

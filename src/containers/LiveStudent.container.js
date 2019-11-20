@@ -29,8 +29,7 @@ export class LiveStudent extends React.Component{
         let session=OV.initSession();
         let subscriber = null;
         session.on('streamCreated', (event) => {
-            num= num+1;
-            console.log("NUUUUUUUUUUUUU"+ num);
+
 			// Subscribe to the Stream to receive it
 			// HTML video will be appended to element with 'video-container' id
             subscriber = session.subscribe(event.stream, 'video-container');

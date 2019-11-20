@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 // Store
-import { createLive, startToRecord, stopRecording, getSession } from '../store/actions';
+import { createLive, startToRecord, stopRecording, saveLive } from '../store/actions';
 // OpenVidu
 import OpvSession from 'openvidu-react';
 import { OpenVidu } from 'openvidu-browser';
@@ -225,6 +225,20 @@ class Live extends Component {
    
   }
 
+  saveSession=()=>{
+    let now= Date.now();
+
+    let params={
+      sessionId: this.state.session.sessionId,
+      nameSession: this.state.nameSession,
+      nameTeacher:"??",
+      description: this.state.descrSession,
+      timeStart: now, 
+      idCourse: "??"
+    }
+    this.props.saveNewLive(params);
+  }
+
 
   connectLive = () => {
 
@@ -246,6 +260,8 @@ class Live extends Component {
      
       });
         session.connect(ovToken).then(()=>{
+
+          this.saveSession();
 
           if (this.state.checked){
             this.startRecording("default");
@@ -387,9 +403,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   createNewLive: (nameCourse, description) => dispatch(createLive(nameCourse, description)),
+  saveNewLive: (sessionId,  nameSession, nameTeacher, description, timeStart, idCourse) => dispatch(startToRecord(sessionId,  nameSession, nameTeacher, description, timeStart, idCourse)),
   startNewRecording: (session, name, properties) => dispatch(startToRecord(session, name, properties)),
   stopRecording: (recordId) => dispatch(stopRecording(recordId)),
-
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Live);
