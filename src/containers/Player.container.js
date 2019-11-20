@@ -5,7 +5,7 @@ import {VideoPlayer} from '../components/Player/VideoPlayer';
 
 // Store
 import { selectVideo } from '../store/actions/video.action';
-import { fetchCourse } from '../store/actions/courses.action';
+import { fetchCourseWithVideo } from '../store/actions/courses.action';
 
 class PlayerContainer extends Component {
 
@@ -22,7 +22,7 @@ class PlayerContainer extends Component {
             <div>
                 <div>
                     {
-                    this.props.course && this.props.course.videos[0]? 
+                    this.props.course && this.props.course.videos[0] && this.props.course.selectedSubtitles? 
                     <div>
                         <VideoSelector course={this.props.course} selectVideo = {this.props.selectVideo}/>
 
@@ -48,7 +48,7 @@ const mapStoreToProps = (store) => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchCourse: (courseID) => dispatch(fetchCourse(courseID)),
+        fetchCourse: (courseID) => dispatch(fetchCourseWithVideo(courseID)),
         selectVideo: (video) => dispatch(selectVideo(video)),
     }
 }

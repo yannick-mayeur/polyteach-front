@@ -1,4 +1,5 @@
-import S from '../../services'
+import S from '../../services';
+import { selectVideo } from './video.action';
 
 export const FETCH_ALL_COURSES = 'FETCH_ALL_COURSES';
 export function fetchAllMyCourses() {
@@ -28,6 +29,14 @@ export function removeCourse(courseID) {
 
 export function fetchCourseWithVideo(courseID) {
     return dispatch => {
-        dispatch(fetchCourse(courseID))
+        const result = dispatch(fetchCourse(courseID))
+
+        result.then((course) => {
+            if (course.action.type === FETCH_COURSE + "_FULFILLED") {
+                if (course.action.payload.data.videos && course.action.payload.data.videos.length > 0) {
+                    dispatch(selectVideo(course.action.payload.data.videos[0]))
+                }
+            }
+        })
     }
 }

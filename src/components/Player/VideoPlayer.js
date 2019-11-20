@@ -40,7 +40,7 @@ export function VideoPlayer(props) {
                 marginTop: '50px',
                 marginBottom: '50px'
             }} key={props.video.videoUrl} preload="auto" crossOrigin="anonymous" controls width={"75%"}>
-                <source src={props.video.videoUrl} type="video/*"/>
+                <source src={props.video.videoUrl} type="video/mp4"/>
                 <track default kind="subtitles"
                        srcLang="en"
                        src={props.video.vttUrl}/>
@@ -67,10 +67,10 @@ export function VideoPlayer(props) {
 
         <div className="vttTextField col-md-11 mx-auto" id="vttText">
         {
-         /*props.subtitles.map((value, index) => <p onClick={changeVideoSec}
-                                                            id={props.timings[index]}
+         props.subtitles.subtitles.map((value, index) => <p onClick={changeVideoSec}
+                                                            id={props.subtitles.timings[index]}
                                                             key={index}>{value}</p>
-                                                            )*/
+                                                            )
         }
         </div>
         </div>
