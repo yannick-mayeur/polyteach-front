@@ -16,6 +16,13 @@ export default function (state = initState, action) {
     case "FETCH_ALL_COURSES_REJECTED":
       return { ...state , fetching: false}
 
+
+    case "REMOVE_COURSE": {
+        const courseDeleted = action.payload.data;
+        return {...state, myCourses: state.myCourses.filter(course => course.id !== courseDeleted.id)}
+      }
+  
+
     default:
       return state;
   }

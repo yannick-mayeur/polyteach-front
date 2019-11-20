@@ -10,7 +10,7 @@ export function ScrollCourses(props) {
     :
     props.courses.map((course) => {
         const courseComponent =
-            <CourseGenre key={course.id} posterUrl={course.picture} course={course}/>
+            <CourseGenre removeCourse={props.removeCourse} key={course.id} posterUrl={course.picture} course={course}/>
         return courseComponent;
     });
 
