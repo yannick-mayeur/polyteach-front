@@ -13,6 +13,8 @@ export default function (state = initStore, action) {
       return { ...state,  }
 
     case "CREATE_LIVE_PENDING":
+      return { ...state,  }
+      
 
 
 
