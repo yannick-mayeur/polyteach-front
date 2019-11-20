@@ -7,14 +7,17 @@ import { createLive, startToRecord, stopRecording, getSession } from '../store/a
 // OpenVidu
 import OpvSession from 'openvidu-react';
 import { OpenVidu } from 'openvidu-browser';
-import { FormControlLabel } from '@material-ui/core';
+import { FormControlLabel, IconButton } from '@material-ui/core';
 import { Switch} from '@material-ui/core';
 import Video from '../components/LiveRoom/Video';
 import ToolbarComponent from '../components/LiveRoom/ToolbarComponent'
-import OpenViduLayout from '../components/LiveRoom/libraryComponents/openvidu-layout';
-const layout = new OpenViduLayout();
+import Tooltip from '@material-ui/core/Tooltip';
+import Share from '@material-ui/icons/Share';
+import Code from '@material-ui/icons/Code';
 const OV= new OpenVidu();
-
+const polyteachURL = "https://polyteach.igpolytech.fr";
+const localhostURL = "http://localhost:8080";
+const num = 0;
 class Live extends Component {
 
   constructor(props) {
@@ -23,7 +26,6 @@ class Live extends Component {
     this.state = {
       nameSession: '', 
       descrSession: '',
-      tokenSession: undefined,
       session: undefined,
       publisher: undefined,
       checked: false,
@@ -50,12 +52,13 @@ class Live extends Component {
     this.setState({
       nameSession: '', 
       descrSession: '', 
-      tokenSession: '',
       session: undefined,
       publisher: undefined,
       checked: false,
-      record: ''
-
+      record: '',
+      audioActive: true,
+      videoActive: true,
+      screenShareActive: false,
     });
   
   }
@@ -65,13 +68,12 @@ class Live extends Component {
   }
 
   toggleChecked = (event) => {
-
     this.setState({ 
       checked: event.target.checked 
     }); 
 
   }
-
+  /********* media manager functions ************/
   isAudioActive = () => {
     return this.state.audioActive;
   }
@@ -85,25 +87,21 @@ class Live extends Component {
   }
 
   micStatusChanged = () =>{
-
     this.state.publisher.publishAudio(!this.isAudioActive());
     this.sendSignalChanged("isAudioActive:" + !this.isAudioActive());
     
     this.setState({
       audioActive: !(this.state.audioActive)
     })
-
   }
 
   camStatusChanged = () => {
-
     this.state.publisher.publishVideo(!this.isVideoActive());
     this.sendSignalChanged("isVideoActive:" + !this.isVideoActive());
     
     this.setState({
       videoActive: !(this.state.videoActive)
     })
-
   }
 
   sendSignalChanged = (data)=>{
@@ -118,12 +116,12 @@ class Live extends Component {
 
     const videoSource = navigator.userAgent.indexOf('Firefox') !== -1 ? 'window' : 'screen';
 
-      const publisher = OV.initPublisher(undefined, {
+    const publisher = OV.initPublisher(undefined, {
         videoSource: videoSource,
         publishAudio: this.isAudioActive(),
         publishVideo: this.isVideoActive(),
         mirror: false
-      },  (error) => {
+    },  (error) => {
                 if (error && error.name === 'SCREEN_EXTENSION_NOT_INSTALLED') {
                     this.setState({ showExtensionDialog: true });
                 } else if (error && error.name === 'SCREEN_SHARING_NOT_SUPPORTED') {
@@ -148,8 +146,6 @@ class Live extends Component {
       });
 
       publisher.on('streamPlaying', () =>{
-
-        publisher.videos[0].video.parentElement.classList.remove('custom-class');
         this.state.publisher.publishVideo(true);
 
       });
@@ -157,14 +153,11 @@ class Live extends Component {
 
 
   stopScreenShare = () => {
-
    this.state.session.unpublish(this.state.publisher);
-    this.connectWebCam();
-    
+   this.connectWebCam();
   }
  
   connectWebCam = () =>{
-
     const publisher = OV.initPublisher(undefined, {
       audioSource: undefined,
       videoSource: undefined,
@@ -174,22 +167,16 @@ class Live extends Component {
       frameRate: 30,
       insertMode: 'APPEND'
     });
-
+    
     this.state.session.publish(publisher);
-  
-    // this.setConnectionId(this.state.session.connection.connectionId);
     this.setState({
       screenShareActive: false,
       publisher: publisher
     })
-
-    //this.subscribeToUserChanged();
-    // this.subscribeToStreamDestroyed();
     this.sendSignalChanged( "isScreenShareActive:"+ this.isScreenShareActive());
   }
 
   toggleFullscreen = () =>{
-
     const document = window.document;
     const fs = document.getElementById('local-video-undefined');
 
@@ -216,18 +203,18 @@ class Live extends Component {
       }
   }
 
- 
+   /********* recording manager functions ************/
   /**
-   * @param  {string} properties => "default" or "customized"
+   * @param  {string} mode => "default" or "customized"
    * @param  {} newProperties => optional{"session", "name", "outputMode", "hasAudio", "hasVideo", 
    * "resolution", "recordingLayout", "customLayout"}
    */
-  startRecording = (properties, newProperties) => {
+  startRecording = (mode, newProperties) => {
 
     let session= this.state.session.sessionId;
     let name= this.state.nameSession;
 
-    (properties === "default") ? 
+    (mode === "default") ? 
       (this.props.startNewRecording(session, name, '').then((res) =>{
           this.setState({
             record: res.value.data
@@ -245,21 +232,17 @@ class Live extends Component {
     //We retrieve the post request's token
     this.props.createNewLive(this.state.nameSession,this.state.descrSession)
       .then((res) => {
-
         const ovToken = res.value.data;
-        console.log("ovToken"+ ovToken);
+
         this.setState({
-          tokenSession: ovToken,
           session: session,
         });
-
-        console.log("sessionId you want ***** "+ session);
         session.on('streamCreated', (event) => {
-
-          console.log("STREAM CREATED 000000");
-     // Subscribe to the Stream to receive it
-     // HTML video will be appended to element with 'video-container' id
-     const subscriber = session.subscribe(event.stream, 'video-container');
+          num= num+1;
+          console.log("NUUUUUUUUUUUUU"+ num);
+        // Subscribe to the Stream to receive it
+        // HTML video will be appended to element with 'video-container' id
+        const subscriber = session.subscribe(event.stream, 'video-container');
      
       });
         session.connect(ovToken).then(()=>{
@@ -267,18 +250,20 @@ class Live extends Component {
           if (this.state.checked){
             this.startRecording("default");
           }
-          // Add our live video to the DOM
-         let publisher = OV.initPublisher(undefined,{
+        
 
-            audioSource: undefined, // The source of audio. If undefined default microphone
-            videoSource: undefined, // The source of video. If undefined default webcam
-            publishAudio: true,  	// Whether you want to start publishing with your audio unmuted or not
-            publishVideo: true,  	// Whether you want to start publishing with your video enabled or not
-            resolution: '640x480',  // The resolution of your video
-            frameRate: 30,			// The frame rate of your video
-            insertMode: 'APPEND',	// How the video is inserted in the target element 'video-container'
-            mirror: false       	// Whether to mirror your local video or not
-          })
+        const defaultProperties = {
+          audioSource: undefined, // The source of audio. If undefined default microphone
+          videoSource: undefined, // The source of video. If undefined default webcam
+          publishAudio: true,  	// Whether you want to start publishing with your audio unmuted or not
+          publishVideo: true,  	// Whether you want to start publishing with your video enabled or not
+          resolution: '640x480',  // The resolution of your video
+          frameRate: 30,			// The frame rate of your video
+          insertMode: 'APPEND',	// How the video is inserted in the target element 'video-container'
+          mirror: false       	// Whether to mirror your local video or not
+        };
+         // Add our live video to the DOM
+         let publisher = OV.initPublisher(undefined, defaultProperties);
 
           //Publish our stream 
           session.publish(publisher);
@@ -291,7 +276,20 @@ class Live extends Component {
     });
   }
 
+  copy=()=>{
+    let copyText = document.getElementById("liveURL"); 
+      /* Get the text field */
+  console.log("copyt"+copyText);
+  /* Select the text field */
+  copyText.select();
+
   
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+
+  /* Alert the copied text */
+
+  }
   render() {
     
     return (
@@ -323,11 +321,53 @@ class Live extends Component {
          
  
       ( <div className="content">
+        <div className="courseShowcase">
          {this.state.publisher!== undefined ? (
-            <div className="courseShowcase">
+           <div>
                <div className="video-container" >
                  <Video videoManager= {this.state.publisher}/>
-               </div>
+               </div>   
+               </div>   
+               ) : null};
+               <div class="col-md-12">
+    
+            <div class="panel-heading">
+             
+              <IconButton color="default">
+                <Share color= 'primary' ></Share>
+              </IconButton>
+
+              <label >Share Stream</label>
+             </div>
+
+             <div class="panel-body">
+           
+               <label>⚪️ Live URL</label>
+               <div className='input-group'>
+               <input type="text" value={localhostURL+"/livestudent/"+this.state.session.sessionId}  id="liveURL"  readOnly="readonly"/>
+          
+               <Tooltip title="Copy">
+               <IconButton color="default" onClick={()=>(this.copy())}>
+                <Code color= 'primary' ></Code>
+              </IconButton>
+              </Tooltip>
+           
+              </div>
+
+              <div><label >Title: {this.state.nameSession}</label>
+              </div>
+              <div>  <label >Description: {this.state.descrSession}</label></div>
+            
+              <label> Date: {new Date().toLocaleString( "en-US",{weekday: "long", year: "numeric", month: "long", day: "numeric", hour12: false })}</label>
+  
+        
+             </div>
+    
+         </div>
+ 
+              
+               
+
                <ToolbarComponent
                     audioActive= {this.state.audioActive}
                     videoActive= {this.state.videoActive}
@@ -338,15 +378,17 @@ class Live extends Component {
                     toggleFullscreen= {this.toggleFullscreen}
                     leaveSession= {this.leaveSession}
                     />     
-           </div>
-            ) : null};
+
+
+      
          </div>
          )}
     </div>
-    );
+    )};
+    </div>
+    )}
   }
 
-}
 
 const mapStateToProps = (state) => ({
   live: state.ovToken, 

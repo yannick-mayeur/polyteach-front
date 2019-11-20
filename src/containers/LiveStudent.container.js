@@ -8,7 +8,7 @@ import { get_tokenSession } from '../store/actions';
 import { OpenVidu } from 'openvidu-browser';
 import Video from '../components/LiveRoom/Video';
 
-
+var num=0;
 export class LiveStudent extends React.Component{
    
     constructor(props) {
@@ -19,12 +19,9 @@ export class LiveStudent extends React.Component{
         };
     }
 
-    // getSession = (sessionId) =>{
-    //     console.log("session1 ===="+sessionId);
-    //     let sessionRetrieved = this.props.getSessionById(sessionId);
-    //     console.log("sessionRetrieved: ---" + sessionRetrieved);
-    // }
     joinSession=(sessionId)=>{
+
+       
         this.props.getTokenById(sessionId).then(token => {
 
         console.log("tkoen r"+token.value.data);
@@ -32,7 +29,8 @@ export class LiveStudent extends React.Component{
         let session=OV.initSession();
         let subscriber = null;
         session.on('streamCreated', (event) => {
-            console.log("STREAM CREATED 000000");
+            num= num+1;
+            console.log("NUUUUUUUUUUUUU"+ num);
 			// Subscribe to the Stream to receive it
 			// HTML video will be appended to element with 'video-container' id
             subscriber = session.subscribe(event.stream, 'video-container');

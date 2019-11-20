@@ -28,7 +28,22 @@ videol {
     font-family: 'Fira Sans', sans-serif;
   }
 
+  .panel-heading {
+    padding: 10px 15px 10px 10px;
+    border-bottom: 1px solid transparent;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+  }
+  .panel-body {
+    padding: 15px;
+}
 
+.input-group {
+  padding: 10px 15px;
+  
+  display: table;
+  box-sizing: border-box;
+}
 .appBar {
     position: bottom;
   }
