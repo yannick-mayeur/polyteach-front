@@ -5,9 +5,17 @@ const coursesService = {
         return Api.get(`courses`);
     },
 
+    getCourse(courseID) {
+        return Api.get(`courses/`+courseID);
+    },
+
     createCourse (data) {
         return Api.post(`/courses`, data);
     },
+
+    deleteCourse(courseID) {
+        return Api.delete(`courses/`+courseID);
+    }
 }
 
 export default coursesService;

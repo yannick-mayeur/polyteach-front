@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { ScrollCourses } from './ScrollCourses.container';
 
 // Store
-import { fetchAllMyCourses } from '../store/actions/courses.action';
+import { fetchAllMyCourses, removeCourse } from '../store/actions/courses.action';
 
 
 class MainContent extends Component {
@@ -27,7 +27,7 @@ class MainContent extends Component {
         <div className="courseShowcase ml-5">
         {this.props.courses && this.props.courses.length > 0 ?
           //this.createScrollCourses(this.props.courses)
-          <ScrollCourses courses={this.props.courses.filter(course => course.name.toLowerCase().includes(this.props.search.toLowerCase()))} name="My Courses"></ScrollCourses>
+          <ScrollCourses removeCourse={this.props.removeCourse} courses={this.props.courses.filter(course => course.name.toLowerCase().includes(this.props.search.toLowerCase()))} name="My Courses"></ScrollCourses>
           : <h1 style={{ textAlign: "center" }} className="mt-5">You have no courses yet :(</h1>}
         </div>
       </div>
@@ -41,7 +41,11 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ fetchAllMyCourses }, dispatch)
+    return {
+        fetchAllMyCourses: () => dispatch(fetchAllMyCourses()),
+        removeCourse: (courseID) => dispatch(removeCourse(courseID)),
+    }
+  //return bindActionCreators({ fetchAllMyCourses, removeCourse }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContent);

@@ -1,4 +1,4 @@
-import { askForSignedURL, askForSubtitles, uploadVideoToGCP } from './Uploader/VideoApi';
+import { askForSignedURL, askForSubtitles, uploadVideoToGCP, askForVTT } from './Uploader/VideoApi';
 
 const videoService = {
   /**
@@ -13,16 +13,19 @@ const videoService = {
 
     if (isUpload) {
       const subtitles = await askForSubtitles(video.name);
-      console.log({
-        titleVideo: video.name,
-        videoURL: subtitles.data.videoURL,
-        vttURL: subtitles.data.vttURL
-      })
       return {
         titleVideo: video.name,
         videoURL: subtitles.data.videoURL,
         vttURL: subtitles.data.vttURL
       }
+    }
+  },
+  
+  async getSubtitles(video) {
+    const subtitles = await askForVTT(video.vttUrl);
+    return {
+        subtitles: subtitles,
+        selectedVideo: video.id,
     }
   }
 }

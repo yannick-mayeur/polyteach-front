@@ -5,9 +5,12 @@ export default function VideoThumbnail(props) {
       return (
          <>
             <div
-               className={"courseShowcase__container--course"}>
-               <img src={props.course.picture} className="courseShowcase__container--course-image" />
-               <h3 className="courseShowcase__container--course-title">{props.course.name}</h3>
+               className={"courseShowcase__container--course"} 
+               onClick={() => props.selectVideo(props.course)}>
+                <video id="videoPlayer" className="plyr__video-embed" width="200" height= "110" playsInline>
+                <source src={props.course.videoUrl} type="video/mp4"/>
+                </video> 
+               <h3 className="courseShowcase__container--course-title">{props.course.title}</h3>
             </div>
          </>
       )

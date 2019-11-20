@@ -124,6 +124,16 @@
          border: none;
       }
 
+      &--edit {
+        background-color: rgba(53, 53, 53, 0.733);
+        border: none;
+     }
+
+     &--delete {
+        background-color: rgba(253, 16, 16, 0.897);
+        border: none;
+     }
+
       &--icon {
          fill: #fff;
          padding-right: 1rem;

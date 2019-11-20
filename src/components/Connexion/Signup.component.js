@@ -56,7 +56,7 @@ class SignUpForm extends Component {
                                     <input type="password" placeholder="password" onChange={this.handleChangePassword} />
                                     <label className="mr-4">Your class:</label>
                                     <select name="pets" id="pet-select" className="mb-4" onChange={this.handleChangeClass}>
-                                        <option value="IG3" selected>IG3</option>
+                                        <option value="IG3" defaultValue>IG3</option>
                                         <option value="IG4">IG4</option>
                                         <option value="IG5">IG5</option>
                                     </select>
