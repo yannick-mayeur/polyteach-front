@@ -278,16 +278,11 @@ class Live extends Component {
 
   copy=()=>{
     let copyText = document.getElementById("liveURL"); 
-      /* Get the text field */
-  console.log("copyt"+copyText);
-  /* Select the text field */
-  copyText.select();
+    console.log("copyt"+copyText);
+    copyText.select();
+    document.execCommand("copy");
 
-  
-  /* Copy the text inside the text field */
-  document.execCommand("copy");
 
-  /* Alert the copied text */
 
   }
   render() {
@@ -364,10 +359,7 @@ class Live extends Component {
              </div>
     
          </div>
- 
               
-               
-
                <ToolbarComponent
                     audioActive= {this.state.audioActive}
                     videoActive= {this.state.videoActive}
@@ -379,8 +371,6 @@ class Live extends Component {
                     leaveSession= {this.leaveSession}
                     />     
 
-
-      
          </div>
          )}
     </div>
