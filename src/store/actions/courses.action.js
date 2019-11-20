@@ -17,6 +17,14 @@ export function fetchCourse(courseID) {
     }
 }
 
+export const REMOVE_COURSE = 'REMOVE_COURSE';
+export function removeCourse(courseID) {
+    return {
+      type: REMOVE_COURSE,
+      payload: S.courses.deleteCourse(courseID)
+    }
+}
+
 
 export function fetchCourseWithVideo(courseID) {
     return dispatch => {

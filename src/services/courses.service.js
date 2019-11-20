@@ -12,6 +12,10 @@ const coursesService = {
     createCourse (data) {
         return Api.post(`/courses`, data);
     },
+
+    deleteCourse(courseID) {
+        return Api.delete(`courses/`+courseID);
+    }
 }
 
 export default coursesService;

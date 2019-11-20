@@ -40,19 +40,28 @@ export default function CourseDetails(props) {
           numberOfStars={5}
           name='rating'
         />
-
+        
         <p className="modal__overview">{props.course.description}</p>
         <Link to={"/player/" + props.course.id} style={{ textDecoration: 'none' }}>
         <button className="modal__button modal__button--purple">
-          <PlayIcon className="header__container-btnLogout-add" />
-          Play
+        <PlayIcon className="header__container-btnLogout-add" />
+        Play
         </button>
         </Link>
         
         <button className="modal__button" onClick={()=>{alert("Ajouter aux bookmarks")}}>
-          <StarIcon className="header__container-btnLogout-add" />
-          Bookmark
+        <StarIcon className="header__container-btnLogout-add" />
+        Bookmark
         </button>
+        
+       <div className="row">
+       <button className="modal__button modal__button--edit">
+          Edit
+        </button>
+        <button className="modal__button modal__button--delete" onClick={() => props.removeCourse(props.course.id)}>
+          Delete
+        </button>
+       </div>
       </div>
     </>
   );
