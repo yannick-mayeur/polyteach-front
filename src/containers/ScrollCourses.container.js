@@ -11,7 +11,7 @@ export function ScrollCourses(props) {
     :
     props.courses.map((course) => {
         const courseComponent =
-            <CourseGenre removeCourse={props.removeCourse} rateCourse={props.rateCourse} toogleBookmarkCourse={props.toogleBookmarkCourse} key={course.id} posterUrl={course.picture} course={course}/>
+            <CourseGenre user={props.user} removeCourse={props.removeCourse} rateCourse={props.rateCourse} toogleBookmarkCourse={props.toogleBookmarkCourse} key={course.id} posterUrl={course.picture} course={course}/>
         return courseComponent;
     });
 

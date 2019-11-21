@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Informations from '../components/CourseEditor/Informations';
 import Videos from '../components/CourseEditor/Videos';
 import Students from '../components/CourseEditor/Students';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addNewCourse, updateCourseName, updateCourseDescription, updateCoursePicture } from '../store/actions';
@@ -20,6 +21,7 @@ class CourseEditor extends Component {
     super(props);
     this.state = {
       index: 0,
+      redirect: false,
     }
   }
 
@@ -38,6 +40,10 @@ class CourseEditor extends Component {
         component: <Students allStudents={this.props.students} newCourseStudents={this.props.newCourse.students} dispatchAddStudents={this.props.addStudents} dispatchRemoveStudents={this.props.removeStudents} dispatchRemoveStudent={this.props.removeStudent} />
       }
     ]
+
+    if(this.state.redirect){
+        return(<Redirect to="/"/>)
+    }
     return (
       <div className="content">
         <div className="courseShowcase">
@@ -75,9 +81,11 @@ class CourseEditor extends Component {
                   picture: this.props.newCourse.picture.url,
                   description: this.props.newCourse.description,
                   videos: this.props.newCourse.videos.selectedVideos,
-                  students: this.props.newCourse.students.selectedStudents
+                  students: this.props.newCourse.students
                 }).then(() => {
-                    window.location.replace("/");
+                    this.setState({
+                        redirect: true,
+                    })
                 })
         } className="saveBtn" >
                   {this.props.newCourse.fetching ? "SENDING..." : "SAVE"}
