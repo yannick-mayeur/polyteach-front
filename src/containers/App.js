@@ -28,12 +28,9 @@ class App extends Component {
           </Route>
         <Route path="/dashboard">
             <Dashboard />
-          </Route>
+        </Route>
         <Route path="/connexion">
             <Connexion />
-          </Route>
-          <Route path="/signup">
-            <Signup />
           </Route>
           <Route exact path="/live">
             <Live/>
