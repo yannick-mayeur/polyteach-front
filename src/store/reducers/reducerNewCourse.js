@@ -32,7 +32,8 @@ export default function (state = initialState, action) {
       return { ...state, fetching: true}
 
     case "ADD_NEW_COURSE_FULFILLED": {
-      return {initialState}
+        const data = action.payload;
+        return { ...state, data, fetching: false}
     }
 
     case "ADD_NEW_COURSE_REJECTED": {

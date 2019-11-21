@@ -50,7 +50,6 @@ class navigation extends Component {
       <nav className={"navigation " + (scrolling ? "black" : "")} >
         <ul className="navigation__container">
           <NavigationItem link="/" exact><img className="navigation__container--logo" src={PolyTeachLogo} alt="" /></NavigationItem>
-          <Link to="/" style={{ textDecoration: 'none' }}><div className="navigation__container-link pseudo-link">My Courses</div></Link>
           <div className="navigation__container--left">
             <SearchLogo className="logo" />
             <input
@@ -88,8 +87,14 @@ class navigation extends Component {
           <LogoutLogo className="header__container-btnLogout-add" />
           Log Out
         </button> 
-          <DropdownContent authorized={this.props.user !== null && this.props.user.role === 1}/>
-          <DropdownArrow className="navigation__container--downArrow" />
+        {
+            this.props.user === null ? 
+            <DropdownContent name={""} authorized={this.props.user !== null && this.props.user.role === 1}/>
+  
+            : 
+            <DropdownContent name={this.props.user.firstname + " "+ this.props.user.lastname} authorized={this.props.user !== null && this.props.user.role === 1}/>
+        }
+                 <DropdownArrow className="navigation__container--downArrow" />
         </ul>
       </nav>
     )

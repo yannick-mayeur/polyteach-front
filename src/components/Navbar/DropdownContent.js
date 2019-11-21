@@ -8,6 +8,8 @@ const dropdownContent = (props) => (
         <div className="navigation__container--userLogo">
             <div className="dropdownContent">
                 <div>
+                <div className="dropdownContent--user mt-2"></div>
+                <p className="dropdownContent--user-text">{props.name}</p>
                     <Link to="/" style={{ textDecoration: 'none' }} className="linkcontent"><p className="dropdownContent-textOutside">Home</p></Link>
 
                     {props.authorized ?
