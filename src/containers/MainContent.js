@@ -37,6 +37,10 @@ class MainContent extends Component {
     return (
       <div className="content">
         <div className="courseShowcase ml-5">
+        {this.props.courses && this.props.courses.length > 0 && this.props.courses.map(course => course.bookmarked).reduce((acc, current) => acc || current) ?
+        <ScrollCourses user={this.props.user} removeCourse={this.props.removeCourse} rateCourse={this.rateCourse} toogleBookmarkCourse={this.toogleBookmarkCourse} courses={this.props.courses.filter(course => course.bookmarked)} name="My Bookmarked Courses"></ScrollCourses>
+          : <h1 style={{ textAlign: "center" }} className="mt-5">You have no bookmarked courses yet :(</h1>}
+
         {this.props.courses && this.props.courses.length > 0 ?
           <ScrollCourses user={this.props.user} removeCourse={this.props.removeCourse} rateCourse={this.rateCourse} toogleBookmarkCourse={this.toogleBookmarkCourse} courses={this.props.courses.filter(course => course.name.toLowerCase().includes(this.props.search.toLowerCase()))} name="My Courses"></ScrollCourses>
           : <h1 style={{ textAlign: "center" }} className="mt-5">You have no courses yet :(</h1>}
