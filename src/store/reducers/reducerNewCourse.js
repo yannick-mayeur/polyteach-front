@@ -32,8 +32,7 @@ export default function (state = initialState, action) {
       return { ...state, fetching: true}
 
     case "ADD_NEW_COURSE_FULFILLED": {
-      const createdCourse = action.payload;
-      return { ...state, createdCourse, fetching: false}
+      return {initialState}
     }
 
     case "ADD_NEW_COURSE_REJECTED": {
