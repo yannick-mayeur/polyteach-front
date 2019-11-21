@@ -37,7 +37,7 @@ export default function (state = initStore, action) {
       return state;
 
 
-            /** GET SESSION ACTION **/
+
     case "GET_TOKEN_SESSION_FULFILLED":
       return { ...state, tokenSession: action.payload.data }
 
@@ -49,5 +49,14 @@ export default function (state = initStore, action) {
       default:
         console.log("default");
         return state;
+
+    case "CHECK_URL_LIVE_FULFILLED":
+      return { ...state, infosLive: action.payload.data }
+
+    case "CHECK_URL_LIVE_REJECTED":
+      return { ...state,  }
+
+    case "CHECK_URL_LIVE_PENDING":
+      return state;
   }
 }

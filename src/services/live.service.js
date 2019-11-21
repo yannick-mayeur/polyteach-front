@@ -20,7 +20,11 @@ const liveService = {
 
     saveLive(idsession,  namesession, descriptionlive, idcourselive) {
         return Api.post("/api/live/save",{idsession,  namesession, descriptionlive, idcourselive})
-    }
+    },
+
+    checkURL(sessionId) {
+        return Api.get("/api/live/infos/" + sessionId);
+    },
 }
 
 export default liveService;

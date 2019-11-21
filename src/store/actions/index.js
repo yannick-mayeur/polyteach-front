@@ -89,3 +89,11 @@ export function get_tokenSession(sessionId) {
     }
   }
 
+export const CHECK_URL_LIVE = 'CHECK_URL_LIVE';
+export function checkURL(sessionId) {
+  return {
+    type: CHECK_URL_LIVE,
+    payload: S.live.checkURL(sessionId)
+  }
+}
+
