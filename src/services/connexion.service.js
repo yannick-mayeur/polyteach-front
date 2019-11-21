@@ -14,7 +14,7 @@ const connexionService = {
         return Api.get(`/login/isTokenValid`, token);
     },
     isAuthenticated() {
-        return localStorage.getItem('jwt_token') != undefined
+        return localStorage.getItem('access_token') != undefined
     },
     askToken(code) {
         return Axios.post('https://oauth.igpolytech.fr/token', {
