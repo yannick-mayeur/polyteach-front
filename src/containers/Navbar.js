@@ -51,8 +51,6 @@ class navigation extends Component {
         <ul className="navigation__container">
           <NavigationItem link="/" exact><img className="navigation__container--logo" src={PolyTeachLogo} alt="" /></NavigationItem>
           <Link to="/" style={{ textDecoration: 'none' }}><div className="navigation__container-link pseudo-link">My Courses</div></Link>
-          <Link to="/dashboard" style={{ textDecoration: 'none' }}><div className="navigation__container-link pseudo-link">Dashboard</div></Link>
-      
           <div className="navigation__container--left">
             <SearchLogo className="logo" />
             <input
