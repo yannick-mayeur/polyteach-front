@@ -20,7 +20,11 @@ export default class Video extends Component {
     }
 
     render() {
-        return <video controls ref={this.videoRef} />;
+        return <video 
+        style={{ display: 'flex',
+        marginRight: "auto",
+        marginLeft: "auto",}}
+        controls ref={this.videoRef} />
     }
 
 }
