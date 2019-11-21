@@ -36,9 +36,9 @@ onSelection(folder) {
 render() {
   return (
   <div>
-    <GooglePicker clientId={CLIENT_ID}
+    <GooglePicker //clientId={CLIENT_ID}
                           children="drivebtn"
-                          developerKey={DEVELOPER_KEY}
+                          //developerKey={DEVELOPER_KEY}
                           scope={SCOPE}
                           onChange={data => this.onSelection(data)}
                           onAuthFailed={data => console.log('on auth failed:', data)}
