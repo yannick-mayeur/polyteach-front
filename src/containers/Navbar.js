@@ -6,6 +6,7 @@ import NavigationItem from '../components/Navbar/NavigationItem'
 import SearchLogo from '../static/images/search-icon.svg';
 import PolyTeachLogo from '../static/images/PolyTeach_Logo_RGB.png';
 import AddLogo from '../static/images/add.svg';
+import RecLogo from '../static/images/rec.svg';
 import LogoutLogo from '../static/images/logout.svg';
 import DropdownArrow from '../static/images/drop-down-arrow.svg';
 import DropdownContent from "../components/Navbar/DropdownContent";
@@ -60,12 +61,27 @@ class navigation extends Component {
               type="text"
               placeholder="Course name" />
           </div>
-          <Link to="/courseEditor" style={{ textDecoration: 'none' }}>
-          <button className="header__container-btnAddCourse">
-          <AddLogo className="header__container-btnAddCourse-add" />
-          Add a new course
-        </button>  
-        </Link>
+
+          {
+            this.props.user === null ? 
+                "" 
+            :  this.props.user.role === "student" ? "" :
+            <div>
+                <Link to="/courseEditor" style={{ textDecoration: 'none' }}>
+                    <button className="header__container-btnAddCourse">
+                    <AddLogo className="header__container-btnAddCourse-add" />
+                    Add a new course
+                    </button>  
+                </Link>
+
+                <Link to="/live" style={{ textDecoration: 'none' }}>
+                    <button className="header__container-btnRecCourse">
+                    <RecLogo className="header__container-btnAddCourse-add" />
+                    Start Live
+                    </button>  
+                </Link>
+            </div>
+        }    
           <button className="header__container-btnLogout">
           <LogoutLogo className="header__container-btnLogout-add" />
           Log Out
@@ -78,7 +94,9 @@ class navigation extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (store) => ({
+    user: store.login.user
+});
 
 const mapDispatchToProps = (dispatch) => ({
   updateSearchQueryCourse: newQuery => dispatch(updateSearchQueryCourse(newQuery))

@@ -55,14 +55,17 @@ export default function CourseDetails(props) {
           {props.course.bookmarked ? "Bookmarked" : "Bookmark" }
         </button>
         
-       <div className="row">
-       <button className="modal__button modal__button--edit">
-          Edit
-        </button>
-        <button className="modal__button modal__button--delete" onClick={() => props.removeCourse(props.course.id)}>
-          Delete
-        </button>
-       </div>
+       {props.user !== null && props.user === props.course.idTeacher? 
+              <div className="row">
+              <button className="modal__button modal__button--edit">
+                 Edit
+               </button>
+               <button className="modal__button modal__button--delete" onClick={() => props.removeCourse(props.course.id)}>
+                 Delete
+               </button>
+              </div>
+              : null}
+
       </div>
     </>
   );

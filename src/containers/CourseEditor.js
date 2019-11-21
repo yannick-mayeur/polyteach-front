@@ -81,7 +81,7 @@ class CourseEditor extends Component {
                   picture: this.props.newCourse.picture.url,
                   description: this.props.newCourse.description,
                   videos: this.props.newCourse.videos.selectedVideos,
-                  students: this.props.newCourse.students.selectedStudents
+                  students: this.props.newCourse.students
                 }).then(() => {
                     this.setState({
                         redirect: true,

@@ -38,7 +38,7 @@ class MainContent extends Component {
       <div className="content">
         <div className="courseShowcase ml-5">
         {this.props.courses && this.props.courses.length > 0 ?
-          <ScrollCourses removeCourse={this.props.removeCourse} rateCourse={this.rateCourse} toogleBookmarkCourse={this.toogleBookmarkCourse} courses={this.props.courses.filter(course => course.name.toLowerCase().includes(this.props.search.toLowerCase()))} name="My Courses"></ScrollCourses>
+          <ScrollCourses user={this.props.user} removeCourse={this.props.removeCourse} rateCourse={this.rateCourse} toogleBookmarkCourse={this.toogleBookmarkCourse} courses={this.props.courses.filter(course => course.name.toLowerCase().includes(this.props.search.toLowerCase()))} name="My Courses"></ScrollCourses>
           : <h1 style={{ textAlign: "center" }} className="mt-5">You have no courses yet :(</h1>}
           
         </div>
@@ -49,7 +49,8 @@ class MainContent extends Component {
 
 const mapStateToProps = (state) => {
   return { courses: state.courses.myCourses,
-            search: state.search.searchQueryCourse }
+            search: state.search.searchQueryCourse,
+            user: state.login.user }
 }
 
 const mapDispatchToProps = (dispatch) => {
