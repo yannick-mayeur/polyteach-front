@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_FAILURE } from '../actions/connexion.action';
+import { LOGIN_SUCCESS, LOGIN_FAILURE, SET_USER } from '../actions/connexion.action';
 
 const initState = {
   fetchingLogin: false,
@@ -28,6 +28,12 @@ export default function (state = initState, action) {
     case "SIGNUP_REJECTED":
       return { ...state, errSignup: action.payload.response.statusText, fetchingSignup: false }
     //END SIGNUP
+
+
+    case SET_USER :
+      return {
+        ...state, user: action.payload
+      }
 
 
 
