@@ -8,7 +8,7 @@ export default class CourseGenre extends Component {
    state = {
       toggleModal: false
    }
-
+   
    handleToggleModal = () => {
       this.setState({ toggleModal: true });
    }
@@ -25,8 +25,9 @@ export default class CourseGenre extends Component {
                <img src={this.props.posterUrl} className="courseShowcase__container--course-image" />
                <h3 className="courseShowcase__container--course-title">{this.props.course.name}</h3>
             </div>
+            
             <Modal show={this.state.toggleModal} course={this.props.course} modalClosed={this.closeModal}>
-               <CourseDetails removeCourse={this.props.removeCourse} course={this.props.course} modalClosed={this.closeModal} />
+               <CourseDetails removeCourse={this.props.removeCourse} rateCourse={this.props.rateCourse} toogleBookmarkCourse={this.props.toogleBookmarkCourse} course={this.props.course} modalClosed={this.closeModal} />
             </Modal>
          </>
       )

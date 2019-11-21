@@ -40,3 +40,34 @@ export function fetchCourseWithVideo(courseID) {
         })
     }
 }
+export const BOOKMARK_COURSE = 'BOOKMARK_COURSE';
+export function bookmarkCourse(course) {
+  return {
+    type: BOOKMARK_COURSE,
+    payload: S.courses.bookmarkCourse(course)
+  }
+}
+
+export const UNBOOKMARK_COURSE = 'UNBOOKMARK_COURSE';
+export function unbookmarkCourse(course) {
+  return {
+    type: UNBOOKMARK_COURSE,
+    payload: S.courses.unbookmarkCourse(course)
+  }
+}
+
+export const RATE_COURSE = 'RATE_COURSE';
+export function rateCourse(course, rate) {
+  return {
+    type: RATE_COURSE,
+    payload: S.courses.rateCourse(course, rate),
+  }
+}
+
+export const UPDATE_RATE_COURSE = 'UPDATE_RATE_COURSE';
+export function updateRateCourse(course, rate) {
+  return {
+    type: UPDATE_RATE_COURSE,
+    payload: S.courses.updateRateCourse(course, rate),
+  }
+}
