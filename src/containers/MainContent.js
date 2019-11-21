@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { ScrollCourses } from './ScrollCourses.container';
 
 // Store
-import { fetchAllMyCourses, removeCourse, bookmarkCourse, unbookmarkCourse, rateCourse, updateRateCourse } from '../store/actions/courses.action';
+import { fetchAllMyCourses, removeCourse, bookmarkCourse, unbookmarkCourse, rateCourseAndRefresh, updateRateCourseAndRefresh } from '../store/actions/courses.action';
 
 
 class MainContent extends Component {
@@ -26,9 +26,9 @@ class MainContent extends Component {
   rateCourse = (course, rate) => {
     if (course.rating) {
       console.log("rate", course, rate)
-      this.props.rateCourse(course, rate)
+      this.props.rateCourseAndRefresh(course, rate)
     } else {
-      this.props.updateRateCourse(course, rate)
+      this.props.updateRateCourseAndRefresh(course, rate)
     }
   }
 
@@ -54,7 +54,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ fetchAllMyCourses, bookmarkCourse, unbookmarkCourse, rateCourse, updateRateCourse, removeCourse }, dispatch)
+  return bindActionCreators({ fetchAllMyCourses, bookmarkCourse, unbookmarkCourse, rateCourseAndRefresh, updateRateCourseAndRefresh, removeCourse }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContent);
