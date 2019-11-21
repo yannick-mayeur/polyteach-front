@@ -31,19 +31,16 @@ class App extends Component {
             <Connexion />
         </Route>
 
-        <PrivateRoute exact path="/live">
-            <Live/>
-        </PrivateRoute>
+        <PrivateRoute exact path="/live" component={Live} /> 
 
         <Route path="/livestudent/:sessionId" component={LiveStudent} />
 
-        <PrivateRoute path="/courseEditor">
-            <CourseEditor />
-        </PrivateRoute>
+        <PrivateRoute path="/courseEditor" component={CourseEditor} />
 
         <PrivateRoute path="/player/:courseID" component={PlayerContainer}/>
 
         <PrivateRoute path='/' component={Layout} />
+
         </Switch>
 
         <Footer />
