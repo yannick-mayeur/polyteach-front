@@ -6,6 +6,7 @@ import LoginReducer from './connexion.reducer';
 import SearchReducer from './search.reducer';
 import StudentReducer from './student.reducer';
 import VideoReducer from './video.reducer';
+import LiveReducer from './live.reducer';
 
 const rootReducer = combineReducers({
   courses: CoursesReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   search: SearchReducer,
   students: StudentReducer,
   video: VideoReducer,
+  live: LiveReducer,
 });
 
 export default rootReducer;

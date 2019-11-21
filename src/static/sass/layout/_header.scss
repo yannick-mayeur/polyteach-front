@@ -134,6 +134,13 @@
             
          }
 
+         &-pressed {
+            width: 15px;
+            height: 15px;
+            fill: $color-purple;
+            margin-right: 1rem;
+         }
+
          &-play {
             width: 15px;
             height: 15px;

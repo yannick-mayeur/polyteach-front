@@ -10,8 +10,11 @@ import CourseEditor from '../containers/CourseEditor'
 import PlayerContainer from './Player.container';
 import Signup from '../components/Connexion/Signup.component';
 import {Dashboard} from '../components/Dashboard/Dashboard';
+import WaitToken from '../components/WaitToken.component';
 
 import {PrivateRoute} from '../components/utils/privateRoute.component';
+import Live from './Live.container';
+import LiveStudent from "./LiveStudent.container";
 
 class App extends Component {
   render() {
@@ -20,6 +23,9 @@ class App extends Component {
         <Navbar />
         {/* Main conteneur */}
         <Switch>
+        <Route path="/oauth">
+            <WaitToken />
+          </Route>
         <Route path="/dashboard">
             <Dashboard />
           </Route>
@@ -29,6 +35,10 @@ class App extends Component {
           <Route path="/signup">
             <Signup />
           </Route>
+          <Route exact path="/live">
+            <Live/>
+          </Route>
+          <Route path="/livestudent/:sessionId" component={LiveStudent} />
           <Route path="/courseEditor">
             <CourseEditor />
           </Route>

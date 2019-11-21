@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { ScrollCourses } from './ScrollCourses.container';
 
 // Store
-import { fetchAllMyCourses, removeCourse } from '../store/actions/courses.action';
+import { fetchAllMyCourses, removeCourse, bookmarkCourse, unbookmarkCourse, rateCourse, updateRateCourse } from '../store/actions/courses.action';
 
 
 class MainContent extends Component {
@@ -15,20 +15,32 @@ class MainContent extends Component {
     this.props.fetchAllMyCourses();
   };
 
-  createScrollCourses = (classCourses) => {
-    return classCourses.map(classCourse => {
-      return <ScrollCourses courses={classCourse.courses} name={classCourse.name}></ScrollCourses>
-    })
+  toogleBookmarkCourse = (course) => {
+    if (course.bookmarked) {
+      this.props.unbookmarkCourse(course);
+    } else {
+      this.props.bookmarkCourse(course);
+    };
   }
+
+  rateCourse = (course, rate) => {
+    if (course.rating) {
+      console.log("rate", course, rate)
+      this.props.rateCourse(course, rate)
+    } else {
+      this.props.updateRateCourse(course, rate)
+    }
+  }
+
 
   render() {
     return (
       <div className="content">
         <div className="courseShowcase ml-5">
         {this.props.courses && this.props.courses.length > 0 ?
-          //this.createScrollCourses(this.props.courses)
-          <ScrollCourses removeCourse={this.props.removeCourse} courses={this.props.courses.filter(course => course.name.toLowerCase().includes(this.props.search.toLowerCase()))} name="My Courses"></ScrollCourses>
+          <ScrollCourses removeCourse={this.props.removeCourse} rateCourse={this.rateCourse} toogleBookmarkCourse={this.toogleBookmarkCourse} courses={this.props.courses.filter(course => course.name.toLowerCase().includes(this.props.search.toLowerCase()))} name="My Courses"></ScrollCourses>
           : <h1 style={{ textAlign: "center" }} className="mt-5">You have no courses yet :(</h1>}
+          
         </div>
       </div>
     );
@@ -41,11 +53,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        fetchAllMyCourses: () => dispatch(fetchAllMyCourses()),
-        removeCourse: (courseID) => dispatch(removeCourse(courseID)),
-    }
-  //return bindActionCreators({ fetchAllMyCourses, removeCourse }, dispatch)
+  return bindActionCreators({ fetchAllMyCourses, bookmarkCourse, unbookmarkCourse, rateCourse, updateRateCourse, removeCourse }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContent);
