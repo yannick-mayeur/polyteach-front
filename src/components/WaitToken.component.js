@@ -41,7 +41,7 @@ class WaitToken extends Component {
                         self.props.setUser(user)
                         self.setState({
                             redirect: true,
-                            path: '/dashboard'
+                            path: '/'
                         })
                     })
                 })
