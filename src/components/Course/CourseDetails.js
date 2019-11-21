@@ -6,6 +6,9 @@ import PlayIcon from '../../static/images/play-button.svg';
 import StarRatings from 'react-star-ratings';
 import { Link } from 'react-router-dom';
 
+// helpers
+import { formatDate } from '../utils/date.helper';
+
 export default function CourseDetails(props) {
   return (
     <>
@@ -16,29 +19,27 @@ export default function CourseDetails(props) {
         </h1>
         <p className="modal__info">
           <span className="modal__rating">
-            {/* Rating: {props.course.vote_average * 10}%{" "} */}
-            Rating: XX%  
+            Rating: {(props.course.averageRating) ? props.course.averageRating * 20 + "%" : "None"}  
           </span>
-          </p>
+        </p>
 
-          <p className="modal__info">
+        <p className="modal__info">
           <span>
             {/*Released: {props.course.release_date}  by: Teacher Name Link*/}
-            Released JJ-MM-AAA by: Teacher Profile Link
+            Released {formatDate(props.course.creationdate)} : {props.course.teacher.firstname + " " + props.course.teacher.lastname}
           </span>
-          </p>
-
-       
+        </p>
 
         <StarRatings
-          rating= {(!props.course.vote_average) ? 0 :  props.course.vote_average / 2}
-          changeRating= {(newRating, name) => {alert("rating changed:" + newRating)}}
+          rating={(!props.course.rating) ? 0 : props.course.rating}
+          changeRating={(newRating) => { props.rateCourse(props.course, newRating) }}
           starRatedColor='rgb(47,72,223)'
-          starHoverColor= 'rgb(50,75,240)'
-          starDimension = '25px'
-          starSpacing = '5px'
+          starHoverColor='rgb(50,75,240)'
+          starDimension='25px'
+          starSpacing='5px'
           numberOfStars={5}
           name='rating'
+          
         />
         
         <p className="modal__overview">{props.course.description}</p>
@@ -49,9 +50,9 @@ export default function CourseDetails(props) {
         </button>
         </Link>
         
-        <button className="modal__button" onClick={()=>{alert("Ajouter aux bookmarks")}}>
-        <StarIcon className="header__container-btnLogout-add" />
-        Bookmark
+        <button className="modal__button" onClick={() => { props.toogleBookmarkCourse(props.course) }}>
+          <StarIcon className={props.course.bookmarked ? "header__container-btnLogout-pressed" : "header__container-btnLogout-add"} />
+          {props.course.bookmarked ? "Bookmarked" : "Bookmark" }
         </button>
         
        <div className="row">

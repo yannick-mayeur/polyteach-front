@@ -2,7 +2,7 @@ import axios from "axios";
 import {URL_API} from "./Config";
 
 const askForSignedImageURL = (pictureName) => {
-    return axios.post(`${URL_API}/picture/upload`, {pictureName: pictureName})
+    return axios.get(`${URL_API}/picture/upload/${pictureName}`)
         .then((result) => {
             return result;
         })
