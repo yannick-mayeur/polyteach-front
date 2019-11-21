@@ -247,11 +247,37 @@ html, *, ::after, ::before {
     border-bottom: 0.5px solid $color-tab;
   }
 
+
+  .live-head{
+    font-size: 4rem;
+    font-family: 'Hind' ;
+    font-weight: 700;
+    text-align: center;
+    color: #fff;
+    background: transparent;
+    max-height: 4rem;
+    border: none;
+  }
   .card-duration{
     font-size: 2rem;
     color: $color-modal-grey;
   }
 
+  .live-description{
+    font-size: 2rem;
+    text-align: center;
+    color: $color-modal-grey;
+  }
+
+  .toolbar{
+      text-align: center;
+  }
+  .sharesheet{
+      vertical-align: middle;
+      text-align: center;
+      display:inline-block;
+      margin: auto;
+  }
 
     .close-btn {
       cursor: pointer;
@@ -376,9 +402,7 @@ html, *, ::after, ::before {
           fill: #000;
        }
     }
-
-
-    .iconpressed{
-        fill: $color-purple
-    }
+ }
+ .iconepressed {
+   fill: $color-purple;
  }

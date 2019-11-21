@@ -16,3 +16,12 @@ export function signup(email, password, classID) {
         payload: S.connexion.signup(email, password, classID)
     }
 }
+
+
+export const SET_USER = 'SET_USER'
+export function setUser(user) {
+    return {
+        type: SET_USER,
+        payload: user,
+    }
+}

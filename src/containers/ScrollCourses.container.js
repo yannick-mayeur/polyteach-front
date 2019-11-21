@@ -4,13 +4,14 @@ import CourseGenre from '../components/Course/CourseGenre';
 
 export function ScrollCourses(props) {
     // Create Course Components from data course
+    
     const courseRow = 
     props.courses.fetching?
     <div className="loader-1 mb-2"><span></span></div>
     :
     props.courses.map((course) => {
         const courseComponent =
-            <CourseGenre removeCourse={props.removeCourse} key={course.id} posterUrl={course.picture} course={course}/>
+            <CourseGenre removeCourse={props.removeCourse} rateCourse={props.rateCourse} toogleBookmarkCourse={props.toogleBookmarkCourse} key={course.id} posterUrl={course.picture} course={course}/>
         return courseComponent;
     });
 

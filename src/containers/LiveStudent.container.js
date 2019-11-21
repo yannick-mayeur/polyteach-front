@@ -40,32 +40,36 @@ export class LiveStudent extends React.Component{
     }
 
     render() {
-
         const sessionId = this.props.match.params.sessionId;
-        // })
+
         return(
             
-            <div className="container" style={{paddingTop:50}}>
-                
-                <div className="row">
-                    <div className="video-container col-md-9">
-                    
-                   {this.state.subscriber ? <Video videoManager={this.state.subscriber}/> : null };
-                    <div display={this.state.display}>
-                        
+            <div className="content">
+                <div className="courseShowcase">
+                <div className="video-container" >
+                        <div className="row text-center mx-auto">
+                            <div className="col-md-12">
+                            <h1 className="live-head mb-4"> Session: {sessionId} </h1>
+                            <p className="live-description"> Description </p>
+                            <h4 className="smallcard-class mt-2"> Teacher Name </h4>
+                            </div>
+                        </div>     
                     </div>
+
+
+                    <div className="menubuttonsrow">
+                        <button className="quitlivebutton"> Quit</button>
+                        <button className="livebutton" onClick={() => (this.joinSession(sessionId))}> Play </button>
                     </div>
-                        <div style={{textAlign:"center"}}>
-                            <button>Quitter</button>
-                            <button className="livebutton" onClick={() => (this.joinSession(sessionId))}> Play </button>
-                        </div>
-                    <div className="col-md-3" style={{backgroundColor:"white",textAlign:"center"}}>
-                        <h1 style={{backgroundColor:"red"}}>Nom du cours : {sessionId}</h1>
-                        <div>
-                            <h1>Description</h1>
-                        </div>
-                        <div>
-                            <h1>Nom du prof</h1>
+
+                    <div className="row">
+                        <div className="video-container mx-auto col-md-12">
+                        {this.state.subscriber ?
+                                <Video videoManager={this.state.subscriber}/> 
+                            : 
+                                null 
+                        }
+                        <div display={this.state.display}/>
                         </div>
                     </div>
                 </div>
