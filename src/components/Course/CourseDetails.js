@@ -54,15 +54,17 @@ export default function CourseDetails(props) {
           <StarIcon className={props.course.bookmarked ? "header__container-btnLogout-pressed" : "header__container-btnLogout-add"} />
           {props.course.bookmarked ? "Bookmarked" : "Bookmark" }
         </button>
-        
-       <div className="row">
-       <button className="modal__button modal__button--edit">
-          Edit
-        </button>
-        <button className="modal__button modal__button--delete" onClick={() => props.removeCourse(props.course.id)}>
-          Delete
-        </button>
-       </div>
+       {props.user !== null && props.user.id === props.course.idteacher? 
+              <div className="row">
+              <button className="modal__button modal__button--edit">
+                 Edit
+               </button>
+               <button className="modal__button modal__button--delete" onClick={() => props.removeCourse(props.course.id)}>
+                 Delete
+               </button>
+              </div>
+              : null}
+
       </div>
     </>
   );

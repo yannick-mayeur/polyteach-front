@@ -9,19 +9,35 @@ import { fetchCourseWithVideo } from '../store/actions/courses.action';
 
 class PlayerContainer extends Component {
 
-  constructor(props) {
-    super(props);
-  };
+    constructor(props) {
+        super(props);
+    };
+  
+    componentWillMount = () => {
+        this.props.fetchCourse(this.props.match.params.courseID)
+    };
 
-  componentWillMount = () => {
-    this.props.fetchCourse(this.props.match.params.courseID)
-  };
+    render() {
+        return (
+            <div>
+                <div>
+                    {
+                    this.props.course && this.props.course.videos[0] && this.props.course.selectedSubtitles? 
+                    <div>
+                        <VideoSelector course={this.props.course} selectVideo = {this.props.selectVideo}/>
 
-  rateVideo = (video, rate) => {
-    if (video.rating) {
-      this.props.updateRateVideo(video, rate);
-    } else {
-      this.props.rateVideo(video, rate);
+                        <VideoPlayer video={this.props.course.videos.find(video => video.id == this.props.course.selectedCourse)} subtitles={this.props.course.selectedSubtitles} />
+                    </div>
+                    :
+                    <div className="content">
+                    <div className="courseShowcase ml-5">
+                         <h1 style={{textAlign: "center"}}>This course is empty !</h1>
+                    </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        );
     }
 
   }

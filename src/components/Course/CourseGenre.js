@@ -27,7 +27,7 @@ export default class CourseGenre extends Component {
             </div>
             
             <Modal show={this.state.toggleModal} course={this.props.course} modalClosed={this.closeModal}>
-               <CourseDetails removeCourse={this.props.removeCourse} rateCourse={this.props.rateCourse} toogleBookmarkCourse={this.props.toogleBookmarkCourse} course={this.props.course} modalClosed={this.closeModal} />
+               <CourseDetails user={this.props.user} removeCourse={this.props.removeCourse} rateCourse={this.props.rateCourse} toogleBookmarkCourse={this.props.toogleBookmarkCourse} course={this.props.course} modalClosed={this.closeModal} />
             </Modal>
          </>
       )
