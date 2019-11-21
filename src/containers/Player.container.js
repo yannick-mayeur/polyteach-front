@@ -31,7 +31,7 @@ class PlayerContainer extends Component {
                     :
                     <div className="content">
                     <div className="courseShowcase ml-5">
-                         <h1>This course is empty !</h1>
+                         <h1 style={{textAlign: "center"}}>This course is empty !</h1>
                     </div>
                     </div>
                     }

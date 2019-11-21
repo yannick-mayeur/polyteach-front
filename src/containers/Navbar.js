@@ -65,28 +65,32 @@ class navigation extends Component {
           {
             this.props.user === null ? 
                 "" 
-            :  this.props.user.role === "student" ? "" :
-            <div>
+            :  this.props.user.role === 0 ? "" :
+          <Link to="/live" style={{ textDecoration: 'none' }}>
+                    <button className="header__container-btnRecCourse">
+                    <RecLogo className="header__container-btnAddCourse-add" />
+                    Start Live
+                    </button>  
+                </Link>
+        }
+
+          {
+            this.props.user === null ? 
+                "" 
+            :  this.props.user.role === 0 ? "" :
+           
                 <Link to="/courseEditor" style={{ textDecoration: 'none' }}>
                     <button className="header__container-btnAddCourse">
                     <AddLogo className="header__container-btnAddCourse-add" />
                     Add a new course
                     </button>  
                 </Link>
-
-                <Link to="/live" style={{ textDecoration: 'none' }}>
-                    <button className="header__container-btnRecCourse">
-                    <RecLogo className="header__container-btnAddCourse-add" />
-                    Start Live
-                    </button>  
-                </Link>
-            </div>
         }    
           <button className="header__container-btnLogout">
           <LogoutLogo className="header__container-btnLogout-add" />
           Log Out
         </button> 
-          <DropdownContent />
+          <DropdownContent authorized={this.props.user !== null && this.props.user.role === 1}/>
           <DropdownArrow className="navigation__container--downArrow" />
         </ul>
       </nav>
