@@ -71,19 +71,3 @@ export function updateRateCourse(course, rate) {
     payload: S.courses.updateRateCourse(course, rate),
   }
 }
-
-export const RATE_COURSE_AND_REFRESH = 'RATE_COURSE_AND_REFRESH';
-export function rateCourseAndRefresh(course, rate) {
-  return (dispatch) => {
-    dispatch(rateCourse(course, rate))
-      .then(() => dispatch(fetchAllMyCourses()))
-  }
-}
-
-export const UPDATE_RATE_COURSE_AND_REFRESH = 'UPDATE_RATE_COURSE_AND_REFRESH';
-export function updateRateCourseAndRefresh(course, rate) {
-  return (dispatch) => {
-    dispatch(updateRateCourse(course, rate))
-      .then(() => dispatch(fetchAllMyCourses()))
-  }
-}
