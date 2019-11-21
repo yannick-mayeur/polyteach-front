@@ -1,4 +1,4 @@
-import { FETCH_ALL_COURSES, BOOKMARK_COURSE, UNBOOKMARK_COURSE, RATE_COURSE, UPDATE_RATE_COURSE } from '../actions/courses.action';
+import { FETCH_ALL_COURSES, BOOKMARK_COURSE, UNBOOKMARK_COURSE, RATE_COURSE, UPDATE_RATE_COURSE , REMOVE_COURSE} from '../actions/courses.action';
 
 const initState = {
   myCourses: []
@@ -74,11 +74,19 @@ export default function (state = initState, action) {
       return { ...state, }
 
 
-    case "REMOVE_COURSE": {
-        const courseDeleted = action.payload.data;
-        return {...state, myCourses: state.myCourses.filter(course => course.id !== courseDeleted.id)}
+    case REMOVE_COURSE+"_FULFILLED": {
+        if(action.payload.data && action.payload.data.length > 0){
+            const courseDeleted = action.payload.data[0];
+            return {...state, myCourses: state.myCourses.filter(course => course.id !== courseDeleted.id)}
+        } else {
+            return {...state}
+        }
       }
-  
+    case REMOVE_COURSE + '_PENDING':
+        return { ...state, }
+    case REMOVE_COURSE + '_REJECTED':
+        return { ...state, }
+    
 
     default:
       return state;

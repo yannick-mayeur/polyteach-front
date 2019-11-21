@@ -6,6 +6,7 @@ const SCOPE = ['https://www.googleapis.com/auth/drive.readonly',
                'https://www.googleapis.com/auth/drive.file'];
 
 
+               
 class Picker extends Component {
 
 constructor(props) {

@@ -54,8 +54,7 @@ export default function CourseDetails(props) {
           <StarIcon className={props.course.bookmarked ? "header__container-btnLogout-pressed" : "header__container-btnLogout-add"} />
           {props.course.bookmarked ? "Bookmarked" : "Bookmark" }
         </button>
-        
-       {props.user !== null && props.user === props.course.idTeacher? 
+       {props.user !== null && props.user.id === props.course.idteacher? 
               <div className="row">
               <button className="modal__button modal__button--edit">
                  Edit

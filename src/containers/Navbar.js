@@ -51,8 +51,6 @@ class navigation extends Component {
         <ul className="navigation__container">
           <NavigationItem link="/" exact><img className="navigation__container--logo" src={PolyTeachLogo} alt="" /></NavigationItem>
           <Link to="/" style={{ textDecoration: 'none' }}><div className="navigation__container-link pseudo-link">My Courses</div></Link>
-          <Link to="/dashboard" style={{ textDecoration: 'none' }}><div className="navigation__container-link pseudo-link">Dashboard</div></Link>
-      
           <div className="navigation__container--left">
             <SearchLogo className="logo" />
             <input
@@ -65,28 +63,32 @@ class navigation extends Component {
           {
             this.props.user === null ? 
                 "" 
-            :  this.props.user.role === "student" ? "" :
-            <div>
+            :  this.props.user.role === 0 ? "" :
+          <Link to="/live" style={{ textDecoration: 'none' }}>
+                    <button className="header__container-btnRecCourse">
+                    <RecLogo className="header__container-btnAddCourse-add" />
+                    Start Live
+                    </button>  
+                </Link>
+        }
+
+          {
+            this.props.user === null ? 
+                "" 
+            :  this.props.user.role === 0 ? "" :
+           
                 <Link to="/courseEditor" style={{ textDecoration: 'none' }}>
                     <button className="header__container-btnAddCourse">
                     <AddLogo className="header__container-btnAddCourse-add" />
                     Add a new course
                     </button>  
                 </Link>
-
-                <Link to="/live" style={{ textDecoration: 'none' }}>
-                    <button className="header__container-btnRecCourse">
-                    <RecLogo className="header__container-btnAddCourse-add" />
-                    Start Live
-                    </button>  
-                </Link>
-            </div>
         }    
           <button className="header__container-btnLogout">
           <LogoutLogo className="header__container-btnLogout-add" />
           Log Out
         </button> 
-          <DropdownContent />
+          <DropdownContent authorized={this.props.user !== null && this.props.user.role === 1}/>
           <DropdownArrow className="navigation__container--downArrow" />
         </ul>
       </nav>
