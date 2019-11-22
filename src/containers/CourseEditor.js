@@ -70,7 +70,7 @@ class CourseEditor extends Component {
             <div className="row mt-5 menubuttonsrow col-md-6">
               <div className="col-md-6">
                 <Link to="/">
-                  <button className="cancelBtn" >
+                  <button className="cancelBtn" onClick={this.props.clearNewCourse}>
                     CANCEL
                   </button>
                 </Link>
