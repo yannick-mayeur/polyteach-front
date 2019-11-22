@@ -48,6 +48,46 @@ videol {
     position: bottom;
   }
 
+.unavailable{
+
+  font-size: 2rem;
+  color:#fff;
+  outline: none;
+  border: none;
+  font-weight: 700;
+  border-radius: .2vw;
+  padding-left: 9rem;
+  padding-right: 9rem;
+  margin-right: 1rem;
+  margin-left: 6rem;
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+  background-color: #df4039;
+  padding-bottom: 1rem;
+
+
+}
+
+.available{
+
+  font-size: 2rem;
+  color:#fff;
+  outline: none;
+  border: none;
+  font-weight: 700;
+  border-radius: .2vw;
+  padding-left: 9rem;
+  padding-right: 9rem;
+  margin-right: 1rem;
+  margin-left: 6rem;
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+  background-color: #94df75;
+  padding-bottom: 1rem;
+
+
+}
+
   .livebutton {
     cursor: pointer;
     font-size: 1.6rem;
@@ -56,13 +96,13 @@ videol {
     border: none;
     font-weight: 700;
     border-radius: .2vw;
-    padding-left: 3.5rem;
+    padding-left: 2rem;
     padding-right: 3.5rem;
     margin-right: 1rem;
     padding-top: 1rem;
     background-color:$color-purple; 
     padding-bottom: 1rem;
-  
+    padding-top: 1rem;
     &-icon{
        width: 15px;
        height: 15px;
@@ -95,10 +135,10 @@ videol {
     padding-right: 3.5rem;
     margin-right: 1rem;
     padding-top: 1rem;
-    background-color: rgba(46, 46, 46, 0.849); 
-    padding-bottom: 1rem;
-  
-    &-icon{
+    background-color: rgba(46, 46, 46, 0.849);
+   padding-bottom: 1rem;
+
+   &-icon{
        width: 15px;
        height: 15px;
        fill: #fff;

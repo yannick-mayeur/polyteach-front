@@ -88,11 +88,34 @@ export function get_tokenSession(sessionId) {
     }
   }
 
-  export const SAVE_LIVE = 'SAVE_LIVE';
-  export function saveLive(sessionId,  nameSession, description, idCourse) {
+export const GET_DATA_LIVE = 'GET_DATA_LIVE';
+export function get_data(sessionId) {
+  return {
+    type: GET_DATA_LIVE,
+    payload: S.live.get_data(sessionId)
+  }
+}
+
+export const SAVE_LIVE = 'SAVE_LIVE';
+export function saveLive(sessionId, nameSession, description,nameTeacher, idCourse) {
     return {
       type: SAVE_LIVE,
-      payload: S.live.saveLive(sessionId,  nameSession, description, idCourse)
+      payload: S.live.saveLive(sessionId, nameSession, description,nameTeacher, idCourse)
     }
   }
+  export const IS_ACTIVE_LIVE = 'IS_ACTIVE_LIVE';
+export function isActive(sessionId) {
+  return {
+    type: IS_ACTIVE_LIVE,
+    payload: S.live.isActive(sessionId)
+  }
+}
 
+  export const GET_ACTIVE_LIVES = 'GET_ACTIVE_LIVES';
+  export function getActiveLives() {
+    const data = S.live.getActiveLives()
+    return {
+      type: GET_ACTIVE_LIVES,
+      payload: data
+    }
+  }

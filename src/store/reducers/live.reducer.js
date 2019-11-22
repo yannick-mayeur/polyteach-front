@@ -39,7 +39,7 @@ export default function (state = initStore, action) {
       return state;
 
 
-            /** GET SESSION ACTION **/
+
     case "GET_TOKEN_SESSION_FULFILLED":
       return { ...state, tokenSession: action.payload.data }
 
@@ -48,8 +48,32 @@ export default function (state = initStore, action) {
 
     case "GET_TOKEN_SESSION_PENDING":
       return state;
-      default:
-        console.log("default");
-        return state;
+
+
+
+    case "GET_DATA_LIVE_FULFILLED":
+      return { ...state, infosLive: action.payload.data }
+
+    case "GET_DATA_LIVE_REJECTED":
+      return { ...state,  }
+
+    case "GET_DATA_LIVE_PENDING":
+      return state;
+
+
+
+    case "IS_ACTIVE_LIVE_FULFILLED":
+      return { ...state, sessionStatus: action.payload.data }
+
+    case "IS_ACTIVE_LIVE_REJECTED":
+      return { ...state,  }
+
+    case "IS_ACTIVE_LIVE_PENDING":
+
+      return state;
+
+    default:
+      console.log("default");
+      return state;
   }
 }

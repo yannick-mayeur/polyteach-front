@@ -1,14 +1,27 @@
 import { FETCH_ALL_COURSES, BOOKMARK_COURSE, UNBOOKMARK_COURSE, RATE_COURSE, UPDATE_RATE_COURSE , REMOVE_COURSE} from '../actions/courses.action';
 
 const initState = {
-  myCourses: []
+  myCourses: [],
+  myLives: [],
 }
 
 export default function (state = initState, action) {
   switch (action.type) {
+
+    case "GET_ACTIVE_LIVES_FULFILLED":
+      const myLives = action.payload.data ;
+      return { ...state, myLives: myLives, fetchingLives: false }
+
+    case "GET_ACTIVE_LIVES_REJECTED":
+      return { ...state, fetchingLives: false }
+
+    case "GET_ACTIVE_LIVES_PENDING":
+      return {...state, fetchingLives: true }
+
+
     case "FETCH_ALL_COURSES_FULFILLED":
       const myCourses = action.payload.data;
-      return { ...state, myCourses, fetching: false }
+      return { ...state, myCourses: myCourses, fetching: false }
 
     case "FETCH_ALL_COURSES_PENDING":
       return { ...state, fetching: true }
@@ -86,7 +99,7 @@ export default function (state = initState, action) {
         return { ...state, }
     case REMOVE_COURSE + '_REJECTED':
         return { ...state, }
-    
+
 
     default:
       return state;
