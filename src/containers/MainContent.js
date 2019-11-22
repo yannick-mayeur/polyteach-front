@@ -72,13 +72,12 @@ class MainContent extends Component {
 const mapStateToProps = (state) => {
   return { courses: state.courses.myCourses,
             search: state.search.searchQueryCourse,
-            user: state.login.user
+            user: state.login.user,
             lives: state.courses.myLives,}
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ fetchAllMyCourses, bookmarkCourse, unbookmarkCourse, rateCourseAndRefresh, updateRateCourseAndRefresh, removeCourse }, dispatch)
-  return bindActionCreators({ fetchAllMyCourses, getActiveLives, bookmarkCourse, unbookmarkCourse, rateCourse, updateRateCourse, removeCourse }, dispatch)
+  return bindActionCreators({ fetchAllMyCourses, bookmarkCourse, getActiveLives, unbookmarkCourse, rateCourseAndRefresh, updateRateCourseAndRefresh, removeCourse }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContent);
