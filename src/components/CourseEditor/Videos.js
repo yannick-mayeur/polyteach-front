@@ -33,7 +33,7 @@ export default function Videos(props) {
         {props.videos.selectedVideos && props.videos.selectedVideos.length > 0 ?
             props.videos.selectedVideos.map((video, index) => {
               const videoCard =
-                <VideoCard key={index + video.titleVideo} idVideo={index} titleVideo={video.titleVideo} videoURL={video.videoURL} vttURL={video.vttURL} setName={props.updateNameVideo} removeVideo={props.removeVideo} />
+                <VideoCard key={index + video.title} idVideo={index} title={video.title} videoURL={video.videoURL} vttURL={video.vttURL} setName={props.updateNameVideo} removeVideo={props.removeVideo} />
               return videoCard;
             }) :
               <h1 style={{ textAlign: "center" }}>You have added no videos yet. </h1>

@@ -87,3 +87,27 @@ export function updateRateCourseAndRefresh(course, rate) {
       .then(() => dispatch(fetchAllMyCourses()))
   }
 }
+
+export const ADD_COURSE_TO_EDIT = 'ADD_COURSE_TO_EDIT';
+export function addCourseToEdit(idCourse) {
+  return {
+    type: ADD_COURSE_TO_EDIT,
+    payload: idCourse,
+  }
+}
+
+export const FETCH_COURSE_TO_EDIT = 'FETCH_COURSE_TO_EDIT';
+export function fetchCourseToEdit(idCourse) {
+  return {
+    type: FETCH_COURSE_TO_EDIT,
+    payload: S.courses.getAllInfosCourseById(idCourse),
+  }
+}
+
+export const UPDATE_COURSE = 'UPDATE_COURSE';
+export function updateCourse(course) {
+  return {
+    type: UPDATE_COURSE,
+    payload: S.courses.updateCourse(course),
+  }
+}

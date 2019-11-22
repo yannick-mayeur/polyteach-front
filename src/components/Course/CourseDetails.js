@@ -58,9 +58,9 @@ export default function CourseDetails(props) {
 
        {props.user !== null && props.user.id === props.course.idteacher? 
               <div className="row">
-              <button className="modal__button modal__button--edit">
+              <div className="modal__button modal__button--edit" onClick={() => props.editCourse(props.course.id)}>
                  Edit
-               </button>
+               </div>
                <button className="modal__button modal__button--delete" onClick={() => props.removeCourse(props.course.id)}>
                  Delete
                </button>

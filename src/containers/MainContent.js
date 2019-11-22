@@ -9,10 +9,16 @@ import {LiveCard} from '../components/LiveCard';
 const studentLive_URL= 'livestudent/';
 
 // Store
-import { fetchAllMyCourses, removeCourse, bookmarkCourse, unbookmarkCourse, rateCourseAndRefresh, updateRateCourseAndRefresh } from '../store/actions/courses.action';
+import { addCourseToEdit, fetchAllMyCourses, removeCourse, bookmarkCourse, unbookmarkCourse, rateCourseAndRefresh, updateRateCourseAndRefresh } from '../store/actions/courses.action';
 import { getActiveLives } from '../store/actions/index';
+import { Redirect } from 'react-router-dom'
 
 class MainContent extends Component {
+
+  state = {
+    redirect: false
+  }
+
   componentWillMount = () => {
     this.props.fetchAllMyCourses();
     this.props.getActiveLives();
@@ -35,8 +41,26 @@ class MainContent extends Component {
     }
   }
 
+  editCourse = (idCourse) => {
+    this.props.addCourseToEdit(idCourse);
+    this.setRedirect();
+  }
+
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    })
+  }
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return
+    }
+  }
+
 
   render() {
+<<<<<<< HEAD
     return (
       <div className="content">
         <div className="courseShowcase ml-5">
@@ -62,14 +86,32 @@ class MainContent extends Component {
                 }
               </div>
             </div>
+=======
+    if (this.state.redirect) {
+      return <Redirect to='/courseEditor' />
+    } else {
+      return (
+        <div className="content">
+
+          <div className="courseShowcase ml-5">
+            {this.props.courses && this.props.courses.length > 0 && this.props.courses.map(course => course.bookmarked).reduce((acc, current) => acc || current) ?
+              <ScrollCourses user={this.props.user} removeCourse={this.props.removeCourse} rateCourse={this.rateCourse} toogleBookmarkCourse={this.toogleBookmarkCourse} courses={this.props.courses.filter(course => course.bookmarked)} name="My Bookmarked Courses"></ScrollCourses>
+              : <h1 style={{ textAlign: "center" }} className="mt-5">{this.props.user && this.props.user.role === 0 ? "You have no bookmarked courses yet :(" : ""}</h1>}
+
+            {this.props.courses && this.props.courses.length > 0 ?
+              <ScrollCourses editCourse={this.editCourse} user={this.props.user} removeCourse={this.props.removeCourse} rateCourse={this.rateCourse} toogleBookmarkCourse={this.toogleBookmarkCourse} courses={this.props.courses.filter(course => course.name.toLowerCase().includes(this.props.search.toLowerCase()))} name="My Courses"></ScrollCourses>
+              : <h1 style={{ textAlign: "center" }} className="mt-5">You have no courses yet :(</h1>}
+
+>>>>>>> editCourse
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
 const mapStateToProps = (state) => {
+<<<<<<< HEAD
   return { courses: state.courses.myCourses,
             search: state.search.searchQueryCourse,
             user: state.login.user,
@@ -78,6 +120,17 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ fetchAllMyCourses, bookmarkCourse, getActiveLives, unbookmarkCourse, rateCourseAndRefresh, updateRateCourseAndRefresh, removeCourse }, dispatch)
+=======
+  return {
+    courses: state.courses.myCourses,
+    search: state.search.searchQueryCourse,
+    user: state.login.user
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ addCourseToEdit, fetchAllMyCourses, bookmarkCourse, unbookmarkCourse, rateCourseAndRefresh, updateRateCourseAndRefresh, removeCourse }, dispatch)
+>>>>>>> editCourse
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContent);

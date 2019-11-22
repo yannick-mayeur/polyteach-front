@@ -8,12 +8,16 @@ import { connect } from 'react-redux';
 import { addNewCourse, clearNewCourse, updateCourseName, updateCourseDescription, updateCoursePicture } from '../store/actions';
 import { fetchStudents, addStudents, clearStudents, removeStudents, removeStudent } from '../store/actions/students.action';
 import { uploadVideo, updateNameVideo, removeVideo } from '../store/actions/video.action';
+import { fetchCourseToEdit, updateCourse } from '../store/actions/courses.action';
 
 class CourseEditor extends Component {
 
   componentWillMount = () => {
     this.props.clearStudents();
     this.props.fetchStudents();
+    if (this.props.courseToEdit) {
+      this.props.fetchCourseToEdit(this.props.courseToEdit);
+    }
   };
 
   //TODO - Fetch original course from id if exists
@@ -25,6 +29,44 @@ class CourseEditor extends Component {
     }
   }
 
+  propsToCourse = () => {
+    return {
+      name: this.props.newCourse.name,
+      picture: this.props.newCourse.picture.url,
+      description: this.props.newCourse.description,
+      videos: this.props.newCourse.videos.selectedVideos,
+      students: this.props.newCourse.students
+    }
+  }
+
+  componentWillUnmount= () => {
+    this.props.clearNewCourse()
+  }
+
+  sendCourse = () => {
+    const courseToSave = this.propsToCourse()
+    if (this.props.courseToEdit) {
+      courseToSave.id = this.props.courseToEdit;
+      this.props.updateCourse(courseToSave).then(
+        () => {
+        this.setState({
+          redirect: true,
+        })
+        this.props.clearNewCourse()
+      }
+      )
+    }
+    else {
+
+      this.props.saveNewCourse(courseToSave).then(() => {
+        this.setState({
+          redirect: true,
+        })
+        this.props.clearNewCourse()
+      })
+    }
+  }
+
   render() {
     let data = [
       {
@@ -33,7 +75,7 @@ class CourseEditor extends Component {
       },
       {
         title: 'Videos',
-        component: <Videos videos={this.props.newCourse.videos} uploadVideo={this.props.uploadVideo} updateNameVideo={this.props.updateNameVideo} removeVideo={this.props.removeVideo} updateVideoToUpload={this.props.updateVideoToUpload}/>
+        component: <Videos videos={this.props.newCourse.videos} uploadVideo={this.props.uploadVideo} updateNameVideo={this.props.updateNameVideo} removeVideo={this.props.removeVideo} updateVideoToUpload={this.props.updateVideoToUpload} />
       },
       {
         title: 'Students',
@@ -41,8 +83,8 @@ class CourseEditor extends Component {
       }
     ]
 
-    if(this.state.redirect){
-        return(<Redirect to="/"/>)
+    if (this.state.redirect) {
+      return (<Redirect to="/" />)
     }
     return (
       <div className="content">
@@ -53,10 +95,10 @@ class CourseEditor extends Component {
                 {
                   data.map((tab, i) =>
                     <li key={i}
-                    data-active={this.state.index === i}
-                    onClick={() => this.setState({ index: i })} className="mx-auto pannel">
-                    <h1 className="tabtitle">{tab.title}</h1>
-                  </li>
+                      data-active={this.state.index === i}
+                      onClick={() => this.setState({ index: i })} className="mx-auto pannel">
+                      <h1 className="tabtitle">{tab.title}</h1>
+                    </li>
                   )
                 }
               </ul>
@@ -76,19 +118,7 @@ class CourseEditor extends Component {
                 </Link>
               </div>
               <div className="col-md-6">
-                <button onClick={() => this.props.saveNewCourse({
-                  name: this.props.newCourse.name,
-                  picture: this.props.newCourse.picture.url,
-                  description: this.props.newCourse.description,
-                  videos: this.props.newCourse.videos.selectedVideos,
-                  students: this.props.newCourse.students
-                }).then(() => {
-                    this.setState({
-                        redirect: true,
-                    })
-                    this.props.clearNewCourse()
-                })
-        } className="saveBtn" >
+                <button onClick={this.sendCourse} className="saveBtn" >
                   {this.props.newCourse.fetching ? "SENDING..." : "SAVE"}
                 </button>
               </div>
@@ -104,6 +134,7 @@ class CourseEditor extends Component {
 const mapStateToProps = (store) => ({
   newCourse: store.newCourse,
   students: store.students,
+  courseToEdit: store.newCourse.idCourseToEdit,
 })
 
 
@@ -112,6 +143,7 @@ const mapDispatchToProps = dispatch => {
     // dispatching multiple actions
     saveNewCourse: course => dispatch(addNewCourse(course)),
     clearNewCourse: () => dispatch(clearNewCourse()),
+    updateCourse: course => dispatch(updateCourse(course)),
     // Students
     fetchStudents: () => dispatch(fetchStudents()),
     addStudents: (students, fromClass) => dispatch(addStudents(students, fromClass)),
@@ -126,6 +158,7 @@ const mapDispatchToProps = dispatch => {
     uploadVideo: (video) => dispatch(uploadVideo(video)),
     updateNameVideo: (id, newName) => dispatch(updateNameVideo(id, newName)),
     removeVideo: (id) => dispatch(removeVideo(id)),
+    fetchCourseToEdit: (id) => dispatch(fetchCourseToEdit(id)),
   }
 }
 

@@ -30,6 +30,14 @@ const coursesService = {
 
     updateRateCourse(course, rate) {
         return Api.put('/course/rateCourse', {course, rate});
+    },
+
+    getAllInfosCourseById(idCourse) {
+        return Api.get('/course/allInfosById/' + idCourse);
+    },
+
+    updateCourse(course) {
+        return Api.put('/course/updateCourse', course);
     }
 }
 
