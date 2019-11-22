@@ -34,7 +34,7 @@ class PlayerContainer extends Component {
               <div>
 
                 <VideoSelector course={this.props.course} selectVideo={this.props.selectVideo} />
-                <VideoPlayer rateVideo={this.rateVideo} video={this.props.course.videos.find(video => video.id == this.props.course.selectedCourse)} subtitles={this.props.course.selectedSubtitles} />
+                <VideoPlayer user={this.props.user} rateVideo={this.rateVideo} video={this.props.course.videos.find(video => video.id == this.props.course.selectedCourse)} subtitles={this.props.course.selectedSubtitles} />
               </div>
               :
               <div className="content">
@@ -52,6 +52,7 @@ class PlayerContainer extends Component {
 const mapStoreToProps = (store) => ({
   course: store.video,
   fetching: store.video.fetching,
+  user: store.login.user,
 })
 
 const mapDispatchToProps = (dispatch) => {

@@ -47,16 +47,22 @@ export function VideoPlayer(props) {
 
       <div className="courseShowcase_videoplayer ">
         <div className="row justify-content-md-center">
-          <StarRatings
-            rating={props.video.rating ? props.video.rating : 0}
-            changeRating={(newRating) => { props.rateVideo(props.video, newRating) }}
-            starRatedColor='rgb(47,72,223)'
-            starHoverColor='rgb(50,75,240)'
-            starDimension='25px'
-            starSpacing='5px'
-            numberOfStars={5}
-            name='rating'
-          />
+          {
+            props.user.role !== 1 ?
+              <StarRatings
+                rating={props.video.rating ? props.video.rating : 0}
+                changeRating={(newRating) => { props.rateVideo(props.video, newRating) }}
+                starRatedColor='rgb(47,72,223)'
+                starHoverColor='rgb(50,75,240)'
+                starDimension='25px'
+                starSpacing='5px'
+                numberOfStars={5}
+                name='rating'
+              />
+              :
+                <div></div>
+
+          }
         </div>
         <div className="row justify-content-md-center">
         <p className="ratingplayer">
