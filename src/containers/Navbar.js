@@ -32,6 +32,11 @@ class navigation extends Component {
     window.removeEventListener('scroll', this.handleScroll);
   }
 
+  logOut = () => {
+    localStorage.clear();
+    window.location.replace('/')
+  }
+  
   /** changes the scrolling state depending on the Y-position */
   handleScroll = (event) => {
     if (window.scrollY === 0) {
@@ -84,7 +89,7 @@ class navigation extends Component {
                 </Link>
         }    
           <button className="header__container-btnLogout">
-          <LogoutLogo className="header__container-btnLogout-add" />
+          <LogoutLogo className="header__container-btnLogout-add" onClick={this.logOut}/>
           Log Out
         </button> 
         {
