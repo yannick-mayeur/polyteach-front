@@ -7,40 +7,41 @@ import Footer from '../components/Footer';
 import Navbar from './Navbar';
 import Connexion from '../components/Connexion/ConnexionForm.components';
 import CourseEditor from '../containers/CourseEditor'
-import PlayerLayout from './PlayerLayout.container';
+import PlayerContainer from './Player.container';
 import Signup from '../components/Connexion/Signup.component';
 import {Dashboard} from '../components/Dashboard/Dashboard';
+import WaitToken from '../components/WaitToken.component';
 
 import {PrivateRoute} from '../components/utils/privateRoute.component';
+import Live from './Live.container';
+import LiveStudent from "./LiveStudent.container";
 
 class App extends Component {
   render() {
     return (
       <>
         <Navbar />
-        {/* Main conteneur */}
+
         <Switch>
-        <Route path="/dashboard">
-            <Dashboard />
-          </Route>
+        <Route path="/oauth">
+            <WaitToken />
+        </Route>
+
         <Route path="/connexion">
             <Connexion />
-          </Route>
-          <Route path="/signup">
-            <Signup />
-          </Route>
-          <Route path="/bookmarks">
-            <PlayerLayout />
-          </Route>
-          <Route path="/courseEditor">
-            <CourseEditor />
-          </Route>
-          <Route path="/player">
-            <PlayerLayout />
-          </Route>
-            <PrivateRoute path='/' component={Layout} />
+        </Route>
+
+        <PrivateRoute exact path="/live" component={Live} /> 
+
+        <Route path="/livestudent/:sessionId" component={LiveStudent} />
+
+        <PrivateRoute path="/courseEditor" component={CourseEditor} />
+
+        <PrivateRoute path="/player/:courseID" component={PlayerContainer}/>
+
+        <PrivateRoute path='/' component={Layout} />
+
         </Switch>
-        {/* End Main conteneur */}
 
         <Footer />
       </>

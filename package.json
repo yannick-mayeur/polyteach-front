@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open --mode development",
-    "build": "webpack -p"
+    "start": "webpack-dev-server --env.API_URL=http://localhost:3000 --env.REDIRECT_URI=http://localhost:8080 --open --mode development",
+    "build:production": "webpack --env.API_URL=https://polyteach-back.igpolytech.fr --env.REDIRECT_URI=https://polyteach.igpolytech.fr -p",
+    "build:staging": "webpack --env.API_URL=https://polyteach-back-staging.igpolytech.fr --env.REDIRECT_URI=https://polyteach-staging.igpolytech.fr -p"
   },
   "engines": {
     "node": "10.1.0",
@@ -14,12 +15,17 @@
   "author": "Andres Alcocer",
   "license": "ISC",
   "dependencies": {
+    "@material-ui/core": "^4.6.1",
+    "@material-ui/icons": "^4.5.1",
     "axios": "^0.18.1",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.9.3",
+    "openvidu-browser": "^2.11.0",
+    "postcss-loader": "^3.0.0",
     "prop-types": "^15.6.2",
     "react": "^16.6.1",
     "react-bootstrap": "^1.0.0-beta.14",
+    "react-bootstrap-sweetalert": "^5.1.7",
     "react-chartjs-2": "^2.8.0",
     "react-dom": "^16.6.1",
     "react-google-picker": "^0.1.0",
@@ -27,9 +33,12 @@
     "react-router-dom": "^4.3.1",
     "react-star-ratings": "^2.3.0",
     "redux": "^4.0.1",
+    "redux-persist": "^6.0.0",
     "redux-promise": "^0.6.0",
     "redux-promise-middleware": "^6.1.2",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "strip-ansi": "^6.0.0",
+    "url-loader": "^2.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.5",
@@ -58,7 +67,7 @@
     "svg-inline-loader": "^0.8.0",
     "svg-react-loader": "^0.4.6",
     "uglifyjs-webpack-plugin": "^2.0.1",
-    "webpack": "^4.25.1",
+    "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.8.2"
   }

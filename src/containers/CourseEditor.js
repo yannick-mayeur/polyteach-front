@@ -1,156 +1,132 @@
 import React, { Component } from 'react';
 import Informations from '../components/CourseEditor/Informations';
-import  Videos  from '../components/CourseEditor/Videos';
-import { Students } from '../components/CourseEditor/Students';
+import Videos from '../components/CourseEditor/Videos';
+import Students from '../components/CourseEditor/Students';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addNewCourse } from '../store/actions';
-  
-  class CourseEditor extends Component {
+import { addNewCourse, clearNewCourse, updateCourseName, updateCourseDescription, updateCoursePicture } from '../store/actions';
+import { fetchStudents, addStudents, clearStudents, removeStudents, removeStudent } from '../store/actions/students.action';
+import { uploadVideo, updateNameVideo, removeVideo } from '../store/actions/video.action';
+
+class CourseEditor extends Component {
+
+  componentWillMount = () => {
+    this.props.clearStudents();
+    this.props.fetchStudents();
+  };
+
   //TODO - Fetch original course from id if exists
-    constructor(props) {
-      super(props);
-      this.state = {
-        index: 0,
-        course: {
-          name: "",
-          picture: "https://icon-library.net/images/placeholder-image-icon/placeholder-image-icon-7.jpg",
-          description: "",
-          videos: []
-        }
-      }
-    }
-
-    saveVideos = (videos) => {
-      this.setState({
-        course: {
-          name: this.state.course.name,
-          picture: this.state.course.picture,
-          description: this.state.course.description,
-          videos: videos
-        } 
-      })
-      console.log("received new state: ")
-      console.log(this.state)
-    }
-
-    getVideos = () => {
-      return this.state.course.videos
-   }
-
-    saveName = (name) => {
-      this.setState({ 
-        course:{
-          description: this.state.course.description,
-          name: name,
-          picture: this.state.course.picture,
-          videos: this.state.course.videos
-        }
-       })
-    }
-
-    getName = () => {
-       return this.state.course.name
-    }
-
-    getDescription = () => {
-      return this.state.course.description
-   }
-
-    saveDescription = (description) => {
-      this.setState({ 
-        course:{
-          description: description,
-          name: this.state.course.name,
-          picture: this.state.course.picture,
-          videos: this.state.course.videos
-        }
-       })
-    }
-
-    savePicture = (picture) => {
-      this.setState({ 
-        course:{
-          description: this.state.course.description,
-          name: this.state.course.name,
-          picture: picture,
-          videos: this.state.course.videos
-        }
-       })
-    }
-
-    getPicture = () => {
-      return this.state.course.picture
-   }
-
-    data = [
-        {
-          title: 'Informations',
-          component: <Informations savePicture={this.savePicture} getPicture={this.getPicture} saveName={this.saveName} name={this.getName} saveDescription={this.saveDescription} description={this.getDescription}/>
-        },
-        {
-          title: 'Videos',
-          component: <Videos saveVideos={this.saveVideos} getVideos={this.getVideos}/>
-        },
-        {
-           title: 'Students',
-           component: <Students/>
-        }
-      ]
-    
-    render() {
-      return (
-        <div className="content">
-        <div className="courseShowcase">
-            <div className="main">
-                <div className="tab">
-                <ul className="tab-list">
-                    {
-                    this.data.map( (tab, i) =>
-                        <li key={i}
-                        data-active={ this.state.index === i }
-                        onClick={() => this.setState({ index: i })} className="mx-auto pannel">
-                          <h1 className="tabtitle">{tab.title}</h1>  
-                        </li>
-                    )
-                    }
-                </ul>
-                <div className="tab-content">
-                    <div data-content={this.state.index + 1}>
-                    {this.data[this.state.index].component}
-                    </div>
-                </div>
-                </div>
-
-                
-                  <div className="row mt-5 menubuttonsrow col-md-6">
-                        <div className="col-md-6">
-                        <Link to="/">
-                        <button className="cancelBtn" >
-                        CANCEL
-                        </button>  
-                        </Link>
-                        </div>
-                        <div className="col-md-6">
-                        <button onClick={() => this.props.saveNewCourse(this.state.course)} className="saveBtn" >
-                        {this.props.newCourse.fetching ? "SENDING..." : "SAVE"}
-                        </button>
-                        </div>
-                  </div>
-            </div>
-        </div>
-        </div>
-      );
+  constructor(props) {
+    super(props);
+    this.state = {
+      index: 0,
+      redirect: false,
     }
   }
 
+  render() {
+    let data = [
+      {
+        title: 'Informations',
+        component: <Informations savePicture={this.props.updateCoursePicture} picture={this.props.newCourse.picture} saveName={this.props.updateCourseName} name={this.props.newCourse.name} saveDescription={this.props.updateCourseDescription} description={this.props.newCourse.description} />
+      },
+      {
+        title: 'Videos',
+        component: <Videos videos={this.props.newCourse.videos} uploadVideo={this.props.uploadVideo} updateNameVideo={this.props.updateNameVideo} removeVideo={this.props.removeVideo} updateVideoToUpload={this.props.updateVideoToUpload}/>
+      },
+      {
+        title: 'Students',
+        component: <Students allStudents={this.props.students} newCourseStudents={this.props.newCourse.students} dispatchAddStudents={this.props.addStudents} dispatchRemoveStudents={this.props.removeStudents} dispatchRemoveStudent={this.props.removeStudent} />
+      }
+    ]
 
-const mapStateToProps = (state) => ({
-  newCourse: state.newCourse
+    if(this.state.redirect){
+        return(<Redirect to="/"/>)
+    }
+    return (
+      <div className="content">
+        <div className="courseShowcase">
+          <div className="main">
+            <div className="tab">
+              <ul className="tab-list">
+                {
+                  data.map((tab, i) =>
+                    <li key={i}
+                    data-active={this.state.index === i}
+                    onClick={() => this.setState({ index: i })} className="mx-auto pannel">
+                    <h1 className="tabtitle">{tab.title}</h1>
+                  </li>
+                  )
+                }
+              </ul>
+              <div className="tab-content">
+                <div data-content={this.state.index + 1}>
+                  {data[this.state.index].component}
+                </div>
+              </div>
+            </div>
+
+            <div className="row mt-5 menubuttonsrow col-md-6">
+              <div className="col-md-6">
+                <Link to="/">
+                  <button className="cancelBtn" onClick={this.props.clearNewCourse}>
+                    CANCEL
+                  </button>
+                </Link>
+              </div>
+              <div className="col-md-6">
+                <button onClick={() => this.props.saveNewCourse({
+                  name: this.props.newCourse.name,
+                  picture: this.props.newCourse.picture.url,
+                  description: this.props.newCourse.description,
+                  videos: this.props.newCourse.videos.selectedVideos,
+                  students: this.props.newCourse.students
+                }).then(() => {
+                    this.setState({
+                        redirect: true,
+                    })
+                    this.props.clearNewCourse()
+                })
+        } className="saveBtn" >
+                  {this.props.newCourse.fetching ? "SENDING..." : "SAVE"}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+
+const mapStateToProps = (store) => ({
+  newCourse: store.newCourse,
+  students: store.students,
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  saveNewCourse: course => dispatch(addNewCourse(course))
-})
+
+const mapDispatchToProps = dispatch => {
+  return {
+    // dispatching multiple actions
+    saveNewCourse: course => dispatch(addNewCourse(course)),
+    clearNewCourse: () => dispatch(clearNewCourse()),
+    // Students
+    fetchStudents: () => dispatch(fetchStudents()),
+    addStudents: (students, fromClass) => dispatch(addStudents(students, fromClass)),
+    removeStudents: (students, fromClass) => dispatch(removeStudents(students, fromClass)),
+    removeStudent: (student, fromClass) => dispatch(removeStudent(student, fromClass)),
+    clearStudents: () => dispatch(clearStudents()),
+    // Informations
+    updateCourseName: (newName) => dispatch(updateCourseName(newName)),
+    updateCourseDescription: (newDescription) => dispatch(updateCourseDescription(newDescription)),
+    updateCoursePicture: (newPicture) => dispatch(updateCoursePicture(newPicture)),
+    // Videos
+    uploadVideo: (video) => dispatch(uploadVideo(video)),
+    updateNameVideo: (id, newName) => dispatch(updateNameVideo(id, newName)),
+    removeVideo: (id) => dispatch(removeVideo(id)),
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(CourseEditor);
