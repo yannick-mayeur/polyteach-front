@@ -41,7 +41,7 @@ export default function (state = initialState, action) {
     }
 
     case CLEAR_NEW_COURSE: {
-        return {initialState}
+        return initialState
     }
 
       // STUDENTS
