@@ -55,7 +55,7 @@ class MainContent extends Component {
                 {(this.props.lives && this.props.lives.length > 0) ?
                     this.props.lives.map(live => {
                       const live_URL = ''+studentLive_URL+ live.idsession;
-                      return <LiveCard key={live.id} live={live} liveURL={live_URL} />
+                      return <LiveCard key={live.idsession} live={live} liveURL={live_URL} />
                     })
                     :
                     <div className="mx-auto text-center"> <h1>There are no teachers currently livestreaming. </h1> </div>
