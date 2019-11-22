@@ -69,7 +69,6 @@ export default function (state = initStore, action) {
       return { ...state,  }
 
     case "IS_ACTIVE_LIVE_PENDING":
-
       return state;
 
     default:

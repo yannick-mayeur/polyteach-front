@@ -234,10 +234,9 @@ class Live extends Component {
             id: this.state.session.sessionId,
             name: this.state.nameSession,
             descr: this.state.descrSession,
-            nameteacher:/* this.props.user.firstname+ ' '+ this.props.user.lastname,*/ '',
-            idcourse: 3//this.props.Course.idCourse,
+            nameteacher: this.props.teacher.firstname + ' ' + this.props.teacher.lastname,
         }
-        this.props.saveNewLive(params.id, params.name, params.descr,params.nameteacher, params.idcourse);
+        this.props.saveNewLive(params.id, params.name, params.descr,params.nameteacher);
     }
 
 
@@ -398,7 +397,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     createNewLive: (nameCourse, description) => dispatch(createLive(nameCourse, description)),
-    saveNewLive: (sessionId, nameSession, description, nameTeacher,idCourse) => dispatch(saveLive(sessionId, nameSession, description, nameTeacher,idCourse)),
+    saveNewLive: (sessionId, nameSession, description, nameTeacher) => dispatch(saveLive(sessionId, nameSession, description, nameTeacher)),
     startNewRecording: (session, name, properties) => dispatch(startToRecord(session, name, properties)),
     stopRecording: (recordId) => dispatch(stopRecording(recordId)),
 });
