@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-
 const dropdownContent = (props) => (
 
     <div className="dropdownContainer">
@@ -21,7 +20,12 @@ const dropdownContent = (props) => (
                         : ""
                     }
 
-                    <p className="dropdownContent-textOutside">Sign out of PolyTeach</p>
+                    <p className="dropdownContent-textOutside" 
+                    onClick={() => {
+                        localStorage.clear();
+                        window.location.replace('/')
+                        }}>
+                    Sign out of PolyTeach</p>
                 </div>
             </div>
         </div>
