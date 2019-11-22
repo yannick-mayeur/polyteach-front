@@ -18,6 +18,13 @@ export function addNewCourse(data) {
   }
 }
 
+export const CLEAR_NEW_COURSE = 'CLEAR_NEW_COURSE';
+export function clearNewCourse() {
+  return {
+    type: CLEAR_NEW_COURSE,
+  }
+}
+
 export const UPDATE_SEARCH_QUERY_COURSE = "UPDATE_SEARCH_QUERY_COURSE";
 export function updateSearchQueryCourse(newQuery) {
   return {

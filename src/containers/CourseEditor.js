@@ -5,7 +5,7 @@ import Students from '../components/CourseEditor/Students';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addNewCourse, updateCourseName, updateCourseDescription, updateCoursePicture } from '../store/actions';
+import { addNewCourse, clearNewCourse, updateCourseName, updateCourseDescription, updateCoursePicture } from '../store/actions';
 import { fetchStudents, addStudents, clearStudents, removeStudents, removeStudent } from '../store/actions/students.action';
 import { uploadVideo, updateNameVideo, removeVideo } from '../store/actions/video.action';
 
@@ -86,6 +86,7 @@ class CourseEditor extends Component {
                     this.setState({
                         redirect: true,
                     })
+                    this.props.clearNewCourse()
                 })
         } className="saveBtn" >
                   {this.props.newCourse.fetching ? "SENDING..." : "SAVE"}
@@ -110,6 +111,7 @@ const mapDispatchToProps = dispatch => {
   return {
     // dispatching multiple actions
     saveNewCourse: course => dispatch(addNewCourse(course)),
+    clearNewCourse: () => dispatch(clearNewCourse()),
     // Students
     fetchStudents: () => dispatch(fetchStudents()),
     addStudents: (students, fromClass) => dispatch(addStudents(students, fromClass)),
