@@ -22,8 +22,8 @@ const liveService = {
         return Api.get("/api/live/data/" + sessionId);
     },
 
-    saveLive(idsession,  namesession, descriptionlive, nameteacher, idcourselive) {
-        return Api.post("/api/live/save",{idsession,  namesession, descriptionlive, nameteacher,idcourselive})
+    saveLive(idsession,  namesession, descriptionlive, nameteacher) {
+        return Api.post("/api/live/save",{idsession,  namesession, descriptionlive, nameteacher})
     },
 
     isActive(sessionId) {

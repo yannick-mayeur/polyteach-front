@@ -97,10 +97,10 @@ export function get_data(sessionId) {
 }
 
 export const SAVE_LIVE = 'SAVE_LIVE';
-export function saveLive(sessionId, nameSession, description,nameTeacher, idCourse) {
+export function saveLive(sessionId, nameSession, description,nameTeacher) {
     return {
       type: SAVE_LIVE,
-      payload: S.live.saveLive(sessionId, nameSession, description,nameTeacher, idCourse)
+      payload: S.live.saveLive(sessionId, nameSession, description,nameTeacher)
     }
   }
   export const IS_ACTIVE_LIVE = 'IS_ACTIVE_LIVE';
