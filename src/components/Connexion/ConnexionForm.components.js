@@ -6,7 +6,7 @@ export default function ConnexionForm () {
     let state = "state"
     localStorage.setItem("state", state)
     const clientId = "c92bcd96-70e3-480a-8bae-c4d7465e4979"
-    const redirectUri = encodeURI('https://polyteach-staging.igpolytech.fr/oauth')
+    const redirectUri = encodeURI(process.env.REDIRECT_URI + '/oauth')
     const uri = 'https://oauth.igpolytech.fr/authorize?client_id='+clientId+'&redirect_uri='+redirectUri+'&state='+state
 
     return (

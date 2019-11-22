@@ -28,6 +28,7 @@ const createStoreWithMiddleware = applyMiddleware(promisemiddleware, thunk)(crea
 const store = createStoreWithMiddleware(persistedReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 let persistor = persistStore(store)
+console.log(process.env.API_URL);
 
 const app = (
    <Provider store={store}>

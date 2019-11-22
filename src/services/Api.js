@@ -2,9 +2,10 @@ import axios from 'axios'
 import S from '../services'
 
 const client = axios.create({
-    baseURL: "https://polyteach-back-staging.igpolytech.fr"
-    //baseURL: "https://polyteach-back.igpolytech.fr"
-    //baseURL: "http://localhost:3000"
+
+    //baseURL: "https://polyteach-back-staging.igpolytech.fr"
+    baseURL: process.env.API_URL
+
 });
 
 client.interceptors.request.use((request) => {

@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open --mode development",
-    "build": "webpack -p"
+    "start": "webpack-dev-server --env.API_URL=http://localhost:3000 --env.REDIRECT_URI=http://localhost:8080 --open --mode development",
+    "build:production": "webpack --env.API_URL=https://polyteach-back.igpolytech.fr --env.REDIRECT_URI=https://polyteach.igpolytech.fr -p",
+    "build:staging": "webpack --env.API_URL=https://polyteach-back-staging.igpolytech.fr --env.REDIRECT_URI=https://polyteach-staging.igpolytech.fr -p"
   },
   "engines": {
     "node": "10.1.0",
