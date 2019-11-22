@@ -38,10 +38,10 @@ export default function Students({allStudents, newCourseStudents, dispatchAddStu
         <div className="container">
           <div className="card-group">
             <div className="row">
+              {console.log(newCourseStudents)}
               {(newCourseStudents.selectedStudents && newCourseStudents.selectedStudents.length > 0) ?
                   newCourseStudents.selectedStudents.map(student => {
-                    return
-                    <StudentCard key={student.id} dispatchRemoveStudent={dispatchRemoveStudent} student={student} />
+                    return <StudentCard key={student.id} dispatchRemoveStudent={dispatchRemoveStudent} student={student} />
                   })
                   :
                    <div className="mx-auto text-center"> <h1>You have added no student to this course yet. </h1> </div>
