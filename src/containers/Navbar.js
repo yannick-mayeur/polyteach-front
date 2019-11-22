@@ -88,8 +88,8 @@ class navigation extends Component {
                     </button>  
                 </Link>
         }    
-          <button className="header__container-btnLogout">
-          <LogoutLogo className="header__container-btnLogout-add" onClick={this.logOut}/>
+          <button className="header__container-btnLogout" onClick={this.logOut}>
+          <LogoutLogo className="header__container-btnLogout-add"/>
           Log Out
         </button> 
         {
