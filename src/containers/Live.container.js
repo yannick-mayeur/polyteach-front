@@ -29,6 +29,7 @@ class Live extends Component {
             audioActive: true,
             videoActive: true,
             screenShareActive: false,
+            recordingURL: undefined
         };
     }
 
@@ -39,11 +40,22 @@ class Live extends Component {
 
     leaveSession = () => {
 
-        this.props.checked ?
-            (this.props.stopRecording(recordId).then(() => {
+
+        if(this.state.checked){
+            let recordId = this.props.record;
+
+            this.props.stopRecording(recordId).then(() => {
                 this.state.session.disconnect();
-            }))
-            : this.state.session.disconnect();
+            })
+            const recordings_url='https://igpolytech.fr:4443/recordings/';
+            const namesession =this.state.nameSession;
+            let videoURL = recordings_url+ recordId+ namesession;
+            this.setState({
+                videoURL: recordingURL
+            })
+        }
+
+        else{this.state.session.disconnect();}
 
         this.setState({
             nameSession: '',
@@ -222,9 +234,10 @@ class Live extends Component {
             id: this.state.session.sessionId,
             name: this.state.nameSession,
             descr: this.state.descrSession,
+            nameteacher:/* this.props.user.firstname+ ' '+ this.props.user.lastname,*/ '',
             idcourse: 3//this.props.Course.idCourse,
         }
-        this.props.saveNewLive(params.id, params.name, params.descr, params.idcourse);
+        this.props.saveNewLive(params.id, params.name, params.descr,params.nameteacher, params.idcourse);
     }
 
 
@@ -284,10 +297,10 @@ class Live extends Component {
 
 
     render() {
-
+        const today = new Date().toLocaleString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric", hour12: false });
         return (
             <div>
-                {this.state.session === undefined ?
+                {this.state.session === undefined && this.state.recordingURL === undefined ?
                     <div className="content">
                         <div className="courseShowcase">
                             <div className="login-page">
@@ -322,7 +335,7 @@ class Live extends Component {
                                             <div className="col-md-12">
                                             <h1 className="live-head mb-4"> {this.state.nameSession} </h1>
                                             <p className="live-description"> {this.state.descrSession} </p>
-                                            <h4 className="smallcard-class mt-2"> {new Date().toLocaleString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric", hour12: false })} </h4>
+                                            <h4 className="smallcard-class mt-2"> {today} </h4>
                                             </div>
                                         </div>     
                                         <Video videoManager={this.state.publisher} />
@@ -330,11 +343,12 @@ class Live extends Component {
                                 </div>
                                 : null
                             }
+
+
                             <div>
-                        
                             <div className="row toolbar">
                                 <div className="col-md-12">
-                                    <IconButton color="default">
+                                   <IconButton color="default">
                                         <Share color='primary'></Share>
                                     </IconButton>
                                     <label className="live-description">Share your Stream</label>
@@ -378,12 +392,13 @@ class Live extends Component {
 
 const mapStateToProps = (state) => ({
     live: state.ovToken,
-    record: state.record
+    record: state.live.recordId,
+    teacher: state.login.user
 });
 
 const mapDispatchToProps = (dispatch) => ({
     createNewLive: (nameCourse, description) => dispatch(createLive(nameCourse, description)),
-    saveNewLive: (sessionId, nameSession, description, idCourse) => dispatch(saveLive(sessionId, nameSession, description, idCourse)),
+    saveNewLive: (sessionId, nameSession, description, nameTeacher,idCourse) => dispatch(saveLive(sessionId, nameSession, description, nameTeacher,idCourse)),
     startNewRecording: (session, name, properties) => dispatch(startToRecord(session, name, properties)),
     stopRecording: (recordId) => dispatch(stopRecording(recordId)),
 });

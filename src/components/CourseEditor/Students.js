@@ -1,7 +1,6 @@
 import React from 'react'
 import UserLogo from '../../static/images/user.svg';
 import { StudentCard } from './StudentCard';
-
 export default function Students({allStudents, newCourseStudents, dispatchAddStudents, dispatchRemoveStudents, dispatchRemoveStudent}) {
   return (
     <>
@@ -41,7 +40,8 @@ export default function Students({allStudents, newCourseStudents, dispatchAddStu
             <div className="row">
               {(newCourseStudents.selectedStudents && newCourseStudents.selectedStudents.length > 0) ?
                   newCourseStudents.selectedStudents.map(student => {
-                    return <StudentCard key={student.id} dispatchRemoveStudent={dispatchRemoveStudent} student={student} />
+                    return
+                    <StudentCard key={student.id} dispatchRemoveStudent={dispatchRemoveStudent} student={student} />
                   })
                   :
                    <div className="mx-auto text-center"> <h1>You have added no student to this course yet. </h1> </div>

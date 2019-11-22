@@ -48,17 +48,32 @@ export default function (state = initStore, action) {
 
     case "GET_TOKEN_SESSION_PENDING":
       return state;
-      default:
-        console.log("default");
-        return state;
 
-    case "CHECK_URL_LIVE_FULFILLED":
+
+
+    case "GET_DATA_LIVE_FULFILLED":
       return { ...state, infosLive: action.payload.data }
 
-    case "CHECK_URL_LIVE_REJECTED":
+    case "GET_DATA_LIVE_REJECTED":
       return { ...state,  }
 
-    case "CHECK_URL_LIVE_PENDING":
+    case "GET_DATA_LIVE_PENDING":
+      return state;
+
+
+
+    case "IS_ACTIVE_LIVE_FULFILLED":
+      return { ...state, sessionStatus: action.payload.data }
+
+    case "IS_ACTIVE_LIVE_REJECTED":
+      return { ...state,  }
+
+    case "IS_ACTIVE_LIVE_PENDING":
+
+      return state;
+
+    default:
+      console.log("default");
       return state;
   }
 }

@@ -18,13 +18,22 @@ const liveService = {
         return Api.get("/api/live/get-token/" + sessionId);
     },
 
-    saveLive(idsession,  namesession, descriptionlive, idcourselive) {
-        return Api.post("/api/live/save",{idsession,  namesession, descriptionlive, idcourselive})
+    get_data(sessionId) {
+        return Api.get("/api/live/data/" + sessionId);
     },
 
-    checkURL(sessionId) {
-        return Api.get("/api/live/infos/" + sessionId);
+    saveLive(idsession,  namesession, descriptionlive, nameteacher, idcourselive) {
+        return Api.post("/api/live/save",{idsession,  namesession, descriptionlive, nameteacher,idcourselive})
     },
+
+    isActive(sessionId) {
+        return Api.get("/api/live/isActive/" + sessionId);
+    },
+
+    getActiveLives() {
+        return Api.get("/api/live/activelives/");
+    },
+
 }
 
 export default liveService;

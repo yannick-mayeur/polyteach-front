@@ -266,7 +266,7 @@ html, *, ::after, ::before {
   .live-description{
     font-size: 2rem;
     text-align: center;
-    color: $color-modal-grey;
+    color: $color-purple;
   }
 
   .toolbar{
@@ -316,8 +316,15 @@ html, *, ::after, ::before {
     .smallcard-class{
       text-align: center;
       font-size: 1.5rem;
-      color: $color-purple;
+      color: gray;
     }
+
+
+  .datecard-class{
+  text-align: center;
+  font-size: 2rem;
+  color: darkgrey;
+  }
 
     .userpicture{
       width: 50px;
