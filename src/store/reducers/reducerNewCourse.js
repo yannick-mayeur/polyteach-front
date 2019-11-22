@@ -1,4 +1,4 @@
-import { FETCH_STUDENTS, UPDATE_NAME_COURSE, UPDATE_DESCRIPTION_COURSE } from '../actions';
+import { FETCH_STUDENTS, UPDATE_NAME_COURSE, UPDATE_DESCRIPTION_COURSE, CLEAR_NEW_COURSE } from '../actions';
 import { ADD_STUDENTS, CLEAR_STUDENTS, REMOVE_STUDENTS, REMOVE_STUDENT } from '../actions/students.action';
 import { UPLOAD_VIDEO, UPDATE_NAME_VIDEO, REMOVE_VIDEO } from '../actions/video.action';
 
@@ -32,12 +32,16 @@ export default function (state = initialState, action) {
       return { ...state, fetching: true}
 
     case "ADD_NEW_COURSE_FULFILLED": {
-      const createdCourse = action.payload;
-      return { ...state, createdCourse, fetching: false}
+        const data = action.payload;
+        return { ...state, data, fetching: false}
     }
 
     case "ADD_NEW_COURSE_REJECTED": {
       return { ...state, fetching: false, failed: true }
+    }
+
+    case CLEAR_NEW_COURSE: {
+        return initialState
     }
 
       // STUDENTS

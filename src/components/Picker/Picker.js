@@ -2,13 +2,11 @@ import React, { Component } from 'react'
 import GooglePicker from '../../services/GooglePicker/react-google-picker';
 import DriveLogo from '../../static/images/drive.svg';
 
-const CLIENT_ID = '703791694622-373kp5j2mbo5hahiqt419rolvvg2gdes.apps.googleusercontent.com';
-const DEVELOPER_KEY = 'AIzaSyDKYU-DvZkT48qsJ4Ta3ymSIYtOyr2L6Go';
-
 const SCOPE = ['https://www.googleapis.com/auth/drive.readonly',
                'https://www.googleapis.com/auth/drive.file'];
 
 
+               
 class Picker extends Component {
 
 constructor(props) {
@@ -38,9 +36,9 @@ onSelection(folder) {
 render() {
   return (
   <div>
-    <GooglePicker clientId={CLIENT_ID}
+    <GooglePicker //clientId={CLIENT_ID}
                           children="drivebtn"
-                          developerKey={DEVELOPER_KEY}
+                          //developerKey={DEVELOPER_KEY}
                           scope={SCOPE}
                           onChange={data => this.onSelection(data)}
                           onAuthFailed={data => console.log('on auth failed:', data)}

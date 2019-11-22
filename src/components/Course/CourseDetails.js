@@ -29,7 +29,7 @@ export default function CourseDetails(props) {
             Released {formatDate(props.course.creationdate)} : {props.course.teacher.firstname + " " + props.course.teacher.lastname}
           </span>
         </p>
-
+        {props.user !== null && props.user.role === 0 ? 
         <StarRatings
           rating={(!props.course.rating) ? 0 : props.course.rating}
           changeRating={(newRating) => { props.rateCourse(props.course, newRating) }}
@@ -39,8 +39,7 @@ export default function CourseDetails(props) {
           starSpacing='5px'
           numberOfStars={5}
           name='rating'
-          
-        />
+        /> : ""}
         
         <p className="modal__overview">{props.course.description}</p>
         <Link to={"/player/" + props.course.id} style={{ textDecoration: 'none' }}>
@@ -49,20 +48,25 @@ export default function CourseDetails(props) {
         Play
         </button>
         </Link>
-        
+
+        {props.user !== null && props.user.role === 0 ? 
         <button className="modal__button" onClick={() => { props.toogleBookmarkCourse(props.course) }}>
           <StarIcon className={props.course.bookmarked ? "header__container-btnLogout-pressed" : "header__container-btnLogout-add"} />
           {props.course.bookmarked ? "Bookmarked" : "Bookmark" }
-        </button>
-        
-       <div className="row">
-       <button className="modal__button modal__button--edit">
-          Edit
-        </button>
-        <button className="modal__button modal__button--delete" onClick={() => props.removeCourse(props.course.id)}>
-          Delete
-        </button>
-       </div>
+        </button> : ""
+        }
+
+       {props.user !== null && props.user.id === props.course.idteacher? 
+              <div className="row">
+              <button className="modal__button modal__button--edit">
+                 Edit
+               </button>
+               <button className="modal__button modal__button--delete" onClick={() => props.removeCourse(props.course.id)}>
+                 Delete
+               </button>
+              </div>
+              : null}
+
       </div>
     </>
   );

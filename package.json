@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open --mode development",
-    "build": "webpack -p"
+    "start": "webpack-dev-server --env.API_URL=http://localhost:3000 --env.REDIRECT_URI=http://localhost:8080 --open --mode development",
+    "build:production": "webpack --env.API_URL=https://polyteach-back.igpolytech.fr --env.REDIRECT_URI=https://polyteach.igpolytech.fr -p",
+    "build:staging": "webpack --env.API_URL=https://polyteach-back-staging.igpolytech.fr --env.REDIRECT_URI=https://polyteach-staging.igpolytech.fr -p"
   },
   "engines": {
     "node": "10.1.0",
@@ -32,6 +33,7 @@
     "react-router-dom": "^4.3.1",
     "react-star-ratings": "^2.3.0",
     "redux": "^4.0.1",
+    "redux-persist": "^6.0.0",
     "redux-promise": "^0.6.0",
     "redux-promise-middleware": "^6.1.2",
     "redux-thunk": "^2.3.0",

@@ -1,4 +1,6 @@
 import { askForSignedURL, askForSubtitles, uploadVideoToGCP, askForVTT } from './Uploader/VideoApi';
+import Api from './Api';
+import { updateRateVideo } from '../store/actions/video.action';
 
 const videoService = {
   /**
@@ -27,7 +29,16 @@ const videoService = {
         subtitles: subtitles,
         selectedVideo: video.id,
     }
-  }
+  },
+
+  rateVideo(video, rate) {
+    return Api.post('/video/rate', {video, rate});
+  },
+
+  updateRateVideo(video, rate) {
+    return Api.put('/video/rate', {video, rate});
+  },
+
 }
 
 export default videoService;

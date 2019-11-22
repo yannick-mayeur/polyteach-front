@@ -21,32 +21,27 @@ class App extends Component {
     return (
       <>
         <Navbar />
-        {/* Main conteneur */}
+
         <Switch>
         <Route path="/oauth">
             <WaitToken />
-          </Route>
-        <Route path="/dashboard">
-            <Dashboard />
-          </Route>
+        </Route>
+
         <Route path="/connexion">
             <Connexion />
-          </Route>
-          <Route path="/signup">
-            <Signup />
-          </Route>
-          <Route exact path="/live">
-            <Live/>
-          </Route>
-          <Route path="/livestudent/:sessionId" component={LiveStudent} />
-          <Route path="/courseEditor">
-            <CourseEditor />
-          </Route>
-          <Route path="/player/:courseID" component={PlayerContainer}>
-          </Route>
-            <PrivateRoute path='/' component={Layout} />
+        </Route>
+
+        <PrivateRoute exact path="/live" component={Live} /> 
+
+        <Route path="/livestudent/:sessionId" component={LiveStudent} />
+
+        <PrivateRoute path="/courseEditor" component={CourseEditor} />
+
+        <PrivateRoute path="/player/:courseID" component={PlayerContainer}/>
+
+        <PrivateRoute path='/' component={Layout} />
+
         </Switch>
-        {/* End Main conteneur */}
 
         <Footer />
       </>
