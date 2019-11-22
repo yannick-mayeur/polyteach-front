@@ -48,7 +48,7 @@ export function VideoPlayer(props) {
       <div className="courseShowcase_videoplayer ">
         <div className="row justify-content-md-center">
           <StarRatings
-            rating={props.video.rating}
+            rating={props.video.rating ? props.video.rating : 0}
             changeRating={(newRating) => { props.rateVideo(props.video, newRating) }}
             starRatedColor='rgb(47,72,223)'
             starHoverColor='rgb(50,75,240)'
