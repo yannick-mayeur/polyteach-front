@@ -5,7 +5,7 @@ import { VideoPlayer } from '../components/Player/VideoPlayer';
 
 // Store
 import { selectVideo, rateVideo, updateRateVideo } from '../store/actions/video.action';
-import { fetchCourseWithVideo } from '../store/actions/courses.action';
+import { fetchCourseWithVideo, clearCourse } from '../store/actions/courses.action';
 
 class PlayerContainer extends Component {
 
@@ -16,6 +16,10 @@ class PlayerContainer extends Component {
   componentWillMount = () => {
     this.props.fetchCourse(this.props.match.params.courseID)
   };
+
+  componentWillUnmount = () => {
+    this.props.clearCourse();
+  }
 
   rateVideo = (video, rate) => {
     if (video.rating) {
@@ -61,6 +65,7 @@ const mapDispatchToProps = (dispatch) => {
     selectVideo: (video) => dispatch(selectVideo(video)),
     rateVideo: (video, rate) => dispatch(rateVideo(video, rate)),
     updateRateVideo: (video, rate) => dispatch(updateRateVideo(video, rate)),
+    clearCourse: () => dispatch(clearCourse()),
   }
 }
 
