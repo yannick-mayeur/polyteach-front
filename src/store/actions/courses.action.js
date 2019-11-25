@@ -27,6 +27,14 @@ export function removeCourse(courseID) {
 }
 
 
+export const CLEAR_COURSE = 'CLEAR_COURSE';
+export function clearCourse() {
+    return {
+      type: CLEAR_COURSE
+    }
+}
+
+
 export function fetchCourseWithVideo(courseID) {
     return dispatch => {
         const result = dispatch(fetchCourse(courseID))
