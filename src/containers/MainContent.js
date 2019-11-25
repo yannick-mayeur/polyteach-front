@@ -52,7 +52,7 @@ class MainContent extends Component {
           <div className="container">
             <div className="card-group">
               <div className="row">
-                {(this.props.lives && this.props.lives.length > 0) ?
+                {(this.props.lives && this.props.lives.length > 0 && this.props.lives[0].idsession) ?
                     this.props.lives.map(live => {
                       const live_URL = ''+studentLive_URL+ live.idsession;
                       return <LiveCard key={live.idsession} live={live} liveURL={live_URL} />

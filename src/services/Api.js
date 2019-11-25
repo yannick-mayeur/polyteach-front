@@ -4,6 +4,7 @@ import S from '../services'
 const client = axios.create({
 
     //baseURL: "https://polyteach-back-staging.igpolytech.fr"
+    
     baseURL: process.env.API_URL
 
 });
