@@ -44,14 +44,14 @@ class Live extends Component {
         if(this.state.checked){
             let recordId = this.props.record;
 
-            this.props.stopRecording(recordId).then(() => {
-                this.state.session.disconnect();
-            })
+
+            this.state.session.disconnect();
+
             const recordings_url='https://igpolytech.fr:4443/recordings/';
             const namesession =this.state.nameSession;
-            let videoURL = recordings_url+ recordId+ namesession;
+            let videoURL = recordings_url+ recordId+ '/'+ namesession+'.mp4';
             this.setState({
-                videoURL: recordingURL
+                videoURL: videoURL
             })
         }
 
@@ -317,8 +317,8 @@ class Live extends Component {
                                         />
                                     </div>
                                     <button className="livebutton" onClick={this.submit}> Play </button>
-
                                 </div>
+                                <p className="smallcard-head">{this.state.videoURL?"Here is your live video download:" + this.state.videoURL : ""}</p>
                             </div>
                         </div>
                     </div>

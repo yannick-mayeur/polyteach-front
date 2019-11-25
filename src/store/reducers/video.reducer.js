@@ -1,4 +1,4 @@
-import { FETCH_COURSE } from '../actions/courses.action';
+import { FETCH_COURSE, CLEAR_COURSE } from '../actions/courses.action';
 import { SELECT_VIDEO, RATE_VIDEO, UPDATE_RATE_VIDEO } from '../actions/video.action';
 
 const initState = {
@@ -22,6 +22,8 @@ const initState = {
       case FETCH_COURSE+"_REJECTED":
         return { ...state , fetching: false}
 
+      case CLEAR_COURSE:
+        return initState;
 
       case SELECT_VIDEO+"_FULFILLED":
         return { ...state, selectedSubtitles: action.payload.subtitles.data, selectedCourse: action.payload.selectedVideo, fetching: false}
